@@ -26,28 +26,28 @@ const featureSlides = [
 // LED Strip Product Showcase - Scrollable carousel
 const ledStripShowcase = [
   {
-    src: "/led-strip-specifications.jpg",
-    alt: "LED Strip Specifications",
-    title: "Product Specifications",
-    description: "3 lengths in 1 pack: 16\", 24\", 40\" (2x each)",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LED0101-NcQN4b3GARfX7EQhQSIcnMbQB9NsFa.jpg",
+    alt: "LED Strip 6-Pack Showcase",
+    title: "Complete 6-Pack Kit",
+    description: "Living room installation with wood slat wall panels",
   },
   {
-    src: "/led-strip-installation-1.jpg",
-    alt: "LED Strip Installation",
-    title: "Professional Installation",
-    description: "Seamless recessed LED integration with wooden slats",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LED0202-FgYEc2VLFBKleJV7PYlgETikXoR8mG.jpg",
+    alt: "LED Strip Features",
+    title: "Advanced Features",
+    description: "Dimmable, Strong Adhesion, Energy-Efficient, 24V Safe, Touch Control, Easy Installation",
   },
   {
-    src: "/led-strip-installation-2.jpg",
-    alt: "LED Strip Installation Detail",
-    title: "Installation Detail",
-    description: "Clean, hidden LED placement within slat system",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LED0303-gogSHAtk3fgrlc95hSLuauXIeSc1We.jpg",
+    alt: "LED Strip Dimming Control",
+    title: "Dimming & Touch Control",
+    description: "Short press: turn lights on/off; Long press: adjust brightness from 10%-100%",
   },
   {
-    src: "/led-strip-living-room.jpg",
-    alt: "LED Strip Living Room",
-    title: "Living Room Accent",
-    description: "Multiple heights creating elegant ambient lighting",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LED030303-P4LLJ1QfKkKzSLlIC8ahDalqeFtXkt.jpg",
+    alt: "LED Strip Installation Details",
+    title: "Thoughtful Details, Effortless Use",
+    description: "Self-Adhesive Design, Extra Adhesive Strip, Black Power Cord - Perfect for WPC/Wood Slat Wall Panel",
   },
 ]
 
@@ -266,6 +266,7 @@ export function LedStripCarousel() {
                       height={225}
                       className="h-full w-full object-cover"
                       style={{ width: "auto", height: "auto" }}
+                      unoptimized
                     />
                   </div>
                   <div className="p-3">
