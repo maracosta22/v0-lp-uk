@@ -50,6 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   }).slice(0, 6)
 
   const isFlexibleAcousticPanel = product.id === "prod_TpLABayQWkNTij" || product.id === "prod_TpSFzPytJW9W0s"
+  const isRecessedLedStrip = product.slug === "recessed-led-strip-lighting" || product.slug === "recessed-led-strip-lighting-fr"
 
   const discountPercent =
     product.onSale && product.originalPrice
@@ -64,7 +65,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       frequentlyBoughtTogether={frequentlyBoughtTogether} 
       frequentlyBoughtTotal={frequentlyBoughtTotal} 
       orderBumpProducts={orderBumpProducts} 
-      isFlexibleAcousticPanel={isFlexibleAcousticPanel} 
+      isFlexibleAcousticPanel={isFlexibleAcousticPanel}
+      isRecessedLedStrip={isRecessedLedStrip}
       discountPercent={discountPercent}
       isFrenchVersion={isFrenchVersion}
     />
