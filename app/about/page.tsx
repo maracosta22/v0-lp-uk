@@ -61,13 +61,12 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden">
               <Image
                 src="/woodworking-workshop-craftsman-working-on-wood-sla.jpg"
                 alt="WOOD SHOP workshop with craftsman working on wood panels"
-                width={600}
-                height={750}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
@@ -128,13 +127,12 @@ export default function AboutPage() {
           <div className="grid gap-8 sm:grid-cols-3">
             {team.map((member) => (
               <div key={member.name} className="text-center">
-                <div className="mx-auto aspect-square w-48 overflow-hidden rounded-full bg-secondary">
+                <div className="relative mx-auto aspect-square w-48 overflow-hidden rounded-full bg-secondary">
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
-                    width={192}
-                    height={192}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                     sizes="192px"
                   />
                 </div>

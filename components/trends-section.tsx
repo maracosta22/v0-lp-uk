@@ -11,45 +11,41 @@ export function TrendsSection() {
           {/* Image Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="aspect-[3/4] overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
                   src="/trend-japandi-interior-natural-wood.jpg"
                   alt="Japandi interior with natural wood elements"
-                  width={400}
-                  height={533}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="aspect-square overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
                 <Image
                   src="/trend-acoustic-panel-office-modern.jpg"
                   alt="Modern office with acoustic panels"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
             </div>
             <div className="mt-8 space-y-4">
-              <div className="aspect-square overflow-hidden">
+              <div className="relative aspect-square overflow-hidden">
                 <Image
                   src="/trend-minimalist-lamp-bedroom.jpg"
                   alt="Minimalist lamp in bedroom setting"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="aspect-[3/4] overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
                   src="/trend-ceramic-decor-shelf.jpg"
                   alt="Ceramic decor on minimalist shelf"
-                  width={400}
-                  height={533}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>

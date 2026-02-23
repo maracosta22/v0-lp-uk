@@ -53,9 +53,8 @@ export function HeroSection() {
             <Image
               src="/hero-scandinavian-living-room-wood-panels.jpg"
               alt="Modern Scandinavian living room with wood slat wall panels"
-              width={800}
-              height={1000}
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              fill
+              className="object-cover transition-transform duration-700 hover:scale-[1.02]"
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

@@ -24,9 +24,8 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           <Image
             src={product.images[0] || "/placeholder.svg"}
             alt={product.name}
-            width={400}
-            height={500}
-            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
+            fill
+            className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             priority={priority}
           />

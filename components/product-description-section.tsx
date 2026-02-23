@@ -11,58 +11,53 @@ export function ProductDescriptionSection() {
           Six Easy Steps to Install, Enjoy a Convenient Experience!
         </h3>
         
-        {/* Step 1: Product Details & Dimensions */}
-        <div className="w-full overflow-hidden rounded-lg mb-8">
+        {/* Step 1: Acoustic Benefits */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
           <Image
-            src="/fr-step-1-product-details.png"
-            alt="Step 1: Product Details - Bedroom with slatted panels, wood-textured laminate, eco-friendly MDF, high-density acoustical polyester fiber, dimensions 94.5 x 23.6 inch"
-            width={1400}
-            height={600}
-            className="h-auto w-full object-cover"
+            src="/install-step-1-acoustic-benefits.jpg"
+            alt="Step 1: Acoustic Benefits - Sound panels noise reducing for walls"
+            fill
+            className="object-cover"
           />
         </div>
 
         {/* Step 2: Wide Application */}
-        <div className="w-full overflow-hidden rounded-lg mb-8">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
           <Image
-            src="/fr-step-2-wide-application.png"
-            alt="Step 2: Wide Application - Living room, office, dining area and modern spaces with acoustic panels"
-            width={1400}
-            height={600}
-            className="h-auto w-full object-cover"
+            src="/install-step-2-wide-application.jpg"
+            alt="Step 2: Wide Application - Multiple room installations"
+            fill
+            className="object-cover"
           />
         </div>
 
-        {/* Step 3: Acoustic Benefits */}
-        <div className="w-full overflow-hidden rounded-lg mb-8">
+        {/* Step 3: Flexible Panels */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
           <Image
-            src="/fr-step-3-acoustic-benefits.png"
-            alt="Step 3: Sound panels noise reducing for walls - Bedroom with acoustic panels and sound absorption illustration"
-            width={1400}
-            height={600}
-            className="h-auto w-full object-cover"
+            src="/install-step-3-flexible-panels.jpg"
+            alt="Step 3: Flexible Wall Panels - Kitchen, bedroom, and detailed applications"
+            fill
+            className="object-cover"
           />
         </div>
 
         {/* Step 4: Before & After */}
-        <div className="w-full overflow-hidden rounded-lg mb-8">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
           <Image
-            src="/fr-step-4-before-after.png"
-            alt="Step 4: Before & After - Bedroom transformation with dark and natural oak acoustic panels"
-            width={1400}
-            height={600}
-            className="h-auto w-full object-cover"
+            src="/install-step-4-before-after.jpg"
+            alt="Step 4: Before & After - Room transformation with acoustic panels"
+            fill
+            className="object-cover"
           />
         </div>
 
-        {/* Step 5: Flexible Wall Panels */}
-        <div className="w-full overflow-hidden rounded-lg">
+        {/* Step 5: Product Details */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg">
           <Image
-            src="/fr-step-5-flexible-panels.png"
-            alt="Step 5: Flexible Wall Panels - Kitchen island, bedroom applications, flat panel and rolled flexible panel"
-            width={1400}
-            height={600}
-            className="h-auto w-full object-cover"
+            src="/install-step-5-product-details.jpg"
+            alt="Step 5: Product Details - Specifications, dimensions, and materials"
+            fill
+            className="object-cover"
           />
         </div>
       </div>

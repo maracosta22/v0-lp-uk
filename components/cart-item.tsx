@@ -28,13 +28,12 @@ export function CartItem({ item }: CartItemProps) {
   return (
     <div className="flex gap-4 py-6">
       {/* Image */}
-      <Link href={`/product/${product.slug}`} className="h-24 w-24 shrink-0 overflow-hidden bg-secondary block">
+      <Link href={`/product/${product.slug}`} className="relative h-24 w-24 shrink-0 overflow-hidden bg-secondary">
         <Image
           src={product.images[0] || "/placeholder.svg"}
           alt={product.name}
-          width={96}
-          height={96}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
           sizes="96px"
         />
       </Link>

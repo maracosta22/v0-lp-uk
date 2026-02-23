@@ -32,7 +32,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'adore ce panneau acoustique! L'installation a été très facile et cela rend magnifique derrière la TV. La qualité du son s'est considérablement améliorée dans le salon. Les conversations ne résonnent plus. Je recommande vivement!",
-    images: ["/fr-review-music-studio.png"],
+    images: ["/customer-review-01-living-room.jpg"],
     helpfulCount: 42,
   },
   {
@@ -47,7 +47,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai installé dans mon bureau et les appels vidéo sont beaucoup meilleurs. Le panneau absorbe le bruit de fond parfaitement. C'est très professionnel derrière moi pendant les réunions en ligne.",
-    images: ["/fr-review-bathroom-wall.png"],
+    images: ["/customer-review-02-home-office.jpg"],
     helpfulCount: 38,
   },
   {
@@ -62,7 +62,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Qualité excellente! Mon mari et moi avons installé autour de la TV. Le panneau est flexible et adaptable - nous avons pu contourner les prises électriques facilement. C'est absolument magnifique!",
-    images: ["/fr-review-tv-entertainment.png"],
+    images: ["/customer-review-03-tv-room.jpg"],
     helpfulCount: 35,
   },
   {
@@ -77,7 +77,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai installé avec des LED et c'est épique! L'absorption acoustique est remarquable quand je joue en ligne - mon micro prend beaucoup moins de bruit ambiant. Investissement parfait.",
-    images: ["/fr-review-gaming-neon.png"],
+    images: ["/customer-review-04-gaming-setup.jpg"],
     helpfulCount: 51,
   },
   {
@@ -92,7 +92,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Je n'imaginais pas qu'un panneau pouvait faire une telle différence! En plus d'améliorer l'acoustique, cela a complètement transformé l'aspect visuel de mon salon. Très recommandé.",
-    images: ["/fr-review-intercom-wall.png"],
+    images: ["/customer-review-05-modern-living.jpg"],
     helpfulCount: 29,
   },
   {
@@ -107,7 +107,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Je suis en phase finale de rénovation de ma maison. Le panneau est arrivé au bon moment et est très facile à travailler. Il s'intègre parfaitement dans ma vision de design. J'en prends d'autres!",
-    images: ["/fr-review-curved-wall.png"],
+    images: ["/customer-review-06-construction.jpg"],
     helpfulCount: 22,
   },
   {
@@ -122,7 +122,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Oui, je l'ai mis dans la salle de bain au-dessus du lavabo. Le panneau est résistant et l'absorption acoustique réduit incroyablement l'écho. C'est élégant et minimaliste. Très satisfait du résultat!",
-    images: ["/fr-review-dark-tv-wall.png"],
+    images: ["/customer-review-07-bathroom.jpg"],
     helpfulCount: 18,
   },
   {
@@ -137,7 +137,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Professionnel du son ici - ce panneau livre ce qu'il promet. L'absorption est cohérente et le design est épuré. Parfait pour un studio maison. Définitivement un investissement de qualité.",
-    images: ["/fr-review-white-desk.png"],
+    images: ["/customer-review-08-office-desk.jpg"],
     helpfulCount: 44,
   },
   {
@@ -152,7 +152,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai créé un mur d'accent avec plusieurs panneaux noirs. Le look est moderne et sophistiqué. L'acoustique de la pièce s'est considérablement améliorée. Tous mes visiteurs adorent!",
-    images: ["/fr-review-room-divider.png"],
+    images: ["/customer-review-09-black-panel.jpg"],
     helpfulCount: 40,
   },
   {
@@ -167,7 +167,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai utilisé les panneaux dans plusieurs zones de ma maison - salon, bureau, même cuisine ouverte. La flexibilité permet une adaptation parfaite dans n'importe quel espace. Qualité indéniable!",
-    images: ["/fr-review-fireplace-tv.png"],
+    images: ["/customer-review-10-multiuse-room.jpg"],
     helpfulCount: 37,
   },
 ]
@@ -257,14 +257,13 @@ export function CustomerReviews() {
                 {review.images.map((image, index) => (
                   <div
                     key={index}
-                    className="h-24 w-24 sm:h-32 sm:w-32 flex-shrink-0 overflow-hidden rounded-lg bg-muted"
+                    className="relative h-24 w-24 sm:h-32 sm:w-32 flex-shrink-0 overflow-hidden rounded-lg bg-muted"
                   >
                     <Image
                       src={image || "/placeholder.svg"}
                       alt={`Review image ${index + 1}`}
-                      width={128}
-                      height={128}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 ))}

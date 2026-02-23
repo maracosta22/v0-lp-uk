@@ -40,9 +40,8 @@ export function CategoriesSection() {
               <Image
                 src={category.image || "/placeholder.svg"}
                 alt={category.name}
-                width={400}
-                height={533}
-                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                fill
+                className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent transition-all duration-300 group-hover:from-foreground/70" />

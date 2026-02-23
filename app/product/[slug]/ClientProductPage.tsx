@@ -364,12 +364,11 @@ export default function ClientProductPage({
                     <div key={bundleProduct.id} className="flex items-center gap-3">
                       <div className="w-20 sm:w-24 bg-secondary/30 rounded-lg overflow-hidden">
                         <Link href={`/product/${bundleProduct.slug}`} className="block">
-                          <div className="aspect-square overflow-hidden">
+                          <div className="aspect-square relative overflow-hidden">
                             <Image
                               src={bundleProduct.images[0] || "/placeholder.svg"}
                               alt={bundleProduct.name}
-                              width={96}
-                              height={96}
+                              fill
                               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                             />
                           </div>
@@ -412,12 +411,11 @@ export default function ClientProductPage({
                       className="flex-shrink-0 w-32 sm:w-36 bg-secondary/30 rounded-lg overflow-hidden flex flex-col"
                     >
                       <Link href={`/product/${bumpProduct.slug}`} className="block">
-                        <div className="relative aspect-square overflow-hidden">
+                        <div className="aspect-square relative overflow-hidden">
                           <Image
                             src={bumpProduct.images[0] || "/placeholder.svg"}
                             alt={bumpProduct.name}
-                            width={144}
-                            height={144}
+                            fill
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                           />
                           {bumpProduct.badge && (

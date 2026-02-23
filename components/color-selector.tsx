@@ -41,9 +41,9 @@ export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
               title={color.name}
               aria-label={`Select ${color.name}`}
             >
-              <div className="relative h-16 w-12 sm:h-20 sm:w-14 overflow-hidden">
+              <div className="relative h-16 w-12 sm:h-20 sm:w-14">
                 {color.image ? (
-                  <Image src={color.image || "/placeholder.svg"} alt={color.name} width={56} height={80} className="h-full w-full object-cover" />
+                  <Image src={color.image || "/placeholder.svg"} alt={color.name} fill className="object-cover" />
                 ) : (
                   <div className="h-full w-full" style={{ backgroundColor: color.hex }} />
                 )}
