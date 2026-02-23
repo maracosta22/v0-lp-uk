@@ -32,14 +32,19 @@ const reviews: Review[] = [
     id: "1",
     author: "Marie Dubois",
     rating: 5,
-    title: "Transforme complètement mon salon | Completely transformed my living room",
-    date: "Février 20, 2026",
+    title: "Completely transformed my living room",
+    titleFr: "Transforme complètement mon salon",
+    date: "February 20, 2026",
+    dateFr: "Février 20, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
-      "J'adore ce panneau acoustique! L'installation a été très facile et cela rend magnifique derrière la TV. La qualité du son s'est considérablement améliorée dans le salon. Les conversations ne résonnent plus. Je recommande vivement! | I absolutely love this acoustic panel! Installation was very easy and it looks amazing behind the TV. The sound quality in the living room has improved dramatically. Conversations no longer echo. Highly recommended!",
+      "I absolutely love this acoustic panel! Installation was very easy and it looks amazing behind the TV. The sound quality in the living room has improved dramatically. Conversations no longer echo. Highly recommended!",
+    contentFr:
+      "J'adore ce panneau acoustique! L'installation a été très facile et cela rend magnifique derrière la TV. La qualité du son s'est considérablement améliorée dans le salon. Les conversations ne résonnent plus. Je recommande vivement!",
     images: ["/flexible-panel-natural-oak-living-room.jpg"],
     helpfulCount: 42,
   },
@@ -47,14 +52,19 @@ const reviews: Review[] = [
     id: "2",
     author: "Jean-Pierre Moreau",
     rating: 5,
-    title: "Parfait pour le télétravail | Perfect for remote work",
-    date: "Février 18, 2026",
+    title: "Perfect for remote work",
+    titleFr: "Parfait pour le télétravail",
+    date: "February 18, 2026",
+    dateFr: "Février 18, 2026",
     country: "France",
     verified: true,
-    color: "Gris | Grey",
+    color: "Grey",
+    colorFr: "Gris",
     size: "270x110cm",
     content:
-      "J'ai installé dans mon bureau et les appels vidéo sont beaucoup meilleurs. Le panneau absorbe le bruit de fond parfaitement. C'est très professionnel derrière moi pendant les réunions en ligne. | I installed it in my office and video calls are much better. The panel absorbs background noise perfectly. It looks very professional behind me during online meetings.",
+      "I installed it in my office and video calls are much better. The panel absorbs background noise perfectly. It looks very professional behind me during online meetings.",
+    contentFr:
+      "J'ai installé dans mon bureau et les appels vidéo sont beaucoup meilleurs. Le panneau absorbe le bruit de fond parfaitement. C'est très professionnel derrière moi pendant les réunions en ligne.",
     images: ["/flexible-panel-grey-tv-wall.jpg"],
     helpfulCount: 38,
   },
@@ -62,14 +72,19 @@ const reviews: Review[] = [
     id: "3",
     author: "Béatrice Laurent",
     rating: 5,
-    title: "Design et fonction parfaits | Perfect design and function",
-    date: "Février 16, 2026",
+    title: "Perfect design and function",
+    titleFr: "Design et fonction parfaits",
+    date: "February 16, 2026",
+    dateFr: "Février 16, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
-      "Qualité excellente! Mon mari et moi avons installé autour de la TV. Le panneau est flexible et adaptable - nous avons pu contourner les prises électriques facilement. C'est absolument magnifique! | Excellent quality! My husband and I installed it around the TV. The panel is flexible and adaptable - we were able to work around the electrical outlets easily. It's absolutely beautiful!",
+      "Excellent quality! My husband and I installed it around the TV. The panel is flexible and adaptable - we were able to work around the electrical outlets easily. It's absolutely beautiful!",
+    contentFr:
+      "Qualité excellente! Mon mari et moi avons installé autour de la TV. Le panneau est flexible et adaptable - nous avons pu contourner les prises électriques facilement. C'est absolument magnifique!",
     images: ["/flexible-panel-natural-oak-tv-feature.jpg"],
     helpfulCount: 35,
   },
@@ -77,14 +92,19 @@ const reviews: Review[] = [
     id: "4",
     author: "Carlos Rodriguez",
     rating: 5,
-    title: "Configuration de gaming professionnel | Professional gaming setup",
-    date: "Février 14, 2026",
+    title: "Professional gaming setup",
+    titleFr: "Configuration de gaming professionnel",
+    date: "February 14, 2026",
+    dateFr: "Février 14, 2026",
     country: "France",
     verified: true,
-    color: "Noir | Black",
+    color: "Black",
+    colorFr: "Noir",
     size: "270x110cm",
     content:
-      "J'ai installé avec des LED et c'est épique! L'absorption acoustique est remarquable quand je joue en ligne - mon micro prend beaucoup moins de bruit ambiant. Investissement parfait. | I installed it with LED lighting and it's epic! The acoustic absorption is remarkable when I play online - my microphone picks up much less ambient noise. Perfect investment.",
+      "I installed it with LED lighting and it's epic! The acoustic absorption is remarkable when I play online - my microphone picks up much less ambient noise. Perfect investment.",
+    contentFr:
+      "J'ai installé avec des LED et c'est épique! L'absorption acoustique est remarquable quand je joue en ligne - mon micro prend beaucoup moins de bruit ambiant. Investissement parfait.",
     images: ["/flexible-panel-smoked-oak-entertainment.jpg"],
     helpfulCount: 51,
   },
@@ -92,14 +112,19 @@ const reviews: Review[] = [
     id: "5",
     author: "Fernanda Silva",
     rating: 5,
-    title: "Rénovation complète du salon | Complete living room renovation",
-    date: "Février 12, 2026",
+    title: "Complete living room renovation",
+    titleFr: "Rénovation complète du salon",
+    date: "February 12, 2026",
+    dateFr: "Février 12, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Fumé | Smoked Oak",
+    color: "Smoked Oak",
+    colorFr: "Chêne Fumé",
     size: "270x110cm",
     content:
-      "Je n'imaginais pas qu'un panneau pouvait faire une telle différence! En plus d'améliorer l'acoustique, cela a complètement transformé l'aspect visuel de mon salon. Très recommandé. | I never imagined that one panel could make such a difference! Beyond improving acoustics, it completely transformed the visual appearance of my living room. Highly recommended.",
+      "I never imagined that one panel could make such a difference! Beyond improving acoustics, it completely transformed the visual appearance of my living room. Highly recommended.",
+    contentFr:
+      "Je n'imaginais pas qu'un panneau pouvait faire une telle différence! En plus d'améliorer l'acoustique, cela a complètement transformé l'aspect visuel de mon salon. Très recommandé.",
     images: ["/flexible-panel-walnut-office.jpg"],
     helpfulCount: 29,
   },
@@ -107,14 +132,19 @@ const reviews: Review[] = [
     id: "6",
     author: "Richard Blanc",
     rating: 5,
-    title: "Facile à installer même en construction | Easy to install during renovation",
-    date: "Février 10, 2026",
+    title: "Easy to install during renovation",
+    titleFr: "Facile à installer même en construction",
+    date: "February 10, 2026",
+    dateFr: "Février 10, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
-      "Je suis en phase finale de rénovation de ma maison. Le panneau est arrivé au bon moment et est très facile à travailler. Il s'intègre parfaitement dans ma vision de design. J'en prends d'autres! | I'm in the final stages of renovating my home. The panel arrived at the perfect time and is very easy to work with. It integrates perfectly with my design vision. I'm ordering more!",
+      "I'm in the final stages of renovating my home. The panel arrived at the perfect time and is very easy to work with. It integrates perfectly with my design vision. I'm ordering more!",
+    contentFr:
+      "Je suis en phase finale de rénovation de ma maison. Le panneau est arrivé au bon moment et est très facile à travailler. Il s'intègre parfaitement dans ma vision de design. J'en prends d'autres!",
     images: ["/flexible-panel-natural-oak-entryway.jpg"],
     helpfulCount: 22,
   },
@@ -122,14 +152,19 @@ const reviews: Review[] = [
     id: "7",
     author: "Inès Martin",
     rating: 5,
-    title: "Solution élégante pour la salle de bain | Elegant bathroom solution",
-    date: "Février 08, 2026",
+    title: "Elegant bathroom solution",
+    titleFr: "Solution élégante pour la salle de bain",
+    date: "February 08, 2026",
+    dateFr: "Février 08, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
-      "Oui, je l'ai mis dans la salle de bain au-dessus du lavabo. Le panneau est résistant et l'absorption acoustique réduit incroyablement l'écho. C'est élégant et minimaliste. Très satisfait du résultat! | Yes, I installed it in the bathroom above the vanity. The panel is durable and the acoustic absorption incredibly reduces echo. It's elegant and minimalist. Very satisfied with the result!",
+      "Yes, I installed it in the bathroom above the vanity. The panel is durable and the acoustic absorption incredibly reduces echo. It's elegant and minimalist. Very satisfied with the result!",
+    contentFr:
+      "Oui, je l'ai mis dans la salle de bain au-dessus du lavabo. Le panneau est résistant et l'absorption acoustique réduit incroyablement l'écho. C'est élégant et minimaliste. Très satisfait du résultat!",
     images: ["/flexible-panel-bathroom-accent.jpg"],
     helpfulCount: 18,
   },
@@ -137,14 +172,19 @@ const reviews: Review[] = [
     id: "8",
     author: "Alexandre Ferré",
     rating: 5,
-    title: "Configuration de travail premium | Premium workspace setup",
-    date: "Février 06, 2026",
+    title: "Premium workspace setup",
+    titleFr: "Configuration de travail premium",
+    date: "February 06, 2026",
+    dateFr: "Février 06, 2026",
     country: "France",
     verified: true,
-    color: "Gris | Grey",
+    color: "Grey",
+    colorFr: "Gris",
     size: "270x110cm",
     content:
-      "Professionnel du son ici - ce panneau livre ce qu'il promet. L'absorption est cohérente et le design est épuré. Parfait pour un studio maison. Définitivement un investissement de qualité. | Sound professional here - this panel delivers on its promises. The absorption is consistent and the design is clean. Perfect for a home studio. Definitely a quality investment.",
+      "Sound professional here - this panel delivers on its promises. The absorption is consistent and the design is clean. Perfect for a home studio. Definitely a quality investment.",
+    contentFr:
+      "Professionnel du son ici - ce panneau livre ce qu'il promet. L'absorption est cohérente et le design est épuré. Parfait pour un studio maison. Définitivement un investissement de qualité.",
     images: ["/flexible-panel-desk-workspace.jpg"],
     helpfulCount: 44,
   },
@@ -152,14 +192,19 @@ const reviews: Review[] = [
     id: "9",
     author: "Suzanne Beaumont",
     rating: 5,
-    title: "Mur de panneaux noirs impressionnant | Impressive black panel wall",
-    date: "Février 04, 2026",
+    title: "Impressive black panel wall",
+    titleFr: "Mur de panneaux noirs impressionnant",
+    date: "February 04, 2026",
+    dateFr: "Février 04, 2026",
     country: "France",
     verified: true,
-    color: "Noir | Black",
+    color: "Black",
+    colorFr: "Noir",
     size: "270x110cm",
     content:
-      "J'ai créé un mur d'accent avec plusieurs panneaux noirs. Le look est moderne et sophistiqué. L'acoustique de la pièce s'est considérablement améliorée. Tous mes visiteurs adorent! | I created an accent wall with multiple black panels. The look is modern and sophisticated. The room's acoustics have improved dramatically. All my visitors love it!",
+      "I created an accent wall with multiple black panels. The look is modern and sophisticated. The room's acoustics have improved dramatically. All my visitors love it!",
+    contentFr:
+      "J'ai créé un mur d'accent avec plusieurs panneaux noirs. Le look est moderne et sophistiqué. L'acoustique de la pièce s'est considérablement améliorée. Tous mes visiteurs adorent!",
     images: ["/flexible-panel-grey-tv-wall.jpg"],
     helpfulCount: 40,
   },
@@ -167,14 +212,19 @@ const reviews: Review[] = [
     id: "10",
     author: "Philippe Mercier",
     rating: 5,
-    title: "Polyvalence exceptionnelle | Exceptional versatility",
-    date: "Février 02, 2026",
+    title: "Exceptional versatility",
+    titleFr: "Polyvalence exceptionnelle",
+    date: "February 02, 2026",
+    dateFr: "Février 02, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
-      "J'ai utilisé les panneaux dans plusieurs zones de ma maison - salon, bureau, même cuisine ouverte. La flexibilité permet une adaptation parfaite dans n'importe quel espace. Qualité indéniable! | I used the panels in multiple areas of my home - living room, office, even open kitchen. The flexibility allows perfect adaptation to any space. Undeniable quality!",
+      "I used the panels in multiple areas of my home - living room, office, even open kitchen. The flexibility allows perfect adaptation to any space. Undeniable quality!",
+    contentFr:
+      "J'ai utilisé les panneaux dans plusieurs zones de ma maison - salon, bureau, même cuisine ouverte. La flexibilité permet une adaptation parfaite dans n'importe quel espace. Qualité indéniable!",
     images: ["/flexible-panel-natural-oak-living-room.jpg"],
     helpfulCount: 37,
   },
@@ -182,11 +232,14 @@ const reviews: Review[] = [
     id: "11",
     author: "Luc Fontaine",
     rating: 5,
-    title: "Panneau + LED = Combinaison parfaite | Panel + LED = Perfect combination",
-    date: "Janvier 28, 2026",
+    title: "Panel + LED = Perfect combination",
+    titleFr: "Panneau + LED = Combinaison parfaite",
+    date: "January 28, 2026",
+    dateFr: "Janvier 28, 2026",
     country: "France",
     verified: true,
-    color: "Chêne Naturel | Natural Oak",
+    color: "Natural Oak",
+    colorFr: "Chêne Naturel",
     size: "270x110cm",
     content:
       "J'ai ajouté les bandes LED verticales et c'est magnifique! L'éclairage chaud met en valeur les panneaux acoustiques. Non seulement l'acoustique s'améliore, mais le design de ma pièce est transformé. Installation facile avec le connecteur rapide. | I added the vertical LED strips and it's amazing! The warm lighting showcases the acoustic panels beautifully. Not only has the acoustics improved, but my room's design is completely transformed. Easy installation with the quick connector.",
@@ -340,29 +393,33 @@ export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
                   />
                 ))}
               </div>
-              <span className="font-semibold text-sm sm:text-base break-words">{review.title}</span>
+              <span className="font-semibold text-sm sm:text-base break-words">
+                {isFrench ? (review.titleFr || review.title) : review.title}
+              </span>
             </div>
 
             {/* Date & Location */}
             <p className="text-xs sm:text-sm text-muted-foreground mb-1">
-              Avis postés en {review.country} le {review.date}
+              {isFrench ? 'Avis postés' : 'Posted'} {isFrench ? 'en' : 'in'} {review.country} {isFrench ? 'le' : 'on'} {isFrench ? (review.dateFr || review.date) : review.date}
             </p>
 
             {/* Product Details */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm mb-3">
-              {review.size && <span className="text-muted-foreground">Taille: {review.size}</span>}
+              {review.size && <span className="text-muted-foreground">{isFrench ? 'Taille' : 'Size'}: {review.size}</span>}
               {review.size && review.color && <span className="text-muted-foreground">|</span>}
-              {review.color && <span className="text-muted-foreground">Couleur: {review.color}</span>}
+              {review.color && <span className="text-muted-foreground">{isFrench ? 'Couleur' : 'Color'}: {isFrench ? (review.colorFr || review.color) : review.color}</span>}
               {review.verified && (
                 <>
                   <span className="text-muted-foreground">|</span>
-                  <span className="font-medium text-amber-600">Achat Vérifié</span>
+                  <span className="font-medium text-amber-600">{isFrench ? 'Achat Vérifié' : 'Verified Purchase'}</span>
                 </>
               )}
             </div>
 
             {/* Content */}
-            <p className="text-muted-foreground leading-relaxed mb-4 text-sm sm:text-base">{review.content}</p>
+            <p className="text-muted-foreground leading-relaxed mb-4 text-sm sm:text-base">
+              {isFrench ? (review.contentFr || review.content) : review.content}
+            </p>
 
             {/* Images */}
             {review.images.length > 0 && (
@@ -388,8 +445,21 @@ export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
             {/* Helpful */}
             <div className="flex items-center gap-4">
               <p className="text-xs sm:text-sm text-muted-foreground">
-                {review.helpfulCount + (helpfulReviews.includes(review.id) ? 1 : 0)} personnes trouvent cet avis utile
+                {review.helpfulCount + (helpfulReviews.includes(review.id) ? 1 : 0)} {isFrench ? 'personnes trouvent cet avis utile' : 'people found this helpful'}
               </p>
+            </div>
+            <div className="flex items-center gap-3 mt-2">
+              <button
+                onClick={() => handleHelpful(review.id)}
+                disabled={helpfulReviews.includes(review.id)}
+                className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ThumbsUp className={`h-3.5 sm:h-4 w-3.5 sm:w-4 ${helpfulReviews.includes(review.id) ? "fill-current" : ""}`} />
+                {isFrench ? 'Utile' : 'Helpful'}
+              </button>
+              <button className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
+                {isFrench ? 'Signaler' : 'Report'}
+              </button>
             </div>
             <div className="flex items-center gap-3 mt-2">
               <button
