@@ -43,7 +43,7 @@ export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
             >
               <div className="relative h-16 w-12 sm:h-20 sm:w-14 overflow-hidden">
                 {color.image ? (
-                  <Image src={color.image || "/placeholder.svg"} alt={color.name} width={56} height={80} className="h-full w-full object-cover" />
+                  <Image src={color.image || "/placeholder.svg"} alt={color.name} width={56} height={80} className="h-full w-full object-cover" style={{ width: "auto", height: "auto" }} />
                 ) : (
                   <div className="h-full w-full" style={{ backgroundColor: color.hex }} />
                 )}
