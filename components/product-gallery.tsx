@@ -23,6 +23,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           width={400}
           height={400}
           className="h-full w-full object-cover"
+          style={{ width: "auto", height: "auto" }}
           priority
           sizes="(max-width: 350px) 100vw, 400px"
           unoptimized={isExternalImage(images[selectedIndex])}
@@ -48,6 +49,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                   width={48}
                   height={48}
                   className="w-full h-full object-cover"
+                  style={{ width: "auto", height: "auto" }}
                   sizes="48px"
                   unoptimized={isExternalImage(image)}
                 />

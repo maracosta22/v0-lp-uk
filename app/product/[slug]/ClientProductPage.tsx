@@ -27,6 +27,7 @@ interface ClientProductPageProps {
   frequentlyBoughtTotal: number
   orderBumpProducts: any[]
   isFlexibleAcousticPanel: boolean
+  isRecessedLedStrip?: boolean
   discountPercent: number
   isFrenchVersion?: boolean
 }
@@ -90,6 +91,7 @@ export default function ClientProductPage({
   frequentlyBoughtTotal,
   orderBumpProducts,
   isFlexibleAcousticPanel,
+  isRecessedLedStrip = false,
   discountPercent,
   isFrenchVersion = false,
 }: ClientProductPageProps) {
@@ -490,8 +492,8 @@ export default function ClientProductPage({
         {/* Customer Reviews Section */}
         {isFlexibleAcousticPanel && <CustomerReviews />}
 
-        {/* Recessed LED Section */}
-        {isFlexibleAcousticPanel && <RecessedLedSection />}
+        {/* Recessed LED Strip Section */}
+        {isRecessedLedStrip && <RecessedLedSection />}
 
         {/* Related Products - Hide for French version */}
         {relatedProducts.length > 0 && !isFrenchVersion && (
