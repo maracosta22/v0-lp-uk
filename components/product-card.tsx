@@ -16,6 +16,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCart()
 
   const isFlexibleAcousticPanel = product.id === "prod_flexible_acoustic"
+  const isExternalImage = product.images[0]?.startsWith("http")
 
   return (
     <div className="group">
@@ -29,6 +30,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             priority={priority}
+            unoptimized={isExternalImage}
           />
           {product.badge && (
             <span

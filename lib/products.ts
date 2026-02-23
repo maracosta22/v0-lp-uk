@@ -255,11 +255,11 @@ export const products: Product[] = [
     currency: "GBP",
     category: "decor",
     images: [
-      "/81vrzlpmogl.jpg",
-      "/71jv3jji-xl.jpg",
-      "/81glhb1udxl.jpg",
-      "/71ov9cwimal.jpg",
-      "/71xooyan4ml.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEANCLEAN-txHaPNf061QilA5QNfchEOUeQvFEIE.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN02-wGsGl6PiQu0WpZKmwOwIFdWFcGuNHN.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN04-jsHtrQ87vwg45Qyo5RrSkzrJbV2MXC.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05-OrCyYhiGFlNOZJ6uMPv729KBWN6jHG.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05E-ImqfbNfWohct5EliXBJBJy3edDfAHq.jpg",
     ],
     features: [
       "Fast scrub-free cleaning",
@@ -322,8 +322,11 @@ export const products: Product[] = [
     category: "decor",
     hidden: true,
     images: [
-      "/starwax-anti-moisissures-bottle.png",
-      "/starwax-anti-moisissures-back.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEANCLEAN-txHaPNf061QilA5QNfchEOUeQvFEIE.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN02-wGsGl6PiQu0WpZKmwOwIFdWFcGuNHN.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN04-jsHtrQ87vwg45Qyo5RrSkzrJbV2MXC.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05-OrCyYhiGFlNOZJ6uMPv729KBWN6jHG.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05E-ImqfbNfWohct5EliXBJBJy3edDfAHq.jpg",
     ],
     features: [
       "Sans rincage, sans odeur incommodante",
