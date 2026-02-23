@@ -16,13 +16,13 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-3 overflow-hidden max-w-full">
-      <div className="w-full max-w-[350px] sm:max-w-[400px] mx-auto overflow-hidden bg-secondary aspect-square">
+      <div className="w-full max-w-[350px] sm:max-w-[400px] mx-auto overflow-hidden bg-secondary aspect-square flex items-center justify-center">
         <Image
           src={images[selectedIndex] || "/placeholder.svg"}
           alt={`${productName} - Image ${selectedIndex + 1}`}
           width={400}
           height={400}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           style={{ width: "auto", height: "auto" }}
           priority
           sizes="(max-width: 350px) 100vw, 400px"
