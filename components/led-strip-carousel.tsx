@@ -186,7 +186,7 @@ export function LedStripCarousel() {
         <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">See It In Your Space</h2>
 
         {/* Room Tabs */}
-        <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-2 -mx-3 px-3">
+        <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-2 -mx-3 px-3 sm:mx-0 sm:px-0">
           {roomTabs.map((room) => (
             <button
               key={room.id}
