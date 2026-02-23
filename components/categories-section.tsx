@@ -36,15 +36,16 @@ export function CategoriesSection() {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
-            <Link key={category.name} href={category.href} className="group relative aspect-[3/4] overflow-hidden">
-              <Image
-                src={category.image || "/placeholder.svg"}
-                alt={category.name}
-                width={400}
-                height={533}
-                className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
+            <Link key={category.name} href={category.href} className="group relative aspect-[3/4] overflow-hidden block">
+              <div className="absolute inset-0">
+                <Image
+                  src={category.image || "/placeholder.svg"}
+                  alt={category.name}
+                  fill
+                  className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent transition-all duration-300 group-hover:from-foreground/70" />
               <div className="absolute bottom-0 left-0 right-0 p-8 text-primary-foreground">
                 <h3 className="font-serif text-2xl font-normal">{category.name}</h3>
