@@ -338,6 +338,32 @@ export const products: Product[] = [
     inStock: true,
     badge: "Essentiel",
   },
+  // Test Product FR
+  {
+    id: "prod_test_fr_001",
+    slug: "produit-test-fr",
+    name: "Produit Test",
+    description: "Produit de test pour verification du systeme - Prix symbolique de 2 reais",
+    longDescription:
+      "Ceci est un produit de test cree pour verifier le bon fonctionnement du systeme de commerce electronique avec la devise BRL (Real bresilien). Ce produit a un prix symbolique de R$ 2,00 et ne doit etre utilise qu'a des fins de test et de validation.",
+    price: 2.00,
+    currency: "BRL",
+    category: "decor",
+    hidden: true,
+    images: [
+      "/placeholder.svg",
+    ],
+    features: [
+      "Produit de test uniquement",
+      "Prix symbolique R$ 2,00",
+      "Ne pas utiliser en production",
+      "Pour validation du systeme",
+    ],
+    dimensions: "Test",
+    material: "Test",
+    inStock: true,
+    badge: "Test",
+  },
 ]
 
 export function getProductBySlug(slug: string): Product | undefined {
