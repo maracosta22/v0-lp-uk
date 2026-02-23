@@ -170,6 +170,111 @@ const reviews: Review[] = [
     images: ["/flexible-panel-natural-oak-living-room.jpg"],
     helpfulCount: 37,
   },
+  {
+    id: "11",
+    author: "Luc Fontaine",
+    rating: 5,
+    title: "Panneau + LED = Combinaison parfaite | Panel + LED = Perfect combination",
+    date: "Janvier 28, 2026",
+    country: "France",
+    verified: true,
+    color: "Chêne Naturel | Natural Oak",
+    size: "270x110cm",
+    content:
+      "J'ai ajouté les bandes LED verticales et c'est magnifique! L'éclairage chaud met en valeur les panneaux acoustiques. Non seulement l'acoustique s'améliore, mais le design de ma pièce est transformé. Installation facile avec le connecteur rapide. | I added the vertical LED strips and it's amazing! The warm lighting showcases the acoustic panels beautifully. Not only has the acoustics improved, but my room's design is completely transformed. Easy installation with the quick connector.",
+    images: ["/led-acoustic-panels-living-room.jpg", "/led-bedroom-modern.jpg"],
+    helpfulCount: 56,
+  },
+  {
+    id: "12",
+    author: "Isabelle Gervais",
+    rating: 5,
+    title: "Configuration LED chambre à coucher | Bedroom LED setup",
+    date: "Janvier 25, 2026",
+    country: "France",
+    verified: true,
+    color: "Gris | Grey",
+    size: "270x110cm",
+    content:
+      "J'ai installé les panneaux gris avec l'éclairage LED blanc chaud dans ma chambre. L'ambiance est devenue très confortable et l'acoustique a réduit les bruits de la rue. C'est comme avoir un mini-spa à la maison! | I installed the grey panels with warm white LED lighting in my bedroom. The atmosphere became very cozy and the acoustics reduced street noise. It's like having a mini-spa at home!",
+    images: ["/led-modern-bedroom-decor.jpg", "/led-dining-room-warm-lights.jpg"],
+    helpfulCount: 48,
+  },
+  {
+    id: "13",
+    author: "Marc Delaunay",
+    rating: 5,
+    title: "Système d'éclairage professionnel | Professional lighting system",
+    date: "Janvier 22, 2026",
+    country: "France",
+    verified: true,
+    color: "Noir | Black",
+    size: "270x110cm",
+    content:
+      "J'ai créé un setup home studio avec les panneaux noirs et les LED adjustables. Le contrôle de luminosité est incroyable - du 10% au 100%. L'absorption acoustique est excellente et les vidéos que je tourne sur ce mur sont professionnelles. | I created a home studio setup with black panels and adjustable LED lights. The brightness control is incredible - from 10% to 100%. The acoustic absorption is excellent and the videos I shoot against this wall look professional.",
+    images: ["/led-black-b-specifications.jpg", "/led-4rooms-showcase.jpg"],
+    helpfulCount: 62,
+  },
+  {
+    id: "14",
+    author: "Nathalie Rousseau",
+    rating: 5,
+    title: "Cuisine moderne avec LED | Modern kitchen with LED",
+    date: "Janvier 19, 2026",
+    country: "France",
+    verified: true,
+    color: "Chêne Naturel | Natural Oak",
+    size: "270x110cm",
+    content:
+      "J'ai installé les panneaux avec les bandes LED CIR90 au-dessus du comptoir de cuisine. L'éclairage haute luminosité révèle vraiment les détails des panneaux en bois. Cela a créé une cuisine très accueillante et fonctionnelle. L'adhésif personnalisé était très collant! | I installed the panels with CIR90 high-brightness LED strips above my kitchen counter. The high-brightness lighting really reveals the details of the wood panels. It created a very welcoming and functional kitchen. The customized adhesive tape was very sticky!",
+    images: ["/led-kitchen-cabinet-lighting.jpg", "/led-adhesive-quality.jpg"],
+    helpfulCount: 45,
+  },
+  {
+    id: "15",
+    author: "Thomas Arnaud",
+    rating: 5,
+    title: "Installtion facile avec Quick Connect | Easy installation with Quick Connect",
+    date: "Janvier 16, 2026",
+    country: "France",
+    verified: true,
+    color: "Chêne Naturel | Natural Oak",
+    size: "270x110cm",
+    content:
+      "Le système Quick Connect a rendu l'installation des LED tellement simple! Je pensais que ce serait complexe, mais avec le câble de connexion extra-long et le guide d'installation, c'était un jeu d'enfant. Le résultat final est spectaculaire. | The Quick Connect system made LED installation so simple! I thought it would be complex, but with the extra-long connecting cable and installation guide, it was a breeze. The final result is spectacular.",
+    images: ["/led-quick-connect-diagram.jpg", "/panel-installation-guide.jpg"],
+    helpfulCount: 51,
+  },
+  {
+    id: "16",
+    author: "Véronique Blanc",
+    rating: 5,
+    title: "Certification de sécurité et qualité | Safety certification and quality",
+    date: "Janvier 13, 2026",
+    country: "France",
+    verified: true,
+    color: "Walnut | Noyer",
+    size: "270x110cm",
+    content:
+      "J'ai été impressionnée par le rapport de test SGS montrant les faibles émissions de formaldéhyde et l'absorption acoustique NRC 0.80. C'est un produit de qualité véritablement certifié. Les panneaux se posent magnifiquement et l'ajout des LED rend tout cela très haut de gamme. | I was impressed by the SGS test report showing low formaldehyde emissions and NRC 0.80 acoustic absorption. This is truly a certified quality product. The panels look beautiful installed and the LED addition makes everything very high-end.",
+    images: ["/panel-safety-certification.jpg", "/panel-acoustic-tested.jpg"],
+    helpfulCount: 39,
+  },
+  {
+    id: "17",
+    author: "Claude Moreau",
+    rating: 5,
+    title: "Applications multiples | Multiple applications",
+    date: "Janvier 10, 2026",
+    country: "France",
+    verified: true,
+    color: "Gris | Grey",
+    size: "270x110cm",
+    content:
+      "J'ai vu les photos d'application dans différentes pièces (bureau, chambre, salon, mur canapé) et cela m'a inspiré. J'ai acheté le kit complet avec les LED et j'ai transformé mon bureau à domicile. Les panneaux s'adaptent parfaitement à chaque espace. Vraiment impressionné! | I saw the application photos in different rooms (office, bedroom, living room, sofa wall) and it inspired me. I bought the complete kit with LED and transformed my home office. The panels fit perfectly in any space. Truly impressed!",
+    images: ["/panel-room-applications.jpg", "/led-4rooms-showcase.jpg"],
+    helpfulCount: 44,
+  },
 ]
 
 const totalReviews = 2847
@@ -265,6 +370,7 @@ export function CustomerReviews() {
                       width={128}
                       height={128}
                       className="h-full w-full object-cover"
+                      style={{ width: "auto", height: "auto" }}
                     />
                   </div>
                 ))}
