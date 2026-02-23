@@ -60,6 +60,10 @@ export const products: Product[] = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible04-oKR2EuRKRtinS7LpkwwJ01dYttAtIZ.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible05-j23M8jQWwN5RIksM85S9SkqUFHLoMC.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible09-bWbjAgzzXv47tlhHS9MmhhwSUBKYwa.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_gv77m0gv77m0gv77-OUxelfTVMtNQsi3axgVhllnLQDzSXH.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_v6k2hsv6k2hsv6k2-YP0bRYOnoSl87jUELafBWZxapznL7v.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nXV0Y8WUw3mRMfk6sxT7Pt1rvflMbI.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hoylswhoylswhoyl-UAT7MQzJC5B6VMXMW2aIThVv0NZMt4.png",
     ],
     features: [
       "Flexible backing - bends to any curve",
@@ -105,6 +109,10 @@ export const products: Product[] = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible04-oKR2EuRKRtinS7LpkwwJ01dYttAtIZ.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible05-j23M8jQWwN5RIksM85S9SkqUFHLoMC.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible09-bWbjAgzzXv47tlhHS9MmhhwSUBKYwa.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_gv77m0gv77m0gv77-OUxelfTVMtNQsi3axgVhllnLQDzSXH.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_v6k2hsv6k2hsv6k2-YP0bRYOnoSl87jUELafBWZxapznL7v.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nXV0Y8WUw3mRMfk6sxT7Pt1rvflMbI.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hoylswhoylswhoyl-UAT7MQzJC5B6VMXMW2aIThVv0NZMt4.png",
     ],
     features: [
       "Support flexible - s'adapte a toute courbe",
@@ -255,8 +263,6 @@ export const products: Product[] = [
     currency: "GBP",
     category: "decor",
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEANCLEAN-txHaPNf061QilA5QNfchEOUeQvFEIE.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN02-wGsGl6PiQu0WpZKmwOwIFdWFcGuNHN.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN04-jsHtrQ87vwg45Qyo5RrSkzrJbV2MXC.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05-OrCyYhiGFlNOZJ6uMPv729KBWN6jHG.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05E-ImqfbNfWohct5EliXBJBJy3edDfAHq.jpg",
@@ -322,8 +328,6 @@ export const products: Product[] = [
     category: "decor",
     hidden: true,
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEANCLEAN-txHaPNf061QilA5QNfchEOUeQvFEIE.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN02-wGsGl6PiQu0WpZKmwOwIFdWFcGuNHN.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN04-jsHtrQ87vwg45Qyo5RrSkzrJbV2MXC.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05-OrCyYhiGFlNOZJ6uMPv729KBWN6jHG.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/CLEAN05E-ImqfbNfWohct5EliXBJBJy3edDfAHq.jpg",
