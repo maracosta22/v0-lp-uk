@@ -122,14 +122,19 @@ export function ThankYouContent() {
 
   const orderTotal = sessionData.amount_total ? (sessionData.amount_total / 100).toFixed(2) : "0.00"
   const customerEmail = sessionData.customer_details?.email || "Not provided"
+  const isFrench = sessionData.metadata?.locale === 'fr'
 
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <div className="text-center mb-8">
         <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-        <h1 className="text-3xl font-bold mb-2">Order Confirmed!</h1>
+        <h1 className="text-3xl font-bold mb-2">
+          {isFrench ? 'Félicitations !' : 'Order Confirmed!'}
+        </h1>
         <p className="text-muted-foreground">
-          Thank you for your purchase. We've sent a confirmation email to {customerEmail}
+          {isFrench 
+            ? 'Félicitations pour votre achat, vous recevrez votre commande dans 14 à 15 jours ! En cas de questions, envoyez un email à homepanel@panel.com'
+            : `Thank you for your purchase. We've sent a confirmation email to ${customerEmail}`}
         </p>
       </div>
 
