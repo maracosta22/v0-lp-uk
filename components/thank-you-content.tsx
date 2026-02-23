@@ -122,7 +122,7 @@ export function ThankYouContent() {
 
   const orderTotal = sessionData.amount_total ? (sessionData.amount_total / 100).toFixed(2) : "0.00"
   const customerEmail = sessionData.customer_details?.email || "Not provided"
-  const isFrench = sessionData.metadata?.locale === 'fr'
+  const isFrench = sessionData.metadata?.content_ids?.includes('-fr') || false
 
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
