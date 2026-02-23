@@ -120,9 +120,13 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
 
         {/* Message */}
         <div className="text-center space-y-3">
-          <h1 className="text-3xl font-bold text-foreground">Thank You!</h1>
+          <h1 className="text-3xl font-bold text-foreground">
+            {purchaseData?.metadata?.locale === 'fr' ? 'Félicitations !' : 'Thank You!'}
+          </h1>
           <p className="text-muted-foreground text-lg">
-            Your order has been confirmed. You will receive an email confirmation shortly.
+            {purchaseData?.metadata?.locale === 'fr' 
+              ? 'Félicitations pour votre achat, vous recevrez votre commande dans 14 à 15 jours ! En cas de questions, envoyez un email à homepanel@panel.com'
+              : 'Your order has been confirmed. You will receive an email confirmation shortly.'}
           </p>
         </div>
 

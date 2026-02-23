@@ -142,7 +142,11 @@ export function AddToCartButton({ product, variant = "default", className, isFre
 
       <Button onClick={handleBuyNow} size="lg" className="h-12 w-full" disabled={!product.inStock} data-add-to-cart="true">
         <ShoppingBag className="mr-2 h-4 w-4" />
-        {isFrenchVersion ? `Acheter - €${displayPrice * quantity}` : `Buy Now - £${displayPrice * quantity}`}
+        {product.currency === "BRL" 
+          ? `Comprar - R$${(displayPrice * quantity).toFixed(2)}`
+          : isFrenchVersion 
+            ? `Acheter - €${displayPrice * quantity}` 
+            : `Buy Now - £${displayPrice * quantity}`}
       </Button>
     </div>
   )
