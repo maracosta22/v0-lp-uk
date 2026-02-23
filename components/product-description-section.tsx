@@ -8,15 +8,12 @@ export function ProductDescriptionSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const flexibleImages = [
-    { src: "/flexible01.jpg", alt: "Flexible Acoustic Panel - Image 1" },
-    { src: "/flexible02.jpg", alt: "Flexible Acoustic Panel - Image 2" },
-    { src: "/flexible03.jpg", alt: "Flexible Acoustic Panel - Image 3" },
-    { src: "/flexible04.jpg", alt: "Flexible Acoustic Panel - Image 4" },
-    { src: "/flexible05.jpg", alt: "Flexible Acoustic Panel - Image 5" },
-    { src: "/flexible06.jpg", alt: "Flexible Acoustic Panel - Image 6" },
-    { src: "/flexible07.jpg", alt: "Flexible Acoustic Panel - Image 7" },
-    { src: "/flexible08.jpg", alt: "Flexible Acoustic Panel - Image 8" },
-    { src: "/flexible09.jpg", alt: "Flexible Acoustic Panel - Image 9" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible01-4OcwUWDlOibpyftWOQHwyW3JJ7BHKW.jpg", alt: "Flexible Acoustic Panel - Product Pack" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible02-tl9EQ27LMTMWC5PHKFtE6Mhl5tGIBF.jpg", alt: "Flexible Acoustic Panel - Live Application Bedroom" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible03-rKWhKKDjSwncUNrOBiupKZwmhzGzHv.jpg", alt: "Flexible Acoustic Panel - Living Room & Dimming Room" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible04-oKR2EuRKRtinS7LpkwwJ01dYttAtIZ.jpg", alt: "Flexible Acoustic Panel - Tested and Proved NRC 0.80" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible05-j23M8jQWwN5RIksM85S9SkqUFHLoMC.jpg", alt: "Flexible Acoustic Panel - SGS Safety Certificate" },
+    { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/flexible09-bWbjAgzzXv47tlhHS9MmhhwSUBKYwa.jpg", alt: "Flexible Acoustic Panel - Technical Specifications" },
   ]
 
   const scrollLeft = () => {
@@ -56,6 +53,7 @@ export function ProductDescriptionSection() {
                     height={400}
                     className="w-full h-full object-cover"
                     priority={index < 3}
+                    unoptimized
                   />
                 </div>
               </div>
