@@ -81,11 +81,12 @@ export const products: Product[] = [
     badge: "Bestseller",
     onSale: true,
     colors: [
+      { id: "charcoal-grey", name: "Charcoal Grey", hex: "#3D3D3D", image: "/color-charcoal-grey.jpg" },
+      { id: "medium-grey", name: "Medium Grey", hex: "#707070", image: "/color-medium-grey.jpg" },
+      { id: "light-grey", name: "Light Grey", hex: "#B8B8B8", image: "/color-light-grey.jpg" },
       { id: "natural-oak", name: "Natural Oak", hex: "#D4B896", image: "/color-natural-oak.jpg" },
-      { id: "smoked-oak", name: "Smoked Oak", hex: "#8B7355", image: "/color-smoked-oak.jpg" },
-      { id: "walnut", name: "Walnut", hex: "#5D4037", image: "/color-walnut.jpg" },
-      { id: "grey-oak", name: "Grey Oak", hex: "#9E9E9E", image: "/color-grey-oak.jpg" },
-      { id: "black", name: "Black", hex: "#2D2D2D", image: "/color-black.jpg" },
+      { id: "walnut", name: "Walnut", hex: "#8B6F47", image: "/color-walnut.jpg" },
+      { id: "black", name: "Black", hex: "#1A1A1A", image: "/color-black.jpg" },
     ],
   },
   // French version of Flexible Acoustic Panel (FR market)
@@ -127,10 +128,12 @@ export const products: Product[] = [
     badge: "Meilleure Vente",
     onSale: true,
     colors: [
-      { id: "natural-oak-fr", name: "Chene Naturel", hex: "#D4B896", image: "/fr-color-natural-oak.png" },
-      { id: "smoked-oak-fr", name: "Chene Fume", hex: "#8B7355", image: "/fr-color-smoked-oak.png" },
-      { id: "dark-smoked-fr", name: "Chene Fume Fonce", hex: "#5D4037", image: "/fr-color-dark-smoked.png" },
-      { id: "grey-oak-fr", name: "Chene Gris", hex: "#9E9E9E", image: "/fr-color-grey.png" },
+      { id: "charcoal-grey-fr", name: "Gris Anthracite", hex: "#3D3D3D", image: "/fr-color-charcoal-grey.jpg" },
+      { id: "medium-grey-fr", name: "Gris Moyen", hex: "#707070", image: "/fr-color-medium-grey.jpg" },
+      { id: "light-grey-fr", name: "Gris Clair", hex: "#B8B8B8", image: "/fr-color-light-grey.jpg" },
+      { id: "natural-oak-fr", name: "Chene Naturel", hex: "#D4B896", image: "/fr-color-natural-oak.jpg" },
+      { id: "walnut-fr", name: "Noyer", hex: "#8B6F47", image: "/fr-color-walnut.jpg" },
+      { id: "black-fr", name: "Noir", hex: "#1A1A1A", image: "/fr-color-black.jpg" },
     ],
   },
   {
