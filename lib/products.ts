@@ -81,11 +81,11 @@ export const products: Product[] = [
     badge: "Bestseller",
     onSale: true,
     colors: [
-      { id: "natural-oak", name: "Natural Oak", hex: "#D4B896", image: "/color-natural-oak.jpg" },
-      { id: "smoked-oak", name: "Smoked Oak", hex: "#8B7355", image: "/color-smoked-oak.jpg" },
-      { id: "walnut", name: "Walnut", hex: "#5D4037", image: "/color-walnut.jpg" },
-      { id: "grey-oak", name: "Grey Oak", hex: "#9E9E9E", image: "/color-grey-oak.jpg" },
-      { id: "black", name: "Black", hex: "#2D2D2D", image: "/color-black.jpg" },
+      { id: "natural", name: "Natural", hex: "#D4B896", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_gv77m0gv77m0gv77-2ZuSE03hVAhko9zJULiZyynQuzvSro.png" },
+      { id: "walnut", name: "Walnut", hex: "#5D4037", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_v6k2hsv6k2hsv6k2-WlF4p8OnMPN9VN2jMsVPIoGPJUxmAU.png" },
+      { id: "black", name: "Black", hex: "#2D2D2D", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nzi1de1MXOo3sji65NDIhMdbxWOdIk.png" },
+      { id: "grey", name: "Grey", hex: "#9E9E9E", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hoylswhoylswhoyl-IspXGlydLXx9MoShiAKqZWmOiQQpwj.png" },
+      { id: "white", name: "White", hex: "#F5F5F5", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nzi1de1MXOo3sji65NDIhMdbxWOdIk.png" },
     ],
   },
   // French version of Flexible Acoustic Panel (FR market)
@@ -130,10 +130,11 @@ export const products: Product[] = [
     badge: "Meilleure Vente",
     onSale: true,
     colors: [
-      { id: "natural-oak-fr", name: "Chene Naturel", hex: "#D4B896", image: "/fr-color-natural-oak.png" },
-      { id: "smoked-oak-fr", name: "Chene Fume", hex: "#8B7355", image: "/fr-color-smoked-oak.png" },
-      { id: "dark-smoked-fr", name: "Chene Fume Fonce", hex: "#5D4037", image: "/fr-color-dark-smoked.png" },
-      { id: "grey-oak-fr", name: "Chene Gris", hex: "#9E9E9E", image: "/fr-color-grey.png" },
+      { id: "natural-fr", name: "Naturel", hex: "#D4B896", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_gv77m0gv77m0gv77-2ZuSE03hVAhko9zJULiZyynQuzvSro.png" },
+      { id: "walnut-fr", name: "Noyer", hex: "#5D4037", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_v6k2hsv6k2hsv6k2-WlF4p8OnMPN9VN2jMsVPIoGPJUxmAU.png" },
+      { id: "black-fr", name: "Noir", hex: "#2D2D2D", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nzi1de1MXOo3sji65NDIhMdbxWOdIk.png" },
+      { id: "grey-fr", name: "Gris", hex: "#9E9E9E", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hoylswhoylswhoyl-IspXGlydLXx9MoShiAKqZWmOiQQpwj.png" },
+      { id: "white-fr", name: "Blanc", hex: "#F5F5F5", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nzi1de1MXOo3sji65NDIhMdbxWOdIk.png" },
     ],
   },
   {
