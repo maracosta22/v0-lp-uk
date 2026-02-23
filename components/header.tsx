@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Menu, ShoppingBag, X } from "lucide-react"
 import { useCart } from "@/lib/cart-context"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 const navigation = [
   { name: "Shop", href: "/products" },
@@ -32,6 +32,7 @@ export function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-80 bg-background">
+            <SheetTitle className="sr-only">Menu</SheetTitle>
             <div className="flex items-center justify-between pb-6">
               <Link
                 href="/"
