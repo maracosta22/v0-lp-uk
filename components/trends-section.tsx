@@ -23,7 +23,7 @@ export function TrendsSection() {
               </div>
               <div className="aspect-square overflow-hidden">
                 <Image
-                  src="/trend-acoustic-panel-office-modern.jpg"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/walnut-acoustic-panel-dark-wood-elegant-modern-AcGAiFqSN3JJrCppZSVKdUuiWt7U8e.jpg"
                   alt="Modern office with acoustic panels"
                   width={400}
                   height={400}
@@ -45,7 +45,7 @@ export function TrendsSection() {
               </div>
               <div className="aspect-[3/4] overflow-hidden">
                 <Image
-                  src="/trend-ceramic-decor-shelf.jpg"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ceramic-vase-dried-flowers-minimalist-vHaUcBwrrPjaWepdUFucLcY2VN6Dv5.jpg"
                   alt="Ceramic decor on minimalist shelf"
                   width={400}
                   height={533}
