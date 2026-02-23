@@ -71,6 +71,16 @@ export const products: Product[] = [
       { id: "black", name: "Black", hex: "#2D2D2D", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_y18qr9y18qr9y18q-nzi1de1MXOo3sji65NDIhMdbxWOdIk.png" },
       { id: "grey", name: "Grey", hex: "#9E9E9E", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hoylswhoylswhoyl-IspXGlydLXx9MoShiAKqZWmOiQQpwj.png" },
     ],
+    features: [
+      "Flexible backing - adapts to any curve",
+      "270x110cm coverage per piece",
+      "Superior NRC rating of 0.85",
+      "Multiple wood tones available",
+      "Easy DIY installation",
+      "Eco-friendly materials",
+    ],
+    dimensions: "270cm W x 110cm H x 0.5cm D",
+    material: "Premium Wood Veneer with Acoustic Felt Backing",
   },
   // French version of Flexible Acoustic Panel (FR market)
   {
