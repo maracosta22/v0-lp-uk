@@ -10,7 +10,9 @@ export function formatPrice(price: number, currency: string = "GBP"): string {
   const roundedPrice = Math.round(validPrice * 100) / 100
   
   // Format based on currency
-  const currencySymbol = currency === "EUR" ? "€" : "£"
+  let currencySymbol = "£"
+  if (currency === "EUR") currencySymbol = "€"
+  else if (currency === "BRL") currencySymbol = "R$"
   
   return `${currencySymbol}${roundedPrice.toFixed(2)}`
 }

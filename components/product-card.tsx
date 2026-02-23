@@ -6,6 +6,7 @@ import type { Product } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 import { Button } from "@/components/ui/button"
 import { ShoppingBag, Flame } from "lucide-react"
+import { formatPrice } from "@/lib/price"
 
 interface ProductCardProps {
   product: Product
@@ -57,11 +58,11 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           <p className="text-sm leading-relaxed text-muted-foreground line-clamp-1">{product.description}</p>
           <div className="flex items-center gap-2 pt-1">
             <p className={`font-serif text-lg tracking-tight ${product.onSale ? "text-accent" : ""}`}>
-              £{product.price}
+              {formatPrice(product.price, product.currency)}
               {isFlexibleAcousticPanel && <span className="ml-1 font-sans text-xs text-muted-foreground">/ piece</span>}
             </p>
             {product.onSale && product.originalPrice && (
-              <p className="font-serif text-sm text-muted-foreground line-through">£{product.originalPrice}</p>
+              <p className="font-serif text-sm text-muted-foreground line-through">{formatPrice(product.originalPrice, product.currency)}</p>
             )}
           </div>
         </div>
