@@ -489,8 +489,8 @@ export default function ClientProductPage({
         {/* Product Description Section */}
         {isFlexibleAcousticPanel && <ProductDescriptionSection />}
 
-        {/* Customer Reviews Section */}
-        {isFlexibleAcousticPanel && <CustomerReviews />}
+  {/* Customer Reviews Section */}
+  {isFlexibleAcousticPanel && <CustomerReviews isFrench={isFrenchVersion} />}
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}

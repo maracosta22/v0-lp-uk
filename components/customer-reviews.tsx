@@ -9,14 +9,22 @@ interface Review {
   author: string
   rating: number
   title: string
+  titleFr?: string
   date: string
+  dateFr?: string
   country: string
   verified: boolean
   color?: string
+  colorFr?: string
   size?: string
   content: string
+  contentFr?: string
   images: string[]
   helpfulCount: number
+}
+
+interface CustomerReviewsProps {
+  isFrench?: boolean
 }
 
 const reviews: Review[] = [
@@ -279,7 +287,7 @@ const reviews: Review[] = [
 
 const totalReviews = 2847
 
-export function CustomerReviews() {
+export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
   const [helpfulReviews, setHelpfulReviews] = useState<string[]>([])
 
   const handleHelpful = (reviewId: string) => {
@@ -294,7 +302,7 @@ export function CustomerReviews() {
     <section className="mt-16 border-t border-border pt-12 overflow-hidden">
       {/* Header */}
       <div className="mb-8">
-        <h2 className="font-serif text-xl sm:text-2xl">Avis Clients</h2>
+        <h2 className="font-serif text-xl sm:text-2xl">{isFrench ? 'Avis Clients' : 'Customer Reviews'}</h2>
         <div className="mt-3 flex items-center gap-2 sm:gap-3 flex-wrap">
           <div className="flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -305,7 +313,7 @@ export function CustomerReviews() {
             ))}
           </div>
           <span className="text-xs sm:text-sm text-muted-foreground">
-            {averageRating.toFixed(1)} sur 5 | {totalReviews} avis
+            {averageRating.toFixed(1)} {isFrench ? 'sur' : 'out of'} 5 | {totalReviews} {isFrench ? 'avis' : 'reviews'}
           </span>
         </div>
       </div>
