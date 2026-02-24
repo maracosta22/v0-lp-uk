@@ -14,7 +14,7 @@ const CONTENT = {
       {
         title: "Easy to Clean",
         text: "Keeping your spaces looking beautiful has never been easier. Our slatted panels are designed to simplify your routine: simply wipe with a dry or slightly damp cloth to remove dust or light marks, without compromising the flawless finish. Functionality and practicality for your everyday life.",
-        image: "/images/acustika-easy-clean.jpg",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Caracteristicas-Facil-de-instalar-tTBaUKwKi4AyDqZpyQSaRsdncnw4Uf.webp",
       },
       {
         title: "European Design for Interiors",
@@ -36,7 +36,7 @@ const CONTENT = {
       {
         title: "Facile a Nettoyer",
         text: "Maintenir la beaute de vos espaces n'a jamais ete aussi simple. Nos panneaux a lattes sont concus pour faciliter votre quotidien : il suffit de passer un chiffon sec ou legerement humide pour enlever la poussiere ou les taches legeres, sans compromettre la finition impeccable. Fonctionnalite et praticite au quotidien.",
-        image: "/images/acustika-easy-clean.jpg",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Caracteristicas-Facil-de-instalar-tTBaUKwKi4AyDqZpyQSaRsdncnw4Uf.webp",
       },
       {
         title: "Design Europeen pour Interieurs",
