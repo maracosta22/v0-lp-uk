@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Plus, Minus, Package } from "lucide-react"
+import { useCart } from "@/lib/cart-context"
 
 const SAMPLES = [
   {
@@ -81,6 +82,7 @@ interface SamplesSectionProps {
 
 export function SamplesSection({ isFrenchVersion = false }: SamplesSectionProps) {
   const [selected, setSelected] = useState<string[]>([])
+  const { addItem } = useCart()
   const lang = isFrenchVersion ? "fr" : "en"
   const t = LABELS[lang]
   const price = PRICE[lang]
@@ -91,6 +93,29 @@ export function SamplesSection({ isFrenchVersion = false }: SamplesSectionProps)
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     )
+  }
+
+  const handleAddToCart = () => {
+    selected.forEach((id) => {
+      const sample = SAMPLES.find((s) => s.id === id)
+      if (!sample) return
+      const sampleProduct = {
+        id: `sample-${id}`,
+        slug: `sample-${id}`,
+        name: `Sample - ${sample.name[lang]}`,
+        description: sample.name[lang],
+        longDescription: "",
+        price: price,
+        currency: isFrenchVersion ? "EUR" : "GBP",
+        category: "samples",
+        images: [sample.image],
+        features: [],
+        inStock: true,
+        noShipping: true,
+      }
+      addItem(sampleProduct, 1)
+    })
+    setSelected([])
   }
 
   return (
@@ -222,6 +247,7 @@ export function SamplesSection({ isFrenchVersion = false }: SamplesSectionProps)
             <button
               type="button"
               disabled={selected.length === 0}
+              onClick={handleAddToCart}
               className="w-full bg-accent text-accent-foreground py-3 rounded-lg text-sm font-semibold hover:bg-accent/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {t.addToCart}
