@@ -74,7 +74,7 @@ const FRAME_INFO = [
       "Soigneusement emballé et envoyé en tube postal résistant",
       "Impression avec encre écologique et non toxique",
     ],
-    image: null,
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_iflkykiflkykiflk-14ui5eCJO8pRc8M5c39UDE3wbYdvWl.png",
   },
   {
     id: "moldura-premium-vidro",
@@ -87,7 +87,7 @@ const FRAME_INFO = [
       "Verre spécial pour tableaux de 0,2 cm d'épaisseur",
       "100% bois de Pin de reboisement et impression avec encre écologique",
     ],
-    image: null,
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_49z2p49z2p49z2p4.png-7tVfBDjzuQoxvZHIySLVUgg9vuLsF1.jpeg",
   },
   {
     id: "moldura-filete",
@@ -100,7 +100,7 @@ const FRAME_INFO = [
       "Impression dernière génération, résistante et ne décolore pas",
       "100% bois de Pin de reboisement et impression avec encre écologique",
     ],
-    image: null,
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_ho4ec5ho4ec5ho4e-2UOOEE3fBhit8jtumSwUCqnRq9qgrb.png",
   },
 ]
 
