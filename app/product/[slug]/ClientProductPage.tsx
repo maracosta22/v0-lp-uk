@@ -19,6 +19,7 @@ import { PeopleViewing } from "@/components/people-viewing"
 import { ProductCard } from "@/components/product-card" // Added import for ProductCard
 import { RecessedLedSection } from "@/components/recessed-led-section"
 import { SamplesSection } from "@/components/samples-section"
+import { AcousticLineSection } from "@/components/acoustic-line-section"
 
 interface ClientProductPageProps {
   product: any
@@ -498,6 +499,9 @@ export default function ClientProductPage({
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
+
+        {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
+        {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={isFrenchVersion} />}
 
         {/* Related Products - Hide for French version */}
         {relatedProducts.length > 0 && !isFrenchVersion && (
