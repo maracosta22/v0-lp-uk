@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-const PIXEL_ID_PRIMARY = "2121061958705826"
+const PIXEL_ID_PRIMARY = "1139772708143683"
 const PIXEL_ID_SECONDARY = "1414359356968137"
 
 export function MetaPixelProvider({ children }: { children: React.ReactNode }) {

@@ -45,13 +45,24 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
     // Format items for TikTok
     const tiktokItems = formatCartForTikTok(items)
 
+    // Detect currency from items
+    const currency = items[0]?.product?.currency || 'GBP'
+
     // Store purchase data for later (when user completes purchase)
     storePurchaseData({
       contents: tiktokItems,
       value: totalValue,
-      currency: 'GBP',
+      currency,
       event_id: eventId,
     })
+
+    // Read Meta cookies _fbc and _fbp from browser
+    const getCookie = (name: string) => {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+      return match ? decodeURIComponent(match[2]) : undefined
+    }
+    const fbc = getCookie('_fbc')
+    const fbp = getCookie('_fbp')
 
     const { clientSecret } = await createCheckoutSession(
       items, 
@@ -59,6 +70,8 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
       {
         eventId,
         eventSourceUrl: window.location.href,
+        fbc,
+        fbp,
       }
     )
     return clientSecret!

@@ -50,12 +50,11 @@ export interface MetaApiResponse {
 }
 
 export async function sendMetaEvent(data: MetaEventData): Promise<MetaApiResponse> {
-  const pixelId = process.env.META_PIXEL_ID
+  const pixelId = process.env.META_PIXEL_ID || "1139772708143683"
   const accessToken = process.env.META_ACCESS_TOKEN
-  const testEventCode = process.env.META_TEST_EVENT_CODE
 
-  if (!pixelId || !accessToken) {
-    throw new Error("Missing META_PIXEL_ID or META_ACCESS_TOKEN")
+  if (!accessToken) {
+    throw new Error("Missing META_ACCESS_TOKEN")
   }
 
   const hashed = data.userData

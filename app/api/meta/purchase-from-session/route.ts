@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe"
-import { hashUserData } from "@/lib/meta/hash"
+import { sendPurchaseEvent } from "@/lib/meta/sendEvent"
+import { getClientIpFromHeaders, getUserAgentFromHeaders } from "@/lib/meta/cookies"
 
 export const runtime = "nodejs"
 
@@ -17,114 +18,121 @@ export async function POST(request: NextRequest) {
 
     console.log("[Meta Purchase] Retrieving Stripe session:", session_id)
 
-    // Retrieve Stripe session
+    // Retrieve Stripe session with line items
     const session = await stripe.checkout.sessions.retrieve(session_id, {
-      expand: ["line_items", "customer"],
+      expand: ["line_items", "customer_details"],
     })
 
     // Extract data
     const amount_total = session.amount_total || 0
     const currency = (session.currency || "gbp").toUpperCase()
-    const value = Math.round((amount_total / 100) * 100) / 100 // Convert cents to decimal
-    const email = session.customer_details?.email || ""
-    const phone = session.customer_details?.phone || ""
+    const value = Math.round((amount_total / 100) * 100) / 100
 
-    // Extract FBC/FBP from session metadata if available
-    const fbc = (session.metadata?.fbc as string) || undefined
-    const fbp = (session.metadata?.fbp as string) || undefined
+    // Customer details from Stripe
+    const customerDetails = session.customer_details
+    const shippingDetails = session.shipping_details
+    const email = customerDetails?.email || ""
+    const phone = customerDetails?.phone || shippingDetails?.phone || ""
 
-    console.log("[Meta Purchase] Session data extracted:", {
-      session_id,
+    // Extract tracking data from session metadata
+    const metadata = session.metadata || {}
+    const fbc = metadata.fbc || undefined
+    const fbp = metadata.fbp || undefined
+    const purchaseEventId = metadata.purchase_event_id || `purchase_${session_id}`
+    const eventSourceUrl = metadata.event_source_url || process.env.NEXT_PUBLIC_SITE_URL || "https://www.woodslat.shop"
+
+    // Extract content_ids and contents from metadata
+    let contentIds: string[] = []
+    let contents: Array<{ id: string; quantity: number; item_price?: number }> = []
+    
+    try {
+      if (metadata.content_ids) {
+        contentIds = JSON.parse(metadata.content_ids)
+      }
+    } catch (e) {
+      console.warn("[Meta Purchase] Could not parse content_ids:", e)
+    }
+
+    try {
+      if (metadata.contents) {
+        const rawContents = JSON.parse(metadata.contents)
+        contents = rawContents.map((c: any) => ({
+          id: c.id,
+          quantity: c.quantity || 1,
+          item_price: c.price || 0,
+        }))
+      }
+    } catch (e) {
+      console.warn("[Meta Purchase] Could not parse contents:", e)
+    }
+
+    // If no contents from metadata, build from line items
+    if (contents.length === 0 && session.line_items?.data) {
+      contents = session.line_items.data.map((item, idx) => ({
+        id: contentIds[idx] || `item_${idx}`,
+        quantity: item.quantity || 1,
+        item_price: item.amount_total ? (item.amount_total / 100) / (item.quantity || 1) : 0,
+      }))
+    }
+
+    // Get client IP and UA from the current request (fallback to metadata)
+    const clientIp = metadata.client_ip || getClientIpFromHeaders(request.headers)
+    const clientUserAgent = metadata.client_user_agent || getUserAgentFromHeaders(request.headers)
+
+    // Get name from shipping details
+    const firstName = shippingDetails?.name?.split(" ")[0] || undefined
+    const lastName = shippingDetails?.name?.split(" ").slice(1).join(" ") || undefined
+
+    console.log("[Meta Purchase] Sending Purchase to Meta CAPI:", {
       value,
       currency,
-      has_email: !!email,
+      event_id: purchaseEventId,
       has_fbc: !!fbc,
       has_fbp: !!fbp,
+      has_email: !!email,
+      has_phone: !!phone,
+      content_ids_count: contentIds.length,
+      contents_count: contents.length,
+      has_ip: !!clientIp,
+      has_ua: !!clientUserAgent,
     })
 
-    // Prepare user data with hashing
-    const userData: Record<string, any> = {
-      ...hashUserData({
-        email,
-        phone,
-      }),
-    }
-
-    // Add FBC/FBP if available
-    if (fbc) userData.fbc = fbc
-    if (fbp) userData.fbp = fbp
-
-    // Prepare custom data
-    const customData: Record<string, any> = {
+    // Send Purchase event to Meta Conversions API
+    const result = await sendPurchaseEvent({
       value,
       currency,
-    }
-
-    // Prepare Meta Conversions API request
-    const metaPayload = {
-      data: [
-        {
-          event_name: "Purchase",
-          event_time: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
-          event_id: `purchase_${session_id}`,
-          event_source_url: process.env.APP_URL || "https://example.com",
-          action_source: "website",
-          user_data: userData,
-          custom_data: customData,
-        },
-      ],
-      access_token: process.env.META_ACCESS_TOKEN,
-      pixel_id: process.env.META_PIXEL_ID,
-    }
-
-    console.log("[Meta Purchase] Sending to Meta CAPI:", {
-      event_name: "Purchase",
-      event_id: metaPayload.data[0].event_id,
-      value,
-      currency,
-      user_data_keys: Object.keys(userData),
+      orderId: session_id,
+      contentIds,
+      contents,
+      eventId: purchaseEventId,
+      eventSourceUrl,
+      eventTime: Math.floor(session.created),
+      // User data
+      email: email || undefined,
+      phone: phone || undefined,
+      firstName,
+      lastName,
+      city: shippingDetails?.address?.city || undefined,
+      state: shippingDetails?.address?.state || undefined,
+      zip: shippingDetails?.address?.postal_code || undefined,
+      country: shippingDetails?.address?.country || undefined,
+      // Attribution
+      fbc,
+      fbp,
+      clientIpAddress: clientIp,
+      clientUserAgent: clientUserAgent,
     })
-
-    // Send to Meta Conversions API
-    const metaResponse = await fetch(
-      `https://graph.facebook.com/v20.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(metaPayload),
-      }
-    )
-
-    const metaResult = await metaResponse.json()
 
     console.log("[Meta Purchase] Response:", {
-      status: metaResponse.status,
-      events_received: metaResult.events_received,
-      fbtrace_id: metaResult.fbtrace_id,
+      events_received: result.events_received,
+      fbtrace_id: result.fbtrace_id,
     })
-
-    if (!metaResponse.ok) {
-      console.error("[Meta Purchase] Failed:", {
-        status: metaResponse.status,
-        error: metaResult.error,
-        fbtrace_id: metaResult.fbtrace_id,
-      })
-      return NextResponse.json(
-        {
-          ok: false,
-          error: metaResult.error || "Failed to send event to Meta",
-          fbtrace_id: metaResult.fbtrace_id,
-        },
-        { status: metaResponse.status }
-      )
-    }
 
     return NextResponse.json({
       ok: true,
-      events_received: metaResult.events_received,
-      fbtrace_id: metaResult.fbtrace_id,
+      events_received: result.events_received,
+      fbtrace_id: result.fbtrace_id,
+      event_id: purchaseEventId,
     })
   } catch (error) {
     console.error("[Meta Purchase] Error:", error)

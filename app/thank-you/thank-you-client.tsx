@@ -6,6 +6,12 @@ import { CheckCircle, Home, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { trackPurchase } from "@/lib/tiktok-events"
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void
+  }
+}
+
 export default function ThankYouClient({ sessionId }: { sessionId: string | null }) {
   const firedRef = useRef(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -28,57 +34,74 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
     ;(async () => {
       try {
         // 1) Fetch session details (optional UI)
+        let sessionData: any = null
         const sessionRes = await fetch(`/api/stripe/session?session_id=${sessionId}`)
         if (sessionRes.ok) {
-          const data = await sessionRes.json()
-          setPurchaseData(data)
+          sessionData = await sessionRes.json()
+          setPurchaseData(sessionData)
           console.log("[v0] Thank You - Session data loaded")
         }
 
-        // 2) Send Purchase event to Meta
-        console.log("[v0] Thank You - Sending Purchase event to Meta")
-        const metaRes = await fetch("/api/meta/purchase-from-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ session_id: sessionId }),
-          keepalive: true,
-        })
-
-        const metaJson = await metaRes.json().catch(() => ({}))
-        console.log("[v0] META RESPONSE", { status: metaRes.status, metaJson })
-
-        if (!metaRes.ok || metaJson?.ok === false) {
-          throw new Error(metaJson?.error || metaJson?.message || `Meta failed (${metaRes.status})`)
-        }
-
-        // 3) Track TikTok Purchase
-        console.log("[v0] Thank You - Tracking Purchase to TikTok")
-        const purchaseDataStored = sessionStorage.getItem('tiktok_purchase_data')
-        
-        if (purchaseDataStored) {
-          try {
-            const data = JSON.parse(purchaseDataStored)
-            await trackPurchase({
-              contents: data.contents || [],
-              value: data.value || 0,
-              currency: data.currency || 'GBP',
-              status: 'completed',
-              description: 'Purchase completed',
-            })
-            sessionStorage.removeItem('tiktok_purchase_data')
-          } catch (e) {
-            console.error('[v0] Error parsing TikTok purchase data:', e)
-          }
-        } else {
-          // If no stored data, track with session info
-          await trackPurchase({
-            value: (purchaseData?.amount_total || 0) / 100,
-            currency: (purchaseData?.currency || 'GBP').toUpperCase(),
-            status: 'completed',
+        // 2) Send Purchase event to Meta CAPI (server-side)
+        console.log("[v0] Thank You - Sending Purchase event to Meta CAPI")
+        let metaEventId: string | undefined
+        try {
+          const metaRes = await fetch("/api/meta/purchase-from-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ session_id: sessionId }),
+            keepalive: true,
           })
+
+          const metaJson = await metaRes.json().catch(() => ({}))
+          console.log("[v0] META CAPI RESPONSE", { status: metaRes.status, metaJson })
+          metaEventId = metaJson?.event_id
+        } catch (metaErr) {
+          console.error("[v0] Meta CAPI failed (non-blocking):", metaErr)
         }
 
-        console.log("[v0] Thank You - Purchase accepted")
+        // 3) Fire Meta Pixel Purchase client-side (deduplicates with CAPI via event_id)
+        const sessionValue = sessionData ? (sessionData.amount_total || 0) / 100 : 0
+        const sessionCurrency = (sessionData?.currency || "GBP").toUpperCase()
+
+        if (typeof window !== "undefined" && window.fbq) {
+          const pixelEventId = metaEventId || `purchase_${sessionId}`
+          window.fbq("track", "Purchase", {
+            value: sessionValue,
+            currency: sessionCurrency,
+            content_type: "product",
+            order_id: sessionId,
+          }, { eventID: pixelEventId })
+          console.log("[v0] Meta Pixel Purchase fired client-side:", { eventID: pixelEventId, value: sessionValue })
+        }
+
+        // 4) Track TikTok Purchase
+        console.log("[v0] Thank You - Tracking Purchase to TikTok")
+        let tiktokData: any = null
+        try {
+          const stored = sessionStorage.getItem('tiktok_purchase_data')
+          if (stored) {
+            tiktokData = JSON.parse(stored)
+            sessionStorage.removeItem('tiktok_purchase_data')
+          }
+        } catch (e) {
+          console.warn('[v0] Could not read TikTok stored data:', e)
+        }
+
+        try {
+          await trackPurchase({
+            contents: tiktokData?.contents || [],
+            value: tiktokData?.value || sessionValue,
+            currency: tiktokData?.currency || sessionCurrency,
+            status: 'completed',
+            description: 'Purchase completed',
+          })
+          console.log("[v0] TikTok Purchase tracked successfully")
+        } catch (tiktokErr) {
+          console.error("[v0] TikTok Purchase failed (non-blocking):", tiktokErr)
+        }
+
+        console.log("[v0] Thank You - All tracking events sent")
         setIsLoading(false)
       } catch (e) {
         console.error("[v0] Thank You - Error:", e)
