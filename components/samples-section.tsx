@@ -4,39 +4,36 @@ import { useState } from "react"
 import Image from "next/image"
 import { Plus, Minus, Package } from "lucide-react"
 
-// Real texture image shared for all wood-tone samples
-const FREIJO_IMG = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PANEL0202-ShqTBvqxVBT3VyP9RT9DsqQtOkU0C4.jpg"
-
 const SAMPLES = [
   {
     id: "tauari-preto",
     name: { en: "Tauari Black Felt", fr: "Tauari Feutre Noir" },
-    image: FREIJO_IMG,
+    image: "/images/samples/tauari-black-felt.jpg",
   },
   {
     id: "tauari-cinza",
     name: { en: "Tauari Grey Felt", fr: "Tauari Feutre Gris" },
-    image: FREIJO_IMG,
+    image: "/images/samples/tauari-grey-felt.jpg",
   },
   {
     id: "freijo",
     name: { en: "Freijó", fr: "Freijó" },
-    image: FREIJO_IMG,
+    image: "/images/samples/freijo.jpg",
   },
   {
     id: "blanchonella",
     name: { en: "Blanchonella", fr: "Blanchonella" },
-    image: FREIJO_IMG,
+    image: "/images/samples/blanchonella.jpg",
   },
   {
     id: "branco",
     name: { en: "White", fr: "Blanc" },
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.48-rs8DHfWAYFQ7Pz4WTowbUtxddV1fW3.png",
+    image: "/images/samples/white.jpg",
   },
   {
     id: "preto",
     name: { en: "Black", fr: "Noir" },
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.56-HNI3SCgLyLpHUPjCTmslzY5jnG8rQc.png",
+    image: "/images/samples/black.jpg",
   },
 ]
 
