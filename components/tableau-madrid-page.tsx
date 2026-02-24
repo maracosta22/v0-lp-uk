@@ -74,33 +74,33 @@ const FRAME_INFO = [
       "Soigneusement emballé et envoyé en tube postal résistant",
       "Impression avec encre écologique et non toxique",
     ],
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.46.39-g1dRjZY79eMT0M1qQGmgtaYlDPnfzu.png",
+    image: null,
   },
   {
     id: "moldura-premium-vidro",
     title: "Moldure Premium",
     subtitle: "Finition haut de gamme et sophistiquée",
-    desc: "Connue comme moldure type « boîte », la Moldure Premium possède une structure <strong>plus robuste et une présence marquante</strong>, pouvant être choisie avec ou sans verre. <br/><br/>Obs: La mesure finale du tableau est la somme de l'art avec la moldure. Ex: art 50×70 cm → tableau final approx. 53×73 cm.",
+    desc: "Connue comme moldure type « boîte », la Moldure Premium possède une structure <strong>plus robuste et une présence marquante</strong>, pouvant être choisie avec ou sans verre. <br/><br/>Note: La mesure finale du tableau est la somme de l'art avec la moldure. Ex: art 50×70 cm → tableau final approx. 53×73 cm.",
     bullets: [
       "Bord de 1,5 cm",
       "Profondeur de 3 cm",
       "Verre spécial pour tableaux de 0,2 cm d'épaisseur",
       "100% bois de Pin de reboisement et impression avec encre écologique",
     ],
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.45.23-G7bxIKBuZznu8W7rUxPelmIGP6JOPH.png",
+    image: null,
   },
   {
     id: "moldura-filete",
     title: "Moldure Filet",
     subtitle: "Fine à l'avant et profonde sur le côté",
-    desc: "Avec un profil fin à l'avant et une plus grande profondeur latérale, la Moldure Filet combine légèreté et présence. Son <strong>design minimaliste valorise l'art</strong>, le maintenant aligné avec la moldure pour un visuel sophistiqué.<br/><br/>Obs: La mesure finale du tableau est la somme de l'art avec la moldure. Ex: art 50×70 cm → tableau final approx. 51×71 cm.",
+    desc: "Avec un profil fin à l'avant et une plus grande profondeur latérale, la Moldure Filet combine légèreté et présence. Son <strong>design minimaliste valorise l'art</strong>, le maintenant aligné avec la moldure pour un visuel sophistiqué.<br/><br/>Note: La mesure finale du tableau est la somme de l'art avec la moldure. Ex: art 50×70 cm → tableau final approx. 51×71 cm.",
     bullets: [
       "Bord de 0,4 cm",
       "Profondeur de 3 cm",
       "Impression dernière génération, résistante et ne décolore pas",
       "100% bois de Pin de reboisement et impression avec encre écologique",
     ],
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.45.03-NTFToD4wrDKpV1RFrnvW7mTw9peTDT.png",
+    image: null,
   },
 ]
 
@@ -108,17 +108,17 @@ const QUALITY_CARDS = [
   {
     title: "Nos tableaux sont faits à la main.",
     desc: "Ici, chaque tableau passe entre des mains talentueuses, qui garantissent une finition impeccable.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.44.29-h5L4XO5SWUCqL2AlrrlxdX377ONxH6.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/17_39_26_187_lr01427-filete-preta%20%281%29-9tbzZKTDsBeo3Zh5UCm6vWsOFY4A2q.webp",
   },
   {
     title: "Votre tableau, votre maison, votre style.",
     desc: "Nous créons chaque pièce avec soin, pour que vous ressentiez cette attention à chaque détail.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.44.29-h5L4XO5SWUCqL2AlrrlxdX377ONxH6.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11_50_13_758_11_2_1_119_lr01427ambiente03%20%282%29-rKVz9Zs6yc0iLmDktTFO4xdy6Wk4Rh.webp",
   },
   {
     title: "Pièces avec sceau de qualité.",
     desc: "C'est ainsi que nous garantissons que chaque pièce a été réalisée selon nos standards d'excellence.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.44.29-h5L4XO5SWUCqL2AlrrlxdX377ONxH6.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11_50_05_829_11_2_1_169_lr01427destaque-3rTBVWdA4H0XQmcV9lYEdKBX5Mv0eo.webp",
   },
 ]
 
@@ -351,15 +351,17 @@ export function TableauMadridPage({ product }: Props) {
                     dangerouslySetInnerHTML={{ __html: info.desc }}
                   />
                 </div>
-                <div className="sm:w-64 rounded-xl overflow-hidden">
-                  <Image
-                    src={info.image}
-                    alt={info.title}
-                    width={600}
-                    height={300}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
+                {info.image && (
+                  <div className="sm:w-64 rounded-xl overflow-hidden">
+                    <Image
+                      src={info.image}
+                      alt={info.title}
+                      width={600}
+                      height={300}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                )}
               </div>
               <ul className="mt-3 space-y-1">
                 {info.bullets.map((b) => (
