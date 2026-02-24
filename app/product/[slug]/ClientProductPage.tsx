@@ -18,6 +18,7 @@ import { useScrollVisibility } from "@/hooks/use-scroll-visibility"
 import { PeopleViewing } from "@/components/people-viewing"
 import { ProductCard } from "@/components/product-card" // Added import for ProductCard
 import { RecessedLedSection } from "@/components/recessed-led-section"
+import { SamplesSection } from "@/components/samples-section"
 
 interface ClientProductPageProps {
   product: any
@@ -483,6 +484,9 @@ export default function ClientProductPage({
 
             {/* LED Strip Lifestyle Carousel - Only for Recessed LED Strip */}
             {product.id === "prod_led_strip" && <LedStripCarousel />}
+
+            {/* Samples Section - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <SamplesSection />}
           </div>
         </div>
 
