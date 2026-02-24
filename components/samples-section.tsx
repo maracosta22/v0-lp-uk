@@ -4,47 +4,91 @@ import { useState } from "react"
 import Image from "next/image"
 import { Plus, Minus, Package } from "lucide-react"
 
+// Real texture image shared for all wood-tone samples
+const FREIJO_IMG = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PANEL0202-ShqTBvqxVBT3VyP9RT9DsqQtOkU0C4.jpg"
+
 const SAMPLES = [
   {
     id: "tauari-preto",
-    name: "Tauari Feltro Preto",
-    price: 19,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.14-hmvJN206hoKoteDbvNVqppOgsAXQf6.png",
+    name: { en: "Tauari Black Felt", fr: "Tauari Feutre Noir" },
+    image: FREIJO_IMG,
   },
   {
     id: "tauari-cinza",
-    name: "Tauari Feltro Cinza",
-    price: 19,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.21-f8QIJqgfEUV95fmTGCMsvSV42pElRv.png",
+    name: { en: "Tauari Grey Felt", fr: "Tauari Feutre Gris" },
+    image: FREIJO_IMG,
   },
   {
     id: "freijo",
-    name: "Freijó",
-    price: 19,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PANEL0202-ShqTBvqxVBT3VyP9RT9DsqQtOkU0C4.jpg",
+    name: { en: "Freijó", fr: "Freijó" },
+    image: FREIJO_IMG,
   },
   {
     id: "blanchonella",
-    name: "Blanchonella",
-    price: 19,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.38-7yn3TxLx1KQCVVp0uCtZSWrOana1nZ.png",
+    name: { en: "Blanchonella", fr: "Blanchonella" },
+    image: FREIJO_IMG,
   },
   {
     id: "branco",
-    name: "Branco",
-    price: 19,
+    name: { en: "White", fr: "Blanc" },
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.48-rs8DHfWAYFQ7Pz4WTowbUtxddV1fW3.png",
   },
   {
     id: "preto",
-    name: "Preto",
-    price: 19,
+    name: { en: "Black", fr: "Noir" },
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2011.20.56-HNI3SCgLyLpHUPjCTmslzY5jnG8rQc.png",
   },
 ]
 
-export function SamplesSection() {
+const PRICE = { en: 5, fr: 5 }
+const CURRENCY = { en: "£", fr: "€" }
+
+const LABELS = {
+  en: {
+    title: "Colour Samples",
+    subtitle:
+      "Not sure which colour to choose? You can receive a physical sample before making your decision. Select the shades you want and get them with",
+    freeShipping: "free shipping!",
+    choose: "Choose your samples:",
+    clickToAdd: "Click on the samples to add them.",
+    selected: (n: number) => `${n} ${n === 1 ? "selected" : "selected"}`,
+    total: "Total",
+    shipping: "Delivery between",
+    shippingDays: "6 to 15 business days",
+    freeLabel: "Free Shipping",
+    addToCart: "Add to Cart",
+    remove: (name: string) => `Remove ${name}`,
+    add: (name: string) => `Add ${name}`,
+  },
+  fr: {
+    title: "Echantillons de couleurs",
+    subtitle:
+      "Vous hesitez sur la couleur ? Recevez un echantillon physique avant de prendre votre decision. Selectionnez les teintes souhaitees et recevez-les avec",
+    freeShipping: "la livraison gratuite !",
+    choose: "Choisissez vos echantillons :",
+    clickToAdd: "Cliquez sur les echantillons pour les ajouter.",
+    selected: (n: number) => `${n} ${n <= 1 ? "selectionne" : "selectionnes"}`,
+    total: "Total",
+    shipping: "Livraison entre",
+    shippingDays: "6 et 15 jours ouvrables",
+    freeLabel: "Livraison gratuite",
+    addToCart: "Ajouter au panier",
+    remove: (name: string) => `Retirer ${name}`,
+    add: (name: string) => `Ajouter ${name}`,
+  },
+}
+
+interface SamplesSectionProps {
+  isFrenchVersion?: boolean
+}
+
+export function SamplesSection({ isFrenchVersion = false }: SamplesSectionProps) {
   const [selected, setSelected] = useState<string[]>([])
+  const lang = isFrenchVersion ? "fr" : "en"
+  const t = LABELS[lang]
+  const price = PRICE[lang]
+  const currency = CURRENCY[lang]
+  const total = selected.length * price
 
   const toggle = (id: string) => {
     setSelected((prev) =>
@@ -52,17 +96,14 @@ export function SamplesSection() {
     )
   }
 
-  const total = selected.length * 19
-
   return (
     <div className="mt-8 border-t border-border pt-8">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-sm font-semibold uppercase tracking-wider mb-3">Amostras de Cores</h2>
+        <h2 className="text-sm font-semibold uppercase tracking-wider mb-3">{t.title}</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Está em dúvida sobre qual cor escolher? Você pode receber uma amostra física antes de tomar sua decisão.
-          Selecione as tonalidades desejadas e receba com{" "}
-          <span className="font-semibold text-foreground">frete grátis!</span>
+          {t.subtitle}{" "}
+          <span className="font-semibold text-foreground">{t.freeShipping}</span>
         </p>
       </div>
 
@@ -72,13 +113,11 @@ export function SamplesSection() {
           {selected.length === 0 ? (
             <div className="flex flex-col items-center gap-3 text-center">
               <Package className="h-12 w-12 text-muted-foreground/40" strokeWidth={1.2} />
-              <p className="text-xs text-muted-foreground">
-                Clique nas amostras desejadas para adicioná-las.
-              </p>
+              <p className="text-xs text-muted-foreground">{t.clickToAdd}</p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-3 text-center">
-              <div className="flex flex-wrap justify-center gap-2 max-w-[200px]">
+              <div className="flex flex-wrap justify-center gap-2 max-w-[220px]">
                 {selected.map((id) => {
                   const sample = SAMPLES.find((s) => s.id === id)!
                   return (
@@ -88,7 +127,7 @@ export function SamplesSection() {
                     >
                       <Image
                         src={sample.image}
-                        alt={sample.name}
+                        alt={sample.name[lang]}
                         width={56}
                         height={56}
                         className="w-full h-full object-cover"
@@ -99,7 +138,7 @@ export function SamplesSection() {
                 })}
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                {selected.length} {selected.length === 1 ? "amostra selecionada" : "amostras selecionadas"}
+                {t.selected(selected.length)}
               </p>
             </div>
           )}
@@ -108,29 +147,34 @@ export function SamplesSection() {
         {/* Right panel — list */}
         <div className="flex flex-col">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium">Escolha as suas amostras:</span>
+            <span className="text-sm font-medium">{t.choose}</span>
             <span className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full font-medium">
-              {selected.length} {selected.length === 1 ? "selecionada" : "selecionadas"}
+              {t.selected(selected.length)}
             </span>
           </div>
 
           <div className="space-y-2 flex-1">
             {SAMPLES.map((sample) => {
               const isSelected = selected.includes(sample.id)
+              const name = sample.name[lang]
               return (
                 <div
                   key={sample.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
                   className={`flex items-center gap-3 rounded-lg border transition-all cursor-pointer ${
                     isSelected
                       ? "border-accent bg-accent/5"
                       : "border-border bg-background hover:border-muted-foreground/40"
                   }`}
                   onClick={() => toggle(sample.id)}
+                  onKeyDown={(e) => e.key === "Enter" && toggle(sample.id)}
                 >
                   <div className="w-16 h-12 flex-shrink-0 overflow-hidden rounded-l-lg">
                     <Image
                       src={sample.image}
-                      alt={sample.name}
+                      alt={name}
                       width={64}
                       height={48}
                       className="w-full h-full object-cover"
@@ -138,12 +182,14 @@ export function SamplesSection() {
                     />
                   </div>
                   <div className="flex-1 min-w-0 py-2">
-                    <p className="text-sm font-medium leading-tight">{sample.name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">+ R$ {sample.price},00</p>
+                    <p className="text-sm font-medium leading-tight">{name}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      + {currency}{price}.00
+                    </p>
                   </div>
                   <button
                     type="button"
-                    aria-label={isSelected ? `Remover ${sample.name}` : `Adicionar ${sample.name}`}
+                    aria-label={isSelected ? t.remove(name) : t.add(name)}
                     className={`mr-3 w-7 h-7 rounded-full flex items-center justify-center border flex-shrink-0 transition-colors ${
                       isSelected
                         ? "border-accent bg-accent text-accent-foreground"
@@ -164,13 +210,16 @@ export function SamplesSection() {
           {/* Footer */}
           <div className="mt-4 border-t border-border pt-4">
             <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-muted-foreground">Total</span>
-              <span className="font-medium">R$ {total},00</span>
+              <span className="text-muted-foreground">{t.total}</span>
+              <span className="font-medium">{currency}{total}.00</span>
             </div>
             <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-              <span>Envio entre <strong className="text-foreground">2 a 5 dias úteis</strong></span>
+              <span>
+                {t.shipping}{" "}
+                <strong className="text-foreground">{t.shippingDays}</strong>
+              </span>
               <span className="bg-foreground text-background text-[10px] font-semibold px-2 py-0.5 rounded">
-                Frete Grátis
+                {t.freeLabel}
               </span>
             </div>
             <button
@@ -178,7 +227,7 @@ export function SamplesSection() {
               disabled={selected.length === 0}
               className="w-full bg-accent text-accent-foreground py-3 rounded-lg text-sm font-semibold hover:bg-accent/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Adicionar ao Carrinho
+              {t.addToCart}
             </button>
           </div>
         </div>

@@ -486,7 +486,7 @@ export default function ClientProductPage({
             {product.id === "prod_led_strip" && <LedStripCarousel />}
 
             {/* Samples Section - Only for Flexible Acoustic Panel */}
-            {isFlexibleAcousticPanel && <SamplesSection />}
+            {isFlexibleAcousticPanel && <SamplesSection isFrenchVersion={isFrenchVersion} />}
           </div>
         </div>
 
