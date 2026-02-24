@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { getProductBySlug, products, getProductsByCategory } from "@/lib/products"
 import ClientProductPage from "./ClientProductPage"
+import { TableauMadridPage } from "@/components/tableau-madrid-page"
 
 export async function generateStaticParams() {
   return products.map((product) => ({
@@ -51,11 +52,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const isFlexibleAcousticPanel = product.id === "prod_TpLABayQWkNTij" || product.id === "prod_TpSFzPytJW9W0s"
   const isRecessedLedStrip = product.slug === "recessed-led-strip-lighting" || product.slug === "recessed-led-strip-lighting-fr"
+  const isTableauMadrid = product.id === "prod_madrid_bernabeu_fr"
 
   const discountPercent =
     product.onSale && product.originalPrice
       ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
       : 0
+
+  // Tableau Madrid has a dedicated page component with size/frame/color selectors
+  if (isTableauMadrid) {
+    return <TableauMadridPage product={product} />
+  }
 
   return (
     <ClientProductPage 

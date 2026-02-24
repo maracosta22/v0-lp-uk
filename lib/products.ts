@@ -336,6 +336,82 @@ export const products: Product[] = [
     inStock: true,
     badge: "Essentiel",
   },
+  // Tableau Madrid - Stade Santiago Bernabéu (FR only)
+  {
+    id: "prod_madrid_bernabeu_fr",
+    slug: "tableau-madrid-santiago-bernabeu",
+    name: "Tableau Madrid Stade Santiago Bernabéu en Noir et Blanc",
+    description:
+      "Tableau décoratif exclusif du Stade Santiago Bernabéu en noir et blanc. Impression haute définition sur papier photographique 240g. Disponible en plusieurs tailles et types de finition.",
+    longDescription:
+      "Avec un design exclusif et une finition de haute qualité, le Tableau Madrid Stade Santiago Bernabéu en Noir et Blanc va sublimer la décoration de votre intérieur avec un style moderne, élégant et qui vous ressemble. Choisissez votre moldure et les dimensions souhaitées ci-dessous. Impression en haute définition sur papier photographique 240g avec des couleurs intenses, soigneusement emballé et envoyé en tube postal résistant. Impression avec encre écologique et non toxique.",
+    price: 29.90,
+    originalPrice: 49.90,
+    currency: "EUR",
+    category: "decor",
+    hidden: true,
+    images: [
+      "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
+      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&q=80",
+      "https://images.unsplash.com/photo-1540747913346-19212a729a38?w=800&q=80",
+      "https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80",
+    ],
+    inStock: true,
+    badge: "Nouveau",
+    onSale: true,
+    colors: [
+      { id: "noir", name: "Noir", hex: "#1a1a1a" },
+      { id: "blanc", name: "Blanc", hex: "#f5f5f5" },
+      { id: "naturel", name: "Naturel", hex: "#D4B896" },
+      { id: "freijo", name: "Freijó", hex: "#8B6343" },
+      { id: "noyer", name: "Noyer", hex: "#3E2010" },
+    ],
+    styles: [
+      {
+        id: "moldura-filete",
+        name: "1. Moldure Filet",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.45.03-NTFToD4wrDKpV1RFrnvW7mTw9peTDT.png",
+      },
+      {
+        id: "moldura-premium-vidro",
+        name: "2. Moldure Premium avec Verre",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.45.23-G7bxIKBuZznu8W7rUxPelmIGP6JOPH.png",
+      },
+      {
+        id: "moldura-premium-sem-vidro",
+        name: "3. Moldure Premium sans Verre",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.45.23-G7bxIKBuZznu8W7rUxPelmIGP6JOPH.png",
+      },
+      {
+        id: "canvas",
+        name: "4. Canvas avec Cadre",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.46.39-g1dRjZY79eMT0M1qQGmgtaYlDPnfzu.png",
+      },
+      {
+        id: "papel-fotografico",
+        name: "5. Papier Photographique",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.46.39-g1dRjZY79eMT0M1qQGmgtaYlDPnfzu.png",
+      },
+      {
+        id: "placa-decorativa",
+        name: "6. Plaque Décorative",
+        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Captura%20de%20Tela%202026-02-24%20a%CC%80s%2018.44.29-h5L4XO5SWUCqL2AlrrlxdX377ONxH6.png",
+      },
+    ],
+    features: [
+      "Impression haute définition sur papier 240g",
+      "Disponible en 6 tailles : 21x30, 30x40, 40x60, 50x70, 70x100, 100x150 cm",
+      "6 types de finition disponibles",
+      "5 couleurs de moldure disponibles",
+      "Encre écologique et non toxique",
+      "Emballage soigné en tube postal résistant",
+      "Fait à la main avec soin",
+      "Certificat de qualité inclus",
+    ],
+    dimensions: "21x30 cm | 30x40 cm | 40x60 cm | 50x70 cm | 70x100 cm | 100x150 cm",
+    material: "Papier Photographique 240g / Bois de Pin 100% reboisement",
+  },
+
   // Test Product FR
   {
     id: "prod_test_fr_001",
