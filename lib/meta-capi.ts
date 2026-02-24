@@ -1,8 +1,7 @@
 // Meta Conversions API (Server-Side)
 import crypto from "crypto"
 
-const META_PIXEL_ID = "2121061958705826"
-const META_API_VERSION = "v18.0"
+const META_API_VERSION = "v20.0"
 
 interface UserData {
   em?: string // email (will be hashed)
@@ -130,8 +129,14 @@ export async function sendCAPIEvent(params: {
   }
 
   try {
+    const pixelId = process.env.META_PIXEL_ID
+    if (!pixelId) {
+      console.error("[Meta CAPI] META_PIXEL_ID not configured")
+      return { success: false, error: "META_PIXEL_ID not configured" }
+    }
+
     const response = await fetch(
-      `https://graph.facebook.com/${META_API_VERSION}/${META_PIXEL_ID}/events?access_token=${accessToken}`,
+      `https://graph.facebook.com/${META_API_VERSION}/${pixelId}/events?access_token=${accessToken}`,
       {
         method: "POST",
         headers: {

@@ -31,34 +31,7 @@ export default function RootLayout({
       <head>
         <meta name="facebook-domain-verification" content="j9zsc5w3t0v08vdkxw8olp13igtfk4" />
         
-        {/* Meta Pixel Code */}
-        <Script
-          id="facebook-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1139772708143683');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1139772708143683&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        {/* Meta Pixel - initialized via MetaPixelProvider to avoid duplicate init */}
 
         {/* Google Analytics */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-E72RJSKTZ3" strategy="afterInteractive" />
