@@ -1,9 +1,9 @@
 // Meta Pixel client-side utilities
-// Primary Pixel ID: 2121061958705826
+// Primary Pixel ID: 1139772708143683
 // Secondary Pixel ID: 1414359356968137
 
-export const META_PIXEL_ID = "2121061958705826"
-export const META_PIXEL_ID_PRIMARY = "2121061958705826"
+export const META_PIXEL_ID = "1139772708143683"
+export const META_PIXEL_ID_PRIMARY = "1139772708143683"
 export const META_PIXEL_ID_SECONDARY = "1414359356968137"
 
 // Declare fbq type for TypeScript

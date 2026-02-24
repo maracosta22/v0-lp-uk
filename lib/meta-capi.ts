@@ -129,11 +129,7 @@ export async function sendCAPIEvent(params: {
   }
 
   try {
-    const pixelId = process.env.META_PIXEL_ID
-    if (!pixelId) {
-      console.error("[Meta CAPI] META_PIXEL_ID not configured")
-      return { success: false, error: "META_PIXEL_ID not configured" }
-    }
+    const pixelId = process.env.META_PIXEL_ID || "1139772708143683"
 
     const response = await fetch(
       `https://graph.facebook.com/${META_API_VERSION}/${pixelId}/events?access_token=${accessToken}`,
