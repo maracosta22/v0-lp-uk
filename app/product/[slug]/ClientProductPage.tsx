@@ -406,6 +406,9 @@ export default function ClientProductPage({
               </div>
             )}
 
+            {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={isFrenchVersion} />}
+
             {/* You Might Also Like - Hide for French version */}
             {orderBumpProducts.length > 0 && !isFrenchVersion && (
               <div className="mt-8 border-t border-border pt-8">
@@ -499,9 +502,6 @@ export default function ClientProductPage({
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
-
-        {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
-        {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={isFrenchVersion} />}
 
         {/* Related Products - Hide for French version */}
         {relatedProducts.length > 0 && !isFrenchVersion && (
