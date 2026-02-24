@@ -345,8 +345,8 @@ export const products: Product[] = [
       "Tableau décoratif exclusif du Stade Santiago Bernabéu en noir et blanc. Impression haute définition sur papier photographique 240g. Disponible en plusieurs tailles et types de finition.",
     longDescription:
       "Avec un design exclusif et une finition de haute qualité, le Tableau Madrid Stade Santiago Bernabéu en Noir et Blanc va sublimer la décoration de votre intérieur avec un style moderne, élégant et qui vous ressemble. Choisissez votre moldure et les dimensions souhaitées ci-dessous. Impression en haute définition sur papier photographique 240g avec des couleurs intenses, soigneusement emballé et envoyé en tube postal résistant. Impression avec encre écologique et non toxique.",
-    price: 29.90,
-    originalPrice: 49.90,
+    price: 87.90,
+    originalPrice: 109.90,
     currency: "EUR",
     category: "decor",
     hidden: true,
