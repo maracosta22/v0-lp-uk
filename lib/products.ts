@@ -351,10 +351,9 @@ export const products: Product[] = [
     category: "decor",
     hidden: true,
     images: [
-      "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
-      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&q=80",
-      "https://images.unsplash.com/photo-1540747913346-19212a729a38?w=800&q=80",
-      "https://images.unsplash.com/photo-1598136490941-30d885318abd?w=800&q=80",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/17_39_26_187_lr01427-filete-preta%20%281%29-9tbzZKTDsBeo3Zh5UCm6vWsOFY4A2q.webp",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/17_39_26_187_lr01427-filete-preta%20%282%29-aoeuTE7COaYrSfQv9o8VjP3SnD86fu.webp",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11_50_13_758_11_2_1_119_lr01427ambiente03%20%282%29-rKVz9Zs6yc0iLmDktTFO4xdy6Wk4Rh.webp",
     ],
     inStock: true,
     badge: "Nouveau",
