@@ -18,6 +18,8 @@ import { useScrollVisibility } from "@/hooks/use-scroll-visibility"
 import { PeopleViewing } from "@/components/people-viewing"
 import { ProductCard } from "@/components/product-card" // Added import for ProductCard
 import { RecessedLedSection } from "@/components/recessed-led-section"
+import { SamplesSection } from "@/components/samples-section"
+import { AcousticLineSection } from "@/components/acoustic-line-section"
 
 interface ClientProductPageProps {
   product: any
@@ -404,6 +406,9 @@ export default function ClientProductPage({
               </div>
             )}
 
+            {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={isFrenchVersion} />}
+
             {/* You Might Also Like - Hide for French version */}
             {orderBumpProducts.length > 0 && !isFrenchVersion && (
               <div className="mt-8 border-t border-border pt-8">
@@ -483,6 +488,9 @@ export default function ClientProductPage({
 
             {/* LED Strip Lifestyle Carousel - Only for Recessed LED Strip */}
             {product.id === "prod_led_strip" && <LedStripCarousel />}
+
+            {/* Samples Section - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <SamplesSection isFrenchVersion={isFrenchVersion} />}
           </div>
         </div>
 
