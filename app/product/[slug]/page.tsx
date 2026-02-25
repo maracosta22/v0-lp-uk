@@ -30,16 +30,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   
   // Get products for "Frequently bought together" section (use French versions if on French page)
   const wallCleanerProduct = products.find((p) => 
-    p.id === (isFrenchVersion ? "prod_TpSGVBy2LIor3O" : "prod_TpLADpW3LMASwd") && p.id !== product.id
+    p.id === (isFrenchVersion ? "prod_U2rvHwRWU8IYTd" : "prod_U2rvasMPkTpnoe") && p.id !== product.id
   )
   const ledStripProduct = products.find((p) => 
-    p.id === (isFrenchVersion ? "prod_TpSGSQupFVbb2s" : "prod_TpLAwqB6JWNMTv") && p.id !== product.id
+    p.id === (isFrenchVersion ? "prod_U2rv6g1To7VPTZ" : "prod_U2rv1ALPGyHHs7") && p.id !== product.id
   )
   const frequentlyBoughtTogether = [wallCleanerProduct, ledStripProduct].filter(Boolean) as typeof products
   const frequentlyBoughtTotal = frequentlyBoughtTogether.reduce((sum, p) => sum + p.price, 0)
   
   // Combine products for "You Might Also Like" - excluding Frequently bought together items and removing duplicates
-  const excludeIds = ["prod_TpLADpW3LMASwd", "prod_TpLAwqB6JWNMTv"]
+  const excludeIds = ["prod_U2rvasMPkTpnoe", "prod_U2rv1ALPGyHHs7"]
   const seenIds = new Set<string>()
   const orderBumpProducts = [
     ...relatedProducts.filter((p) => !excludeIds.includes(p.id)),
@@ -50,9 +50,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     return true
   }).slice(0, 6)
 
-  const isFlexibleAcousticPanel = product.id === "prod_TpLABayQWkNTij" || product.id === "prod_TpSFzPytJW9W0s"
+  const isFlexibleAcousticPanel = product.id === "prod_U2rtV5Q5yVJ2XV" || product.id === "prod_U2rumuoWXebtgj"
   const isRecessedLedStrip = product.slug === "recessed-led-strip-lighting" || product.slug === "recessed-led-strip-lighting-fr"
-  const isTableauMadrid = product.id === "prod_madrid_bernabeu_fr"
+  const isTableauMadrid = product.id === "prod_U2rvgYxfRGaGl7"
 
   const discountPercent =
     product.onSale && product.originalPrice

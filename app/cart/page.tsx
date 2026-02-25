@@ -15,7 +15,7 @@ import { getStoredUTMs } from "@/lib/utm-client"
 export default function CartPage() {
   const { items, totalPrice, clearCart } = useCart()
 
-  const hasFlexiblePanel = items.some((item) => item.product.id === "prod_TpLABayQWkNTij")
+  const hasFlexiblePanel = items.some((item) => item.product.id === "prod_U2rtV5Q5yVJ2XV")
   
   // Check if cart has products with mixed currencies (should never happen, but validate)
   const currencies = items.map((item) => item.product.currency || "GBP")

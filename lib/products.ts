@@ -418,11 +418,11 @@ export const products: Product[] = [
     id: "prod_U2rwsqAu2lmXwH",
     slug: "produit-test-fr",
     name: "Produit Test",
-    description: "Produit de test pour verification du systeme - Prix symbolique de 2 reais",
+    description: "Produit de test pour verification du systeme - Prix symbolique de 2 euros",
     longDescription:
-      "Ceci est un produit de test cree pour verifier le bon fonctionnement du systeme de commerce electronique avec la devise BRL (Real bresilien). Ce produit a un prix symbolique de R$ 2,00 et ne doit etre utilise qu'a des fins de test et de validation.",
+      "Ceci est un produit de test cree pour verifier le bon fonctionnement du systeme de commerce electronique avec la devise EUR (Euro). Ce produit a un prix symbolique de 2,00 € et ne doit etre utilise qu'a des fins de test et de validation.",
     price: 2.00,
-    currency: "BRL",
+    currency: "EUR",
     category: "decor",
     hidden: true,
     images: [
@@ -430,7 +430,7 @@ export const products: Product[] = [
     ],
     features: [
       "Produit de test uniquement",
-      "Prix symbolique R$ 2,00",
+      "Prix symbolique 2,00 €",
       "Ne pas utiliser en production",
       "Pour validation du systeme",
     ],
