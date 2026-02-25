@@ -16,7 +16,7 @@ interface ProductCardProps {
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCart()
 
-  const isFlexibleAcousticPanel = product.id === "prod_flexible_acoustic"
+  const isFlexibleAcousticPanel = product.id === "prod_U2rtV5Q5yVJ2XV"
   const isExternalImage = product.images[0]?.startsWith("http")
 
   return (
