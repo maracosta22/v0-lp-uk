@@ -44,6 +44,17 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Google Tag Manager - Additional ID */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-VT8NSCZQ0J" strategy="afterInteractive" />
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VT8NSCZQ0J');
+          `}
+        </Script>
+
         {/* TikTok Pixel Code Base */}
         <Script id="tiktok-pixel-base" strategy="beforeInteractive">
           {`
