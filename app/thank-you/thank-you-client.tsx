@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Script from "next/script"
 import Link from "next/link"
 import { CheckCircle, Home, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,6 +10,7 @@ import { trackPurchase } from "@/lib/tiktok-events"
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void
+    gtag?: (...args: any[]) => void
   }
 }
 
@@ -91,6 +93,16 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
           // Non-blocking: silently fail
         }
 
+        // 5) Fire Google Ads Conversion Tracking
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-17015613738/V-16CKmc_P4bEKrS1rE_',
+            'value': sessionValue,
+            'currency': sessionCurrency,
+            'transaction_id': sessionId
+          })
+        }
+
         setIsLoading(false)
       } catch (e) {
         console.error("[v0] Thank You - Error:", e)
@@ -123,8 +135,20 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="max-w-md w-full space-y-8">
+    <>
+      <Script id="google-ads-conversion" strategy="afterInteractive">
+        {`
+          gtag('event', 'conversion', {
+              'send_to': 'AW-17015613738/V-16CKmc_P4bEKrS1rE_',
+              'value': ${sessionData ? (sessionData.amount_total || 0) / 100 : 1.0},
+              'currency': '${sessionData ? (sessionData.currency || "EUR").toUpperCase() : "EUR"}',
+              'transaction_id': '${sessionId}'
+          });
+        `}
+      </Script>
+
+      <main className="min-h-screen flex items-center justify-center bg-background px-4">
+        <div className="max-w-md w-full space-y-8">
         {/* Success Icon */}
         <div className="flex justify-center">
           <CheckCircle className="h-20 w-20 text-green-600" />
@@ -211,5 +235,6 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
         </div>
       </div>
     </main>
+    </>
   )
 }
