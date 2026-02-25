@@ -2,6 +2,69 @@
 import crypto from "crypto"
 import { hashUserData } from "./hash"
 
+// ---------------------------------------------------------------------------
+// Multi-pixel configuration (one per currency / market)
+// Each entry maps a currency code to its own Pixel ID + Access Token.
+// Set the corresponding env vars in Vercel → Project → Environment Variables.
+// ---------------------------------------------------------------------------
+export interface PixelConfig {
+  pixelId: string
+  accessToken: string
+}
+
+// Returns the pixel that matches the given currency, falling back to the
+// primary pixel defined by META_PIXEL_ID / META_ACCESS_TOKEN.
+export function getPixelForCurrency(currency: string): PixelConfig {
+  const upper = (currency || "").toUpperCase()
+
+  const map: Record<string, { idEnv: string; tokenEnv: string }> = {
+    GBP: { idEnv: "META_PIXEL_ID_GBP", tokenEnv: "META_ACCESS_TOKEN_GBP" },
+    USD: { idEnv: "META_PIXEL_ID_USD", tokenEnv: "META_ACCESS_TOKEN_USD" },
+    EUR: { idEnv: "META_PIXEL_ID_EUR", tokenEnv: "META_ACCESS_TOKEN_EUR" },
+  }
+
+  const entry = map[upper]
+  if (entry) {
+    const pixelId = process.env[entry.idEnv]
+    const accessToken = process.env[entry.tokenEnv]
+    if (pixelId && accessToken) {
+      return { pixelId, accessToken }
+    }
+  }
+
+  // Fallback to primary pixel
+  return {
+    pixelId: process.env.META_PIXEL_ID || "1139772708143683",
+    accessToken: process.env.META_ACCESS_TOKEN || "",
+  }
+}
+
+// Returns ALL configured pixels (one per currency), deduplicating by pixelId.
+export function getAllConfiguredPixels(): PixelConfig[] {
+  const currencies = ["GBP", "USD", "EUR"]
+  const seen = new Set<string>()
+  const result: PixelConfig[] = []
+
+  for (const cur of currencies) {
+    const cfg = getPixelForCurrency(cur)
+    if (cfg.pixelId && cfg.accessToken && !seen.has(cfg.pixelId)) {
+      seen.add(cfg.pixelId)
+      result.push(cfg)
+    }
+  }
+
+  // Ensure primary pixel is always included
+  const primary = {
+    pixelId: process.env.META_PIXEL_ID || "1139772708143683",
+    accessToken: process.env.META_ACCESS_TOKEN || "",
+  }
+  if (primary.pixelId && primary.accessToken && !seen.has(primary.pixelId)) {
+    result.push(primary)
+  }
+
+  return result
+}
+
 export interface MetaEventData {
   eventName: string
   eventTime?: number
@@ -49,12 +112,15 @@ export interface MetaApiResponse {
   }
 }
 
-export async function sendMetaEvent(data: MetaEventData): Promise<MetaApiResponse> {
-  const pixelId = process.env.META_PIXEL_ID || "1139772708143683"
-  const accessToken = process.env.META_ACCESS_TOKEN
+// Internal helper: sends one event to a specific pixel
+async function _sendToPixel(
+  data: MetaEventData,
+  pixel: PixelConfig,
+): Promise<MetaApiResponse> {
+  const { pixelId, accessToken } = pixel
 
   if (!accessToken) {
-    throw new Error("Missing META_ACCESS_TOKEN")
+    throw new Error(`Missing access token for pixel ${pixelId}`)
   }
 
   const hashed = data.userData
@@ -115,6 +181,7 @@ export async function sendMetaEvent(data: MetaEventData): Promise<MetaApiRespons
       : undefined,
   }
 
+  const testEventCode = process.env.META_TEST_EVENT_CODE
   const apiPayload: { data: typeof eventPayload[]; test_event_code?: string } = {
     data: [eventPayload],
   }
@@ -133,6 +200,24 @@ export async function sendMetaEvent(data: MetaEventData): Promise<MetaApiRespons
   }
 
   return json
+}
+
+// Sends an event to the primary pixel (backward-compatible)
+export async function sendMetaEvent(data: MetaEventData): Promise<MetaApiResponse> {
+  const pixel: PixelConfig = {
+    pixelId: process.env.META_PIXEL_ID || "1139772708143683",
+    accessToken: process.env.META_ACCESS_TOKEN || "",
+  }
+  return _sendToPixel(data, pixel)
+}
+
+// Sends an event to the pixel that matches the given currency
+export async function sendMetaEventForCurrency(
+  data: MetaEventData,
+  currency: string,
+): Promise<MetaApiResponse> {
+  const pixel = getPixelForCurrency(currency)
+  return _sendToPixel(data, pixel)
 }
 
 export async function sendPurchaseEvent(params: {
@@ -158,7 +243,7 @@ export async function sendPurchaseEvent(params: {
   eventId?: string
   eventTime?: number
 }) {
-  return sendMetaEvent({
+  const eventData: MetaEventData = {
     eventName: "Purchase",
     eventTime: params.eventTime,
     eventId: params.eventId,
@@ -186,5 +271,9 @@ export async function sendPurchaseEvent(params: {
       contents: params.contents,
       contentType: "product",
     },
-  })
+  }
+
+  // Send to the pixel configured for this currency (e.g. GBP → META_PIXEL_ID_GBP)
+  // Falls back to the primary pixel if no per-currency pixel is set.
+  return sendMetaEventForCurrency(eventData, params.currency)
 }

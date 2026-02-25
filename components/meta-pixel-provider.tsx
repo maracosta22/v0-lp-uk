@@ -11,8 +11,19 @@ declare global {
   }
 }
 
+// Pixel principal (base) — ID fixo fornecido pelo cliente
 const PIXEL_ID_PRIMARY = "1139772708143683"
-const PIXEL_ID_SECONDARY = "1414359356968137"
+
+// IDs por moeda: configurados via env vars (NEXT_PUBLIC_META_PIXEL_ID_GBP, etc.)
+// Fallback para o pixel principal caso a variável não esteja definida.
+const PIXEL_ID_GBP  = process.env.NEXT_PUBLIC_META_PIXEL_ID_GBP  || PIXEL_ID_PRIMARY
+const PIXEL_ID_USD  = process.env.NEXT_PUBLIC_META_PIXEL_ID_USD  || PIXEL_ID_PRIMARY
+const PIXEL_ID_EUR  = process.env.NEXT_PUBLIC_META_PIXEL_ID_EUR  || PIXEL_ID_PRIMARY
+
+// Lista deduplicada de todos os pixels a inicializar
+const ALL_PIXEL_IDS = Array.from(
+  new Set([PIXEL_ID_PRIMARY, PIXEL_ID_GBP, PIXEL_ID_USD, PIXEL_ID_EUR])
+)
 
 export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -23,8 +34,7 @@ export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
     // se algum script já criou fbq, não recria do zero; só garante init
     if (typeof window.fbq === "function") {
       try {
-        window.fbq("init", PIXEL_ID_PRIMARY)
-        window.fbq("init", PIXEL_ID_SECONDARY)
+        for (const id of ALL_PIXEL_IDS) window.fbq("init", id)
         window.fbq("track", "PageView")
       } catch {}
       return
@@ -49,38 +59,30 @@ export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
     })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js")
 
     try {
-      window.fbq?.("init", PIXEL_ID_PRIMARY)
-      window.fbq?.("init", PIXEL_ID_SECONDARY)
+      for (const id of ALL_PIXEL_IDS) window.fbq?.("init", id)
       window.fbq?.("track", "PageView")
     } catch {}
   }, [])
 
   return (
     <>
-      {/* se JS estiver desabilitado */}
+      {/* Fallback para ambientes sem JS */}
       <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${PIXEL_ID_PRIMARY}&ev=PageView&noscript=1`}
-          alt=""
-        />
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${PIXEL_ID_SECONDARY}&ev=PageView&noscript=1`}
-          alt=""
-        />
+        {ALL_PIXEL_IDS.map((id) => (
+          <img
+            key={id}
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        ))}
       </noscript>
 
-      {/* não carregue outro script do meta fora daqui */}
+      {/* guard redundante para evitar re-init por scripts externos */}
       <Script id="meta-pixel-loader" strategy="afterInteractive">
-        {`
-          // guard redundante: evita 2 init caso scripts externos tentem reiniciar
-          window.__META_PIXEL_INITED__ = window.__META_PIXEL_INITED__ ?? true;
-        `}
+        {`window.__META_PIXEL_INITED__ = window.__META_PIXEL_INITED__ ?? true;`}
       </Script>
 
       {children}
