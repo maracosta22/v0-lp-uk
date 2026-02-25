@@ -413,6 +413,34 @@ export const products: Product[] = [
     material: "Papier Photographique 240g / Bois de Pin 100% reboisement",
   },
 
+  // Test Product EN
+  {
+    id: "prod_test_gbp_2",
+    slug: "test-product-gbp",
+    name: "Test Product",
+    description: "Test product for system verification - Symbolic price of £2 with no shipping",
+    longDescription:
+      "This is a test product created to verify the proper functioning of the e-commerce system with GBP (British Pounds) currency. This product has a symbolic price of £2.00 and should only be used for testing and validation purposes. No shipping charges apply.",
+    price: 2.00,
+    currency: "GBP",
+    category: "decor",
+    hidden: true,
+    noShipping: true,
+    images: [
+      "/placeholder.svg",
+    ],
+    features: [
+      "Test product only",
+      "Symbolic price £2.00",
+      "No shipping charges",
+      "For system validation",
+    ],
+    dimensions: "Test",
+    material: "Test",
+    inStock: true,
+    badge: "Test",
+  },
+
   // Test Product FR
   {
     id: "prod_U2rwsqAu2lmXwH",
@@ -425,6 +453,7 @@ export const products: Product[] = [
     currency: "EUR",
     category: "decor",
     hidden: true,
+    noShipping: true,
     images: [
       "/placeholder.svg",
     ],
