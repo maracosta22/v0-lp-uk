@@ -120,7 +120,9 @@ async function _sendToPixel(
   const { pixelId, accessToken } = pixel
 
   if (!accessToken) {
-    throw new Error(`Missing access token for pixel ${pixelId}`)
+    const errorMsg = `[Meta CAPI] ❌ ERRO CRÍTICO: Access Token vazio para pixel ${pixelId}. Configure META_ACCESS_TOKEN em Vercel → Project → Environment Variables`
+    console.error(errorMsg)
+    throw new Error(errorMsg)
   }
 
   const hashed = data.userData
@@ -187,6 +189,9 @@ async function _sendToPixel(
   }
   if (testEventCode) apiPayload.test_event_code = testEventCode
 
+  // Log do envio da requisição
+  console.log(`[Meta CAPI] 📤 Enviando evento ${data.eventName} para pixel ${pixelId} (moeda: ${data.customData?.currency || 'N/A'})`)
+
   const res = await fetch(`https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -196,8 +201,13 @@ async function _sendToPixel(
   const json: MetaApiResponse = await res.json()
 
   if (!res.ok || json.error) {
-    throw new Error(json.error?.message || "Meta API error")
+    const errorMsg = json.error?.message || "Meta API error"
+    console.error(`[Meta CAPI] ❌ Erro na API: ${errorMsg}`)
+    throw new Error(errorMsg)
   }
+
+  // Log de sucesso
+  console.log(`[Meta CAPI] ✅ Evento ${data.eventName} enviado com sucesso (eventID: ${data.eventId}, pixelID: ${pixelId})`)
 
   return json
 }
