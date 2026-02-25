@@ -19,10 +19,6 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    console.log("[v0] ThankYouClient mounted - sessionId:", sessionId)
-  }, [sessionId])
-
-  useEffect(() => {
     if (!sessionId) {
       setError("No session ID found")
       setIsLoading(false)
@@ -39,11 +35,9 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
         if (sessionRes.ok) {
           sessionData = await sessionRes.json()
           setPurchaseData(sessionData)
-          console.log("[v0] Thank You - Session data loaded")
         }
 
         // 2) Send Purchase event to Meta CAPI (server-side)
-        console.log("[v0] Thank You - Sending Purchase event to Meta CAPI")
         let metaEventId: string | undefined
         try {
           const metaRes = await fetch("/api/meta/purchase-from-session", {
@@ -54,10 +48,9 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
           })
 
           const metaJson = await metaRes.json().catch(() => ({}))
-          console.log("[v0] META CAPI RESPONSE", { status: metaRes.status, metaJson })
           metaEventId = metaJson?.event_id
         } catch (metaErr) {
-          console.error("[v0] Meta CAPI failed (non-blocking):", metaErr)
+          // Non-blocking: silently fail
         }
 
         // 3) Fire Meta Pixel Purchase client-side (deduplicates with CAPI via event_id)
@@ -72,11 +65,9 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
             content_type: "product",
             order_id: sessionId,
           }, { eventID: pixelEventId })
-          console.log("[v0] Meta Pixel Purchase fired client-side:", { eventID: pixelEventId, value: sessionValue })
         }
 
         // 4) Track TikTok Purchase
-        console.log("[v0] Thank You - Tracking Purchase to TikTok")
         let tiktokData: any = null
         try {
           const stored = sessionStorage.getItem('tiktok_purchase_data')
@@ -96,12 +87,10 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
             status: 'completed',
             description: 'Purchase completed',
           })
-          console.log("[v0] TikTok Purchase tracked successfully")
         } catch (tiktokErr) {
-          console.error("[v0] TikTok Purchase failed (non-blocking):", tiktokErr)
+          // Non-blocking: silently fail
         }
 
-        console.log("[v0] Thank You - All tracking events sent")
         setIsLoading(false)
       } catch (e) {
         console.error("[v0] Thank You - Error:", e)
