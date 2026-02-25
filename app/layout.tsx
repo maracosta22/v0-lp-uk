@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="facebook-domain-verification" content="j9zsc5w3t0v08vdkxw8olp13igtfk4" />
+        <meta name="facebook-domain-verification" content="doluxynzdjfzg90rzthp0243s680oy" />
         
         {/* Meta Pixel - initialized via MetaPixelProvider to avoid duplicate init */}
 
