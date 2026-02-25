@@ -415,14 +415,14 @@ export const products: Product[] = [
 
   // Test Product EN
   {
-    id: "prod_test_gbp_2",
-    slug: "test-product-gbp",
+    id: "prod_test_usd_2",
+    slug: "test-product-usd",
     name: "Test Product",
-    description: "Test product for system verification - Symbolic price of £2 with no shipping",
+    description: "Test product for system verification - Symbolic price of $2 with no shipping",
     longDescription:
-      "This is a test product created to verify the proper functioning of the e-commerce system with GBP (British Pounds) currency. This product has a symbolic price of £2.00 and should only be used for testing and validation purposes. No shipping charges apply.",
+      "This is a test product created to verify the proper functioning of the e-commerce system with USD (US Dollar) currency. This product has a symbolic price of $2.00 and should only be used for testing and validation purposes. No shipping charges apply.",
     price: 2.00,
-    currency: "GBP",
+    currency: "USD",
     category: "decor",
     hidden: true,
     noShipping: true,
@@ -431,7 +431,7 @@ export const products: Product[] = [
     ],
     features: [
       "Test product only",
-      "Symbolic price £2.00",
+      "Symbolic price $2.00",
       "No shipping charges",
       "For system validation",
     ],
