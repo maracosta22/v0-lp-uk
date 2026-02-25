@@ -21,7 +21,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/98 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border/50 bg-background/98 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8">
         {/* Mobile menu */}
         <Sheet open={open} onOpenChange={setOpen}>

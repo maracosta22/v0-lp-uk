@@ -61,7 +61,7 @@ export default function RootLayout({
           <MetaPixelProvider>
             <CartProvider>
               <Header />
-              <main className="min-h-screen">{children}</main>
+              <main className="min-h-screen pt-16 lg:pt-20">{children}</main>
               <Footer />
             </CartProvider>
           </MetaPixelProvider>
