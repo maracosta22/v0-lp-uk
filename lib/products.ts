@@ -42,7 +42,7 @@ export const categories = [
 
 export const products: Product[] = [
   {
-    id: "prod_TpLABayQWkNTij",
+    id: "prod_U2rtV5Q5yVJ2XV",
     slug: "flexible-acoustic-panel",
     name: "Flexible Acoustic Panel",
     description:
@@ -83,7 +83,7 @@ export const products: Product[] = [
   },
   // French version of Flexible Acoustic Panel (FR market)
   {
-    id: "prod_TpSFzPytJW9W0s",
+    id: "prod_U2rumuoWXebtgj",
     slug: "flexible-acoustic-panel-fr",
     name: "Panneau Acoustique Flexible",
     description:
@@ -126,7 +126,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "prod_TpLAW5iRofGP1H",
+    id: "prod_U2ruVRYaRGoKCs",
     slug: "oak-slat-wall-panel",
     name: "Oak Slat Wall Panel",
     description:
@@ -148,7 +148,7 @@ export const products: Product[] = [
     badge: "Bestseller",
   },
   {
-    id: "prod_TpLAV512AhX2aF",
+    id: "prod_U2rvlV7CwHRTh9",
     slug: "walnut-acoustic-panel",
     name: "Walnut Acoustic Panel",
     description: "Premium walnut acoustic panel combining elegant aesthetics with superior sound absorption.",
@@ -169,7 +169,7 @@ export const products: Product[] = [
     badge: "New",
   },
   {
-    id: "prod_TpLA9PomP0yOV9",
+    id: "prod_U2rv9MUnL9I0qN",
     slug: "minimalist-arc-lamp",
     name: "Minimalist Arc Lamp",
     description: "Elegant floor lamp with sweeping arc design. Brass finish with linen shade.",
@@ -185,7 +185,7 @@ export const products: Product[] = [
     inStock: true,
   },
   {
-    id: "prod_TpLBX8mhd8rUBn",
+    id: "prod_U2rvJ4c1okxtKw",
     slug: "organic-ceramic-vase",
     name: "Organic Ceramic Vase",
     description: "Hand-thrown ceramic vase with organic curves and matte glaze finish.",
@@ -210,7 +210,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "prod_TpLAwqB6JWNMTv",
+    id: "prod_U2rv1ALPGyHHs7",
     slug: "recessed-led-strip-lighting",
     name: "Recessed LED Strip Kit",
     description: "Warm 3000K LED strip kit for recessed panel lighting. Self-adhesive with touch dimmer. 8 pieces included.",
@@ -242,7 +242,7 @@ export const products: Product[] = [
     badge: "Popular",
   },
   {
-    id: "prod_TpLADpW3LMASwd",
+    id: "prod_U2rvasMPkTpnoe",
     slug: "wall-preparation-cleaner",
     name: "Wall Preparation Cleaner",
     description: "Professional foaming wall cleaner for pre-installation surface preparation. Removes dirt, grease, and stains without damaging surfaces.",
@@ -273,7 +273,7 @@ export const products: Product[] = [
   },
   // French version of LED Strip Kit
   {
-    id: "prod_TpSGSQupFVbb2s",
+    id: "prod_U2rv6g1To7VPTZ",
     slug: "recessed-led-strip-lighting-fr",
     name: "Kit Ruban LED Encastre",
     description: "Ruban LED blanc chaud 3000K pour eclairage de panneaux encastres. Auto-adhesif avec variateur tactile. 8 pieces incluses.",
@@ -306,7 +306,7 @@ export const products: Product[] = [
   },
   // French version of Wall Cleaner
   {
-    id: "prod_TpSGVBy2LIor3O",
+    id: "prod_U2rvHwRWU8IYTd",
     slug: "wall-preparation-cleaner-fr",
     name: "STARWAX Anti-moisissures pour murs et pieces a vivre 500ML",
     description: "Ideal pour eliminer les moisissures sur les murs, plafonds, contours de fenetres des pieces a vivre. Sans rincage, sans odeur incommodante, ne decolore pas les supports. Sans Javel.",
@@ -338,7 +338,7 @@ export const products: Product[] = [
   },
   // Tableau Madrid - Stade Santiago Bernabéu (FR only)
   {
-    id: "prod_madrid_bernabeu_fr",
+    id: "prod_U2rvgYxfRGaGl7",
     slug: "tableau-madrid-santiago-bernabeu",
     name: "Tableau Madrid Stade Santiago Bernabéu en Noir et Blanc",
     description:
@@ -415,7 +415,7 @@ export const products: Product[] = [
 
   // Test Product FR
   {
-    id: "prod_test_fr_001",
+    id: "prod_U2rwsqAu2lmXwH",
     slug: "produit-test-fr",
     name: "Produit Test",
     description: "Produit de test pour verification du systeme - Prix symbolique de 2 reais",
