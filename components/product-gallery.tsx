@@ -41,9 +41,9 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-3 max-w-full">
-      {/* Main image - full width, no constrained max-w, swipeable */}
+      {/* Main image - contained size, respects original proportions, swipeable */}
       <div
-        className="relative w-full overflow-hidden bg-secondary aspect-square flex items-center justify-center touch-pan-y"
+        className="relative w-full max-w-[400px] mx-auto overflow-hidden bg-secondary flex items-center justify-center touch-pan-y"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -51,11 +51,11 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <Image
           src={images[selectedIndex] || "/placeholder.svg"}
           alt={`${productName} - Image ${selectedIndex + 1}`}
-          width={600}
-          height={600}
-          className="h-full w-full object-contain"
+          width={400}
+          height={400}
+          className="w-full h-auto object-contain"
           priority
-          sizes="(max-width: 640px) 100vw, 50vw"
+          sizes="(max-width: 640px) 100vw, 400px"
           unoptimized={isExternalImage(images[selectedIndex])}
         />
 
@@ -79,7 +79,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
       {/* Thumbnail strip - horizontally scrollable with touch */}
       {images.length > 1 && (
-        <div className="w-full overflow-hidden" ref={mainScrollRef}>
+        <div className="w-full max-w-[400px] mx-auto overflow-hidden" ref={mainScrollRef}>
           <div
             className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory"
             style={{
