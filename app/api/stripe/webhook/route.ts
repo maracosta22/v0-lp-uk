@@ -110,7 +110,9 @@ async function handlePurchaseEvent(session: Stripe.Checkout.Session) {
     const metadata = fullSession.metadata || {}
     const fbc = metadata.fbc || undefined
     const fbp = metadata.fbp || undefined
-    const eventId = metadata.event_id || `purchase_${session.id}`
+    // IMPORTANT: Use purchase_event_id (not event_id which is for checkout)
+    // This must match the eventId used by purchase-from-session and the client-side fbq() call
+    const eventId = metadata.purchase_event_id || metadata.event_id || `purchase_${session.id}`
     const contentIds = metadata.content_ids ? JSON.parse(metadata.content_ids) : []
 
     // Get customer details

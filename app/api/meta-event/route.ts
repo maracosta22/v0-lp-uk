@@ -10,7 +10,7 @@ function sha256(value: string) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { event_name, email, phone, external_id, value, currency, fbp, fbc } = await request.json()
+    const { event_name, event_id, email, phone, external_id, value, currency, fbp, fbc } = await request.json()
 
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("cf-connecting-ip")
 
@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
         {
           event_name: event_name || "Purchase",
           event_time: Math.floor(Date.now() / 1000),
+          event_id: event_id || `${event_name || "Purchase"}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           action_source: "website",
           event_source_url,
           user_data: {

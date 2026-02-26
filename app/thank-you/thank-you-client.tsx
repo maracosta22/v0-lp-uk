@@ -136,17 +136,6 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
 
   return (
     <>
-      <Script id="google-ads-conversion" strategy="afterInteractive">
-        {`
-          gtag('event', 'conversion', {
-              'send_to': 'AW-17015613738/V-16CKmc_P4bEKrS1rE_',
-              'value': ${sessionData ? (sessionData.amount_total || 0) / 100 : 1.0},
-              'currency': '${sessionData ? (sessionData.currency || "EUR").toUpperCase() : "EUR"}',
-              'transaction_id': '${sessionId}'
-          });
-        `}
-      </Script>
-
       <main className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="max-w-md w-full space-y-8">
         {/* Success Icon */}
