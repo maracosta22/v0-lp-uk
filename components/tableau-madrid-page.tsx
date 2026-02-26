@@ -153,7 +153,7 @@ export function TableauMadridPage({ product }: Props) {
       <div className="max-w-2xl mx-auto px-4 py-6">
 
         {/* Gallery */}
-        <ProductGallery images={product.images} productName={product.name} />
+        <ProductGallery images={product.images} productName={product.name} video={product.video} />
 
         {/* Header */}
         <div className="mt-6">
