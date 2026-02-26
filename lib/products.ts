@@ -107,6 +107,7 @@ export const products: Product[] = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panneau08-MDTCtLoI5jgKXB9aMNIgb6jn6rpRlj.avif",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panneau10-st1uB7l391OAmADvAE7RopRDYVevb6.avif",
     ],
+    video: "/videos/akupanel-demo.mp4",
     features: [
       "Support flexible - s'adapte a toute courbe",
       "Couverture de 270x110cm par piece",
