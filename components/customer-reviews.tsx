@@ -205,7 +205,7 @@ const reviews: Review[] = [
       "I created an accent wall with multiple black panels. The look is modern and sophisticated. The room's acoustics have improved dramatically. All my visitors love it!",
     contentFr:
       "J'ai créé un mur d'accent avec plusieurs panneaux noirs. Le look est moderne et sophistiqué. L'acoustique de la pièce s'est considérablement améliorée. Tous mes visiteurs adorent!",
-    images: ["/flexible-panel-grey-tv-wall.jpg"],
+    images: ["/images/review-staircase-dark-panels.jpg"],
     helpfulCount: 40,
   },
   {
@@ -225,7 +225,7 @@ const reviews: Review[] = [
       "I used the panels in multiple areas of my home - living room, office, even open kitchen. The flexibility allows perfect adaptation to any space. Undeniable quality!",
     contentFr:
       "J'ai utilisé les panneaux dans plusieurs zones de ma maison - salon, bureau, même cuisine ouverte. La flexibilité permet une adaptation parfaite dans n'importe quel espace. Qualité indéniable!",
-    images: ["/flexible-panel-natural-oak-living-room.jpg"],
+    images: ["/images/review-modern-kitchen-panels.jpg"],
     helpfulCount: 37,
   },
   {
@@ -243,7 +243,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai ajouté les bandes LED verticales et c'est magnifique! L'éclairage chaud met en valeur les panneaux acoustiques. Non seulement l'acoustique s'améliore, mais le design de ma pièce est transformé. Installation facile avec le connecteur rapide. | I added the vertical LED strips and it's amazing! The warm lighting showcases the acoustic panels beautifully. Not only has the acoustics improved, but my room's design is completely transformed. Easy installation with the quick connector.",
-    images: ["/led-acoustic-panels-living-room.jpg", "/led-bedroom-modern.jpg"],
+    images: [],
     helpfulCount: 56,
   },
   {
@@ -258,7 +258,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai installé les panneaux gris avec l'éclairage LED blanc chaud dans ma chambre. L'ambiance est devenue très confortable et l'acoustique a réduit les bruits de la rue. C'est comme avoir un mini-spa à la maison! | I installed the grey panels with warm white LED lighting in my bedroom. The atmosphere became very cozy and the acoustics reduced street noise. It's like having a mini-spa at home!",
-    images: ["/led-modern-bedroom-decor.jpg", "/led-dining-room-warm-lights.jpg"],
+    images: [],
     helpfulCount: 48,
   },
   {
@@ -273,7 +273,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai créé un setup home studio avec les panneaux noirs et les LED adjustables. Le contrôle de luminosité est incroyable - du 10% au 100%. L'absorption acoustique est excellente et les vidéos que je tourne sur ce mur sont professionnelles. | I created a home studio setup with black panels and adjustable LED lights. The brightness control is incredible - from 10% to 100%. The acoustic absorption is excellent and the videos I shoot against this wall look professional.",
-    images: ["/led-black-b-specifications.jpg", "/led-4rooms-showcase.jpg"],
+    images: [],
     helpfulCount: 62,
   },
   {
@@ -288,7 +288,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai installé les panneaux avec les bandes LED CIR90 au-dessus du comptoir de cuisine. L'éclairage haute luminosité révèle vraiment les détails des panneaux en bois. Cela a créé une cuisine très accueillante et fonctionnelle. L'adhésif personnalisé était très collant! | I installed the panels with CIR90 high-brightness LED strips above my kitchen counter. The high-brightness lighting really reveals the details of the wood panels. It created a very welcoming and functional kitchen. The customized adhesive tape was very sticky!",
-    images: ["/led-kitchen-cabinet-lighting.jpg", "/led-adhesive-quality.jpg"],
+    images: [],
     helpfulCount: 45,
   },
   {
@@ -303,7 +303,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "Le système Quick Connect a rendu l'installation des LED tellement simple! Je pensais que ce serait complexe, mais avec le câble de connexion extra-long et le guide d'installation, c'était un jeu d'enfant. Le résultat final est spectaculaire. | The Quick Connect system made LED installation so simple! I thought it would be complex, but with the extra-long connecting cable and installation guide, it was a breeze. The final result is spectacular.",
-    images: ["/led-quick-connect-diagram.jpg", "/panel-installation-guide.jpg"],
+    images: [],
     helpfulCount: 51,
   },
   {
@@ -318,7 +318,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai été impressionnée par le rapport de test SGS montrant les faibles émissions de formaldéhyde et l'absorption acoustique NRC 0.80. C'est un produit de qualité véritablement certifié. Les panneaux se posent magnifiquement et l'ajout des LED rend tout cela très haut de gamme. | I was impressed by the SGS test report showing low formaldehyde emissions and NRC 0.80 acoustic absorption. This is truly a certified quality product. The panels look beautiful installed and the LED addition makes everything very high-end.",
-    images: ["/panel-safety-certification.jpg", "/panel-acoustic-tested.jpg"],
+    images: [],
     helpfulCount: 39,
   },
   {
@@ -333,7 +333,7 @@ const reviews: Review[] = [
     size: "270x110cm",
     content:
       "J'ai vu les photos d'application dans différentes pièces (bureau, chambre, salon, mur canapé) et cela m'a inspiré. J'ai acheté le kit complet avec les LED et j'ai transformé mon bureau à domicile. Les panneaux s'adaptent parfaitement à chaque espace. Vraiment impressionné! | I saw the application photos in different rooms (office, bedroom, living room, sofa wall) and it inspired me. I bought the complete kit with LED and transformed my home office. The panels fit perfectly in any space. Truly impressed!",
-    images: ["/panel-room-applications.jpg", "/led-4rooms-showcase.jpg"],
+    images: [],
     helpfulCount: 44,
   },
 ]

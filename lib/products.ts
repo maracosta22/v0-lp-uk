@@ -221,7 +221,7 @@ export const products: Product[] = [
     description: "Warm 3000K LED strip kit for recessed panel lighting. Self-adhesive with touch dimmer. 8 pieces included.",
     longDescription:
       "Elevate your wall panels with our professional Recessed LED Strip Kit, designed specifically for behind-panel installation. This complete 8-piece kit includes LED strips in multiple sizes (18\", 26\", 34\", 42\" - 2 of each), a premium LED driver, touch sensor dimmer switch, and all connecting cables. The warm 3000K color temperature creates a cozy ambient glow, while the touch dimmer allows adjustment from 10% to 100% brightness with memory function. Features customized thicker adhesive tape for superior mounting and black aluminum housing that disappears behind panels. Quick connect system makes installation effortless. Perfect for bedrooms, living rooms, offices, and sofa walls.",
-    price: 57.90,
+    price: 150.49,
     currency: "GBP",
     category: "lighting",
     images: [
@@ -284,8 +284,8 @@ export const products: Product[] = [
     description: "Ruban LED blanc chaud 3000K pour eclairage de panneaux encastres. Auto-adhesif avec variateur tactile. 8 pieces incluses.",
     longDescription:
       "Ameliorez vos panneaux muraux avec notre Kit Ruban LED Encastre professionnel, concu specifiquement pour l'installation derriere les panneaux. Ce kit complet de 8 pieces comprend des rubans LED de plusieurs tailles (18\", 26\", 34\", 42\" - 2 de chaque), un driver LED premium, un variateur tactile, et tous les cables de connexion. La temperature de couleur chaude de 3000K cree une ambiance chaleureuse, tandis que le variateur tactile permet un reglage de 10% a 100% de luminosite avec fonction memoire. Caracterise par un ruban adhesif plus epais pour un montage superieur et un boitier en aluminium noir qui disparait derriere les panneaux. Le systeme de connexion rapide rend l'installation simple. Parfait pour chambres, salons, bureaux et murs de canape.",
-    price: 57.90,
-    currency: "GBP",
+    price: 150.49,
+    currency: "EUR",
     category: "lighting",
     images: [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LED0101-NcQN4b3GARfX7EQhQSIcnMbQB9NsFa.jpg",
