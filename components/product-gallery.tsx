@@ -17,12 +17,20 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
   const videoIndex = video ? images.length : -1
 
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
 
   const isExternalImage = (src: string) => src.startsWith("http")
   const isVideoSelected = selectedIndex === videoIndex
+
+  const handlePlayVideo = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.play()
+      setIsVideoPlaying(true)
+    }
+  }, [])
 
   // Swipe on main image area
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -39,11 +47,21 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
     if (Math.abs(diff) > threshold) {
       if (diff > 0 && selectedIndex < totalItems - 1) {
         setSelectedIndex((prev) => prev + 1)
+        setIsVideoPlaying(false)
       } else if (diff < 0 && selectedIndex > 0) {
         setSelectedIndex((prev) => prev - 1)
+        setIsVideoPlaying(false)
       }
     }
   }, [selectedIndex, totalItems])
+
+  const handleSelectIndex = useCallback((index: number) => {
+    setSelectedIndex(index)
+    setIsVideoPlaying(false)
+    if (videoRef.current) {
+      videoRef.current.pause()
+    }
+  }, [])
 
   return (
     <div className="flex flex-col gap-3 overflow-hidden max-w-full">
@@ -55,14 +73,32 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
         onTouchEnd={handleTouchEnd}
       >
         {isVideoSelected && video ? (
-          <video
-            ref={videoRef}
-            src={video}
-            controls
-            playsInline
-            preload="metadata"
-            className="h-full w-full object-contain"
-          />
+          <div className="relative h-full w-full flex items-center justify-center">
+            <video
+              ref={videoRef}
+              src={video}
+              controls={isVideoPlaying}
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-contain"
+              onPlay={() => setIsVideoPlaying(true)}
+              onPause={() => setIsVideoPlaying(false)}
+              onEnded={() => setIsVideoPlaying(false)}
+            />
+            {/* Play overlay */}
+            {!isVideoPlaying && (
+              <button
+                type="button"
+                onClick={handlePlayVideo}
+                className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity hover:bg-black/30"
+                aria-label="Play video"
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform hover:scale-110">
+                  <Play className="h-7 w-7 text-foreground fill-foreground ml-1" />
+                </div>
+              </button>
+            )}
+          </div>
         ) : (
           <Image
             src={images[selectedIndex] || "/placeholder.svg"}
@@ -94,7 +130,7 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
               <button
                 type="button"
                 key={index}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => handleSelectIndex(index)}
                 className={cn(
                   "w-10 h-10 sm:w-12 sm:h-12 min-w-[40px] sm:min-w-[48px] min-h-[40px] sm:min-h-[48px] overflow-hidden bg-secondary transition-all flex-shrink-0",
                   selectedIndex === index ? "ring-1 ring-foreground" : "opacity-60 hover:opacity-100",
@@ -117,7 +153,7 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
             {video && (
               <button
                 type="button"
-                onClick={() => setSelectedIndex(videoIndex)}
+                onClick={() => handleSelectIndex(videoIndex)}
                 className={cn(
                   "w-10 h-10 sm:w-12 sm:h-12 min-w-[40px] sm:min-w-[48px] min-h-[40px] sm:min-h-[48px] overflow-hidden bg-foreground/90 transition-all flex-shrink-0 flex items-center justify-center",
                   selectedIndex === videoIndex ? "ring-1 ring-foreground" : "opacity-60 hover:opacity-100",
