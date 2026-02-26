@@ -29,6 +29,7 @@ export interface Product {
   badge?: string
   onSale?: boolean
   colors?: ProductColor[]
+  video?: string // URL to a product demo video (MP4)
   styles?: ProductStyle[] // Added styles for product variants
   noShipping?: boolean // Skip shipping for this product
   hidden?: boolean // Hide from product listings (only accessible via direct link)
@@ -62,6 +63,7 @@ export const products: Product[] = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panneau08-MDTCtLoI5jgKXB9aMNIgb6jn6rpRlj.avif",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panneau10-st1uB7l391OAmADvAE7RopRDYVevb6.avif",
     ],
+    video: "/videos/akupanel-demo.mp4",
     inStock: true,
     badge: "Bestseller",
     onSale: true,

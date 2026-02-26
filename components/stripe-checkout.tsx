@@ -19,7 +19,6 @@ interface CartItem {
     name: string
     price: number
     salePrice?: number
-    currency?: string
   }
   quantity: number
 }
@@ -34,66 +33,48 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
   const [loading, setLoading] = useState(false)
 
   const fetchClientSecret = useCallback(async () => {
-    try {
-      // Generate unique event ID for deduplication
-      const eventId = `purchase_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      
-      // Calculate total
-      const totalValue = items.reduce((sum, item) => {
-        const price = item.product.salePrice || item.product.price
-        return sum + price * item.quantity
-      }, 0)
+    // Generate unique event ID for deduplication
+    const eventId = `purchase_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    
+    // Calculate total
+    const totalValue = items.reduce((sum, item) => {
+      const price = item.product.salePrice || item.product.price
+      return sum + price * item.quantity
+    }, 0)
 
-      // Format items for TikTok
-      const tiktokItems = formatCartForTikTok(items)
+    // Format items for TikTok
+    const tiktokItems = formatCartForTikTok(items)
 
-      // Detect currency from items
-      const currency = items[0]?.product?.currency || 'GBP'
+    // Detect currency from items
+    const currency = items[0]?.product?.currency || 'GBP'
 
-      // Store purchase data for later (when user completes purchase)
-      storePurchaseData({
-        contents: tiktokItems,
-        value: totalValue,
-        currency,
-        event_id: eventId,
-      })
+    // Store purchase data for later (when user completes purchase)
+    storePurchaseData({
+      contents: tiktokItems,
+      value: totalValue,
+      currency,
+      event_id: eventId,
+    })
 
-      // Read Meta cookies _fbc and _fbp from browser
-      const getCookie = (name: string) => {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-        return match ? decodeURIComponent(match[2]) : undefined
-      }
-      const fbc = getCookie('_fbc')
-      const fbp = getCookie('_fbp')
-
-      console.log("[Stripe] Creating checkout session:", {
-        items_count: items.length,
-        total: totalValue,
-        currency,
-        origin: window.location.origin,
-      })
-
-      const { clientSecret } = await createCheckoutSession(
-        items, 
-        window.location.origin,
-        {
-          eventId,
-          eventSourceUrl: window.location.href,
-          fbc,
-          fbp,
-        }
-      )
-
-      if (!clientSecret) {
-        throw new Error("No client secret returned from Stripe")
-      }
-
-      console.log("[Stripe] Checkout session created successfully")
-      return clientSecret
-    } catch (error: any) {
-      console.error("[Stripe] Error creating checkout session:", error?.message || error)
-      throw error
+    // Read Meta cookies _fbc and _fbp from browser
+    const getCookie = (name: string) => {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+      return match ? decodeURIComponent(match[2]) : undefined
     }
+    const fbc = getCookie('_fbc')
+    const fbp = getCookie('_fbp')
+
+    const { clientSecret } = await createCheckoutSession(
+      items, 
+      window.location.origin,
+      {
+        eventId,
+        eventSourceUrl: window.location.href,
+        fbc,
+        fbp,
+      }
+    )
+    return clientSecret!
   }, [items])
 
   const handleStartCheckout = async () => {
@@ -115,7 +96,7 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
         currency: 'GBP',
       })
     } catch (error) {
-      console.error('[Stripe] Error tracking AddPaymentInfo:', error)
+      console.error('[v0] Error tracking AddPaymentInfo:', error)
     }
 
     onInitiateCheckout?.()
