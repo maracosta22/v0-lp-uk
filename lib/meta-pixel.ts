@@ -1,10 +1,8 @@
 // Meta Pixel client-side utilities
-// Primary Pixel ID: 1139772708143683
-// Secondary Pixel ID: 1414359356968137
+// Primary (and ONLY) Pixel ID: 1139772708143683
+// Secondary pixel 1414359356968137 has been REMOVED to prevent conflicts.
 
 export const META_PIXEL_ID = "1139772708143683"
-export const META_PIXEL_ID_PRIMARY = "1139772708143683"
-export const META_PIXEL_ID_SECONDARY = "1414359356968137"
 
 // Declare fbq type for TypeScript
 declare global {
@@ -14,14 +12,15 @@ declare global {
   }
 }
 
-// Generate unique event ID for deduplication
+// Generate unique event ID for deduplication between Pixel (browser) and CAPI (server)
+// IMPORTANT: The SAME eventId must be sent to both fbq() and the /api/meta/track CAPI endpoint.
 export function generateEventId(prefix?: string): string {
   const timestamp = Date.now()
   const random = Math.random().toString(36).substring(2, 15)
   return prefix ? `${prefix}_${timestamp}_${random}` : `${timestamp}_${random}`
 }
 
-// Track ViewContent event
+// Track ViewContent event (fires ONCE with eventID for deduplication)
 export function trackViewContent(params: {
   contentId: string
   contentName: string
@@ -29,32 +28,23 @@ export function trackViewContent(params: {
   value: number
   currency?: string
   eventId?: string
-  pixelId?: "primary" | "secondary" | "both"
 }) {
   const eventId = params.eventId || generateEventId("vc")
-  const trackBoth = params.pixelId === "both" || params.pixelId === undefined
 
   if (typeof window !== "undefined" && window.fbq) {
-    const eventData = {
+    window.fbq("track", "ViewContent", {
       content_ids: [params.contentId],
       content_name: params.contentName,
       content_type: params.contentType || "product",
       value: params.value,
       currency: params.currency || "GBP",
-    }
-
-    if (params.pixelId === "primary" || trackBoth) {
-      window.fbq("track", "ViewContent", eventData, { eventID: eventId })
-    }
-    if (params.pixelId === "secondary" || trackBoth) {
-      window.fbq("track", "ViewContent", eventData, { eventID: eventId })
-    }
+    }, { eventID: eventId })
   }
 
   return eventId
 }
 
-// Track AddToCart event
+// Track AddToCart event (fires ONCE with eventID for deduplication)
 export function trackAddToCart(params: {
   contentId: string
   contentName: string
@@ -62,13 +52,11 @@ export function trackAddToCart(params: {
   value: number
   currency?: string
   eventId?: string
-  pixelId?: "primary" | "secondary" | "both"
 }) {
   const eventId = params.eventId || generateEventId("atc")
-  const trackBoth = params.pixelId === "both" || params.pixelId === undefined
 
   if (typeof window !== "undefined" && window.fbq) {
-    const eventData = {
+    window.fbq("track", "AddToCart", {
       content_ids: [params.contentId],
       contents: [
         {
@@ -81,79 +69,54 @@ export function trackAddToCart(params: {
       content_type: "product",
       value: params.value,
       currency: params.currency || "GBP",
-    }
-
-    if (params.pixelId === "primary" || trackBoth) {
-      window.fbq("track", "AddToCart", eventData, { eventID: eventId })
-    }
-    if (params.pixelId === "secondary" || trackBoth) {
-      window.fbq("track", "AddToCart", eventData, { eventID: eventId })
-    }
+    }, { eventID: eventId })
   }
 
   return eventId
 }
 
-// Track InitiateCheckout event
+// Track InitiateCheckout event (fires ONCE with eventID for deduplication)
 export function trackInitiateCheckout(params: {
   contentIds: string[]
   numItems: number
   value: number
   currency?: string
   eventId?: string
-  pixelId?: "primary" | "secondary" | "both"
 }) {
   const eventId = params.eventId || generateEventId("ic")
-  const trackBoth = params.pixelId === "both" || params.pixelId === undefined
 
   if (typeof window !== "undefined" && window.fbq) {
-    const eventData = {
+    window.fbq("track", "InitiateCheckout", {
       content_ids: params.contentIds,
       num_items: params.numItems,
       value: params.value,
       currency: params.currency || "GBP",
-    }
-
-    if (params.pixelId === "primary" || trackBoth) {
-      window.fbq("track", "InitiateCheckout", eventData, { eventID: eventId })
-    }
-    if (params.pixelId === "secondary" || trackBoth) {
-      window.fbq("track", "InitiateCheckout", eventData, { eventID: eventId })
-    }
+    }, { eventID: eventId })
   }
 
   return eventId
 }
 
-// Track Purchase event
+// Track Purchase event (fires ONCE with eventID for deduplication)
 export function trackPurchase(params: {
   orderId: string
   contentIds: string[]
   contents: Array<{ id: string; quantity: number; item_price: number }>
   value: number
   currency?: string
-  pixelId?: "primary" | "secondary" | "both"
+  eventId?: string
 }) {
-  // Event ID for deduplication
-  const eventId = `purchase_${params.orderId}`
-  const trackBoth = params.pixelId === "both" || params.pixelId === undefined
+  const eventId = params.eventId || `purchase_${params.orderId}`
 
   if (typeof window !== "undefined" && window.fbq) {
-    const eventData = {
+    window.fbq("track", "Purchase", {
       content_ids: params.contentIds,
       contents: params.contents,
       content_type: "product",
       value: params.value,
       currency: params.currency || "GBP",
       order_id: params.orderId,
-    }
-
-    if (params.pixelId === "primary" || trackBoth) {
-      window.fbq("track", "Purchase", eventData, { eventID: eventId })
-    }
-    if (params.pixelId === "secondary" || trackBoth) {
-      window.fbq("track", "Purchase", eventData, { eventID: eventId })
-    }
+    }, { eventID: eventId })
   }
 
   return eventId
