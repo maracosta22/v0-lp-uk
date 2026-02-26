@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ShoppingCart, Check, Star, Info, ArrowLeft, AlertTriangle, Truck, RotateCcw, Shield } from "lucide-react"
+import { ShoppingCart, Check, Star, Info, ArrowLeft, Truck, RotateCcw, Shield } from "lucide-react"
 import { useCart } from "@/lib/cart-context"
 import { products } from "@/lib/products"
 import { ProductGallery } from "@/components/product-gallery"
@@ -206,16 +206,7 @@ export default function ClientProductPage({
               </div>
             )}
 
-            {/* Urgency/Scarcity Banner */}
-            {isFlexibleAcousticPanel && (
-              <div className="mt-4 flex items-center gap-2 rounded-md bg-amber-50 border border-amber-200 px-3 py-2">
-                <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-amber-800">{isFrenchVersion ? "Depechez-vous! Stock limite" : "Hurry! Stock is running low"}</p>
-                  <p className="text-xs text-amber-700">{isFrenchVersion ? "Seulement 30 unites en stock" : "Only 30 units left in stock"}</p>
-                </div>
-              </div>
-            )}
+
 
             {isFlexibleAcousticPanel ? (
               <div className="mt-6 space-y-5 max-w-full overflow-hidden">
