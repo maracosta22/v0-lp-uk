@@ -10,6 +10,7 @@ interface CartItem {
     name: string
     price: number
     salePrice?: number
+    currency?: string
   }
   quantity: number
 }
@@ -106,35 +107,46 @@ export async function createCheckoutSession(items: CartItem[], origin: string, t
       ? [
           {
             shipping_rate_data: {
-              type: "fixed_amount",
+              type: "fixed_amount" as const,
               fixed_amount: { amount: 700, currency: checkoutCurrency },
               display_name: "Standard Shipping",
-              delivery_estimate: { minimum: { unit: "business_day", value: 5 }, maximum: { unit: "business_day", value: 10 } },
+              delivery_estimate: {
+                minimum: { unit: "business_day" as const, value: 5 },
+                maximum: { unit: "business_day" as const, value: 10 },
+              },
             },
           },
           {
             shipping_rate_data: {
-              type: "fixed_amount",
+              type: "fixed_amount" as const,
               fixed_amount: { amount: 1500, currency: checkoutCurrency },
               display_name: "Express Shipping",
-              delivery_estimate: { minimum: { unit: "business_day", value: 2 }, maximum: { unit: "business_day", value: 4 } },
+              delivery_estimate: {
+                minimum: { unit: "business_day" as const, value: 2 },
+                maximum: { unit: "business_day" as const, value: 4 },
+              },
             },
           },
         ]
       : []
 
     // Build metadata for tracking
+    // IMPORTANT: Stripe metadata values are limited to 500 characters each
     const contentIds = items.map((item) => item.product.id)
     const contents = items.map((item) => {
       const serverProduct = products.find((p) => p.id === item.product.id)
       return {
         id: item.product.id,
-        title: serverProduct?.name || item.product.name,
+        title: (serverProduct?.name || item.product.name).substring(0, 50),
         category: serverProduct?.category || "product",
         price: serverProduct?.salePrice || serverProduct?.price || item.product.price,
         quantity: item.quantity,
       }
     })
+
+    // Truncate serialized metadata to fit Stripe's 500-char limit per value
+    const contentIdsStr = JSON.stringify(contentIds).substring(0, 500)
+    const contentsStr = JSON.stringify(contents).substring(0, 500)
 
     // ✅ IDs: se não veio do client, cria aqui
     const checkoutEventId = trackingData?.eventId || makeId("checkout")
@@ -185,9 +197,9 @@ export async function createCheckoutSession(items: CartItem[], origin: string, t
       },
 
       metadata: {
-        // produtos
-        content_ids: JSON.stringify(contentIds),
-        contents: JSON.stringify(contents),
+        // produtos (truncated to fit Stripe's 500-char limit)
+        content_ids: contentIdsStr,
+        contents: contentsStr,
 
         // ✅ Meta cookies
         ...(trackingData?.fbc ? { fbc: trackingData.fbc } : {}),
@@ -217,17 +229,32 @@ export async function createCheckoutSession(items: CartItem[], origin: string, t
       sessionConfig.shipping_options = shippingOptions
     }
 
+    console.log("[Stripe] Creating checkout session with config:", {
+      line_items_count: lineItems.length,
+      currency: checkoutCurrency,
+      has_shipping: shippingOptions.length > 0,
+      metadata_content_ids_length: contentIdsStr.length,
+      metadata_contents_length: contentsStr.length,
+      checkout_event_id: checkoutEventId,
+      purchase_event_id: purchaseEventId,
+    })
+
     const session = await stripe.checkout.sessions.create(sessionConfig)
 
     console.log("[Stripe] Checkout session created:", {
       session_id: session.id,
-      checkout_event_id: checkoutEventId,
-      purchase_event_id: purchaseEventId,
-      has_tracking_data: !!trackingData,
+      client_secret_exists: !!session.client_secret,
     })
 
     return { clientSecret: session.client_secret }
-  } catch (error) {
+  } catch (error: any) {
+    console.error("[Stripe] Error creating checkout session:", {
+      message: error?.message,
+      type: error?.type,
+      code: error?.code,
+      param: error?.param,
+      statusCode: error?.statusCode,
+    })
     throw error
   }
 }
