@@ -91,6 +91,17 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Google Ads Conversion Tag - AW-11316024864 */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11316024864" strategy="afterInteractive" />
+        <Script id="google-ads-tag-11316024864" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-11316024864');
+          `}
+        </Script>
+
         {/* TikTok Pixel Code Base */}
         {process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID && (
           <Script id="tiktok-pixel-base" strategy="beforeInteractive">
