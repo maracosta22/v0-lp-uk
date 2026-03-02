@@ -43,7 +43,7 @@ export const categories = [
 
 export const products: Product[] = [
   {
-    id: "prod_U2rtV5Q5yVJ2XV",
+    id: "prod_U4kuSjp9pwoOzo",
     slug: "flexible-acoustic-panel",
     name: "Flexible Acoustic Panel",
     description:
@@ -131,7 +131,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "prod_U2ruVRYaRGoKCs",
+    id: "prod_U4kuz3MBgNjf76",
     slug: "oak-slat-wall-panel",
     name: "Oak Slat Wall Panel",
     description:
@@ -153,7 +153,7 @@ export const products: Product[] = [
     badge: "Bestseller",
   },
   {
-    id: "prod_U2rvlV7CwHRTh9",
+    id: "prod_U4kuODmzE1memh",
     slug: "walnut-acoustic-panel",
     name: "Walnut Acoustic Panel",
     description: "Premium walnut acoustic panel combining elegant aesthetics with superior sound absorption.",
@@ -174,7 +174,7 @@ export const products: Product[] = [
     badge: "New",
   },
   {
-    id: "prod_U2rv9MUnL9I0qN",
+    id: "prod_U4kuzRsw3B5dBe",
     slug: "minimalist-arc-lamp",
     name: "Minimalist Arc Lamp",
     description: "Elegant floor lamp with sweeping arc design. Brass finish with linen shade.",
@@ -190,7 +190,7 @@ export const products: Product[] = [
     inStock: true,
   },
   {
-    id: "prod_U2rvJ4c1okxtKw",
+    id: "prod_U4kuu8uiPc6s44",
     slug: "organic-ceramic-vase",
     name: "Organic Ceramic Vase",
     description: "Hand-thrown ceramic vase with organic curves and matte glaze finish.",
@@ -215,7 +215,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "prod_U2rv1ALPGyHHs7",
+    id: "prod_U4kv4CKxEyo0xu",
     slug: "recessed-led-strip-lighting",
     name: "Recessed LED Strip Kit",
     description: "Warm 3000K LED strip kit for recessed panel lighting. Self-adhesive with touch dimmer. 8 pieces included.",
@@ -247,7 +247,7 @@ export const products: Product[] = [
     badge: "Popular",
   },
   {
-    id: "prod_U2rvasMPkTpnoe",
+    id: "prod_U4kvhZVdMgj3T5",
     slug: "wall-preparation-cleaner",
     name: "Wall Preparation Cleaner",
     description: "Professional foaming wall cleaner for pre-installation surface preparation. Removes dirt, grease, and stains without damaging surfaces.",
