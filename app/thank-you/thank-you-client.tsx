@@ -6,6 +6,7 @@ import Link from "next/link"
 import { CheckCircle, Home, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { trackPurchase } from "@/lib/tiktok-events"
+import { useScript } from "next/script"
 
 declare global {
   interface Window {
@@ -109,6 +110,14 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
             'currency': 'EUR',
             'transaction_id': sessionId
           })
+
+          // Google Ads - Conversão AW-829407887
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-829407887/C0XCCO30w_8bEM7U_pM_',
+            'value': sessionValue,
+            'currency': sessionCurrency,
+            'transaction_id': sessionId
+          })
         }
 
         setIsLoading(false)
@@ -144,6 +153,17 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
 
   return (
     <>
+      {/* Google Ads Conversion Tag - AW-829407887 */}
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-829407887" strategy="afterInteractive" />
+      <Script id="google-ads-conversion-829407887" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-829407887');
+        `}
+      </Script>
+
       <main className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="max-w-md w-full space-y-8">
         {/* Success Icon */}
