@@ -118,6 +118,14 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
             'currency': sessionCurrency,
             'transaction_id': sessionId
           })
+
+          // Google Ads - Compra conversion (AW-11316024864)
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-11316024864/FMZtCJ3t4IEcEKCs85Mq',
+            'value': 14.0,
+            'currency': 'EUR',
+            'transaction_id': sessionId
+          })
         }
 
         setIsLoading(false)
