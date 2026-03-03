@@ -362,39 +362,46 @@ export default function ClientProductPage({
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
                 <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">{isFrenchVersion ? "Frequemment achetes ensemble" : "Frequently Bought Together"}</h2>
-                <div className="flex flex-wrap items-center gap-3">
-                  {frequentlyBoughtTogether.map((bundleProduct, index) => (
-                    <div key={bundleProduct.id} className="flex items-center gap-3">
-                      <div className="w-20 sm:w-24 bg-secondary/30 rounded-lg overflow-hidden">
-                        <Link href={`/product/${bundleProduct.slug}`} className="block">
-                          <div className="aspect-square overflow-hidden">
-                            <Image
-                              src={bundleProduct.images[0] || "/placeholder.svg"}
-                              alt={bundleProduct.name}
-                              width={96}
-                              height={96}
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            />
+                <div className="flex flex-col gap-4">
+                  {/* Products */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    {frequentlyBoughtTogether.map((bundleProduct, index) => (
+                      <div key={bundleProduct.id} className="flex items-center gap-3">
+                        <div className="w-20 sm:w-24 bg-secondary/30 rounded-lg overflow-hidden">
+                          <Link href={`/product/${bundleProduct.slug}`} className="block">
+                            <div className="aspect-square overflow-hidden">
+                              <Image
+                                src={bundleProduct.images[0] || "/placeholder.svg"}
+                                alt={bundleProduct.name}
+                                width={96}
+                                height={96}
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                          </Link>
+                          <div className="p-1.5">
+                            <h3 className="text-[10px] sm:text-xs font-medium leading-tight line-clamp-2">
+                              {bundleProduct.name}
+                            </h3>
+                            <p className="text-[10px] sm:text-xs font-semibold mt-0.5">{isFrenchVersion ? "€" : "£"}{bundleProduct.price}</p>
                           </div>
-                        </Link>
-                        <div className="p-1.5">
-                          <h3 className="text-[10px] sm:text-xs font-medium leading-tight line-clamp-2">
-                            {bundleProduct.name}
-                          </h3>
-                          <p className="text-[10px] sm:text-xs font-semibold mt-0.5">{isFrenchVersion ? "€" : "£"}{bundleProduct.price}</p>
                         </div>
+                        {index < frequentlyBoughtTogether.length - 1 && (
+                          <span className="text-lg font-light text-muted-foreground">+</span>
+                        )}
                       </div>
-                      {index < frequentlyBoughtTogether.length - 1 && (
-                        <span className="text-lg font-light text-muted-foreground">+</span>
-                      )}
+                    ))}
+                  </div>
+                  
+                  {/* Price & Button */}
+                  <div className="flex items-center justify-between gap-3 pt-3 border-t border-border">
+                    <div>
+                      <p className="text-xs text-muted-foreground">{isFrenchVersion ? "Prix total:" : "Total price:"}</p>
+                      <p className="text-lg font-semibold">{isFrenchVersion ? "€" : "£"}{frequentlyBoughtTotal.toFixed(2)}</p>
                     </div>
-                  ))}
-                  <div className="flex flex-col items-center gap-1.5 ml-auto">
-                    <p className="text-xs text-muted-foreground">{isFrenchVersion ? "Prix total:" : "Total price:"}</p>
-                    <p className="text-base sm:text-lg font-semibold">{isFrenchVersion ? "€" : "£"}{frequentlyBoughtTotal.toFixed(2)}</p>
                     <button
                       type="button"
-                      className="px-3 py-1.5 text-xs font-medium bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors"
+                      className="px-4 py-2 text-sm font-medium bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors whitespace-nowrap"
                       onClick={handleAddBothToCart}
                     >
                       {isFrenchVersion ? "Ajouter au panier" : "Add Both to Cart"}
