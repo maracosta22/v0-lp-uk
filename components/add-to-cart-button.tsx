@@ -149,40 +149,35 @@ export function AddToCartButton({ product, variant = "default", className, isFre
                 key={option.qty}
                 type="button"
                 onClick={() => setSelectedQtyOption(option)}
-                className={`w-full text-left rounded-lg border-2 px-3 py-2.5 transition-all ${
+                className={`w-full rounded-lg border-2 px-4 py-3 transition-all ${
                   isSelected
                     ? "border-[#FF6B00] bg-orange-50"
                     : "border-gray-200 bg-white hover:border-gray-300"
                 }`}
               >
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold text-gray-900">{option.label}</span>
-                    {option.badge === "Le Plus Populaire" && (
-                      <span className="bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        Le Plus Populaire
-                      </span>
-                    )}
-                    {option.badge === "Meilleure Valeur" && (
-                      <span className="bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        Meilleure Valeur
+                    {option.badge && (
+                      <span className={`text-white text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                        option.badge === "Le Plus Populaire" ? "bg-green-600" : "bg-amber-600"
+                      }`}>
+                        {option.badge}
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 ml-auto flex-wrap">
-                    {option.savings && (
-                      <span className="text-xs text-green-700 font-medium">
-                        Économisez {option.savings}
-                      </span>
-                    )}
-                    <span className="text-sm font-bold text-gray-900">€{option.price.toFixed(2)}</span>
-                  </div>
+                  <span className="text-sm font-bold text-gray-900">€{option.price.toFixed(2)}</span>
                 </div>
-                {option.freeShipping && (
-                  <p className="text-xs text-green-700 font-medium mt-1">
-                    Livraison gratuite incluse !
-                  </p>
-                )}
+                <div className="flex items-center justify-between text-xs">
+                  {option.savings ? (
+                    <span className="text-green-700 font-medium">Économisez {option.savings}</span>
+                  ) : (
+                    <span></span>
+                  )}
+                  {option.freeShipping && (
+                    <span className="text-green-700 font-medium">Livraison gratuite incluse !</span>
+                  )}
+                </div>
               </button>
             )
           })}
@@ -197,7 +192,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Commander Maintenant — €{selectedQtyOption.price.toFixed(2)}
+          Commander Maintenant €{selectedQtyOption.price.toFixed(2)}
         </button>
 
         {/* Reassurance line */}

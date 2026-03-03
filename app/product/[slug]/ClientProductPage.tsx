@@ -334,7 +334,7 @@ export default function ClientProductPage({
               <AddToCartButton product={product} isFrenchVersion={isFrenchVersion} />
               {isFrenchVersion && (
                 <p className="text-center text-xs text-muted-foreground">
-                  Expédition sous 24-48h — Livraison estimée 5 à 8 jours ouvrables
+                  Expédition sous 24-48h • Livraison estimée 5 à 8 jours ouvrables
                 </p>
               )}
             </div>
