@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useCart } from "@/lib/cart-context"
 import type { Product } from "@/lib/products"
 import { Button } from "@/components/ui/button"
-import { Minus, Plus, ShoppingBag } from "lucide-react"
+import { Minus, Plus, ShoppingBag, ShoppingCart } from "lucide-react"
 import { trackAddToCart, generateEventId } from "@/lib/meta-pixel"
 import { trackAddToCart as trackTikTokAddToCart } from "@/lib/tiktok-events"
 import { getFbpFbc } from "@/lib/fbp-fbc"
@@ -18,12 +18,24 @@ interface AddToCartButtonProps {
   isFrenchVersion?: boolean
 }
 
+// FR upsell quantity options
+const frQuantities = [
+  { qty: 1, price: 15.44, label: "1 Panneau", badge: null, savings: null, freeShipping: false },
+  { qty: 2, price: 28.00, label: "2 Panneaux", badge: null, savings: "€2,88", freeShipping: false },
+  { qty: 4, price: 54.00, label: "4 Panneaux", badge: "Le Plus Populaire", savings: "€7,76", freeShipping: true },
+  { qty: 6, price: 80.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€12,64", freeShipping: true },
+]
+
 export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = false }: AddToCartButtonProps) {
   const { addItem, items } = useCart()
   const router = useRouter()
+
+  // FR: default to 4 panels option (index 2)
+  const [selectedQtyOption, setSelectedQtyOption] = useState(frQuantities[2])
+  // Non-FR: simple quantity
   const [quantity, setQuantity] = useState(1)
 
-  const handleBuyNow = () => {
+  const handleBuyNow = (overrideQty?: number, overridePrice?: number) => {
     // Check if cart has products with different currency
     const cartHasProducts = items.length > 0
     if (cartHasProducts) {
@@ -38,7 +50,10 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       }
     }
 
-    const displayPrice = product.salePrice || product.price
+    const qty = overrideQty ?? (isFrenchVersion ? selectedQtyOption.qty : quantity)
+    const unitPrice = overridePrice ?? (isFrenchVersion ? selectedQtyOption.price / selectedQtyOption.qty : (product.salePrice || product.price))
+    const totalValue = overridePrice ?? (isFrenchVersion ? selectedQtyOption.price : (product.salePrice || product.price) * quantity)
+
     const eventId = generateEventId("atc")
     const currency = isFrenchVersion ? "EUR" : "GBP"
 
@@ -46,8 +61,8 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     trackAddToCart({
       contentId: product.id,
       contentName: product.name,
-      quantity,
-      value: displayPrice * quantity,
+      quantity: qty,
+      value: totalValue,
       currency: currency,
       eventId,
     })
@@ -60,12 +75,12 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           content_type: 'product',
           content_name: product.name,
           content_category: product.category,
-          price: displayPrice,
-          num_items: quantity,
+          price: unitPrice,
+          num_items: qty,
           brand: 'Acoustic Design',
         }
       ],
-      value: displayPrice * quantity,
+      value: totalValue,
       currency: currency,
       description: product.name,
     })
@@ -83,10 +98,10 @@ export function AddToCartButton({ product, variant = "default", className, isFre
         pageUrl: window.location.href,
         customData: {
           content_ids: [product.id],
-          contents: [{ id: product.id, quantity, item_price: displayPrice }],
+          contents: [{ id: product.id, quantity: qty, item_price: unitPrice }],
           content_name: product.name,
           content_type: "product",
-          value: displayPrice * quantity,
+          value: totalValue,
           currency: currency,
           ...utms,
         },
@@ -95,7 +110,11 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       }),
     }).catch(console.error)
 
-    addItem(product, quantity)
+    // For FR upsell, add the selected qty as a single cart entry with adjusted price
+    const productToAdd = isFrenchVersion
+      ? { ...product, price: selectedQtyOption.price / selectedQtyOption.qty }
+      : product
+    addItem(productToAdd, qty)
     router.push("/cart")
   }
 
@@ -105,7 +124,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
   if (variant === "icon") {
     return (
       <Button
-        onClick={handleBuyNow}
+        onClick={() => handleBuyNow(1, displayPrice)}
         size="sm"
         variant="outline"
         className={`gap-1 ${className || ""}`}
@@ -117,6 +136,79 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     )
   }
 
+  // French version: upsell quantity selector + orange CTA button
+  if (isFrenchVersion) {
+    return (
+      <div className="flex flex-col gap-3 w-full">
+        {/* Quantity upsell cards */}
+        <div className="space-y-2">
+          {frQuantities.map((option) => {
+            const isSelected = selectedQtyOption.qty === option.qty
+            return (
+              <button
+                key={option.qty}
+                type="button"
+                onClick={() => setSelectedQtyOption(option)}
+                className={`w-full text-left rounded-lg border-2 px-3 py-2.5 transition-all ${
+                  isSelected
+                    ? "border-[#FF6B00] bg-orange-50"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm font-semibold text-gray-900">{option.label}</span>
+                    {option.badge === "Le Plus Populaire" && (
+                      <span className="bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        Le Plus Populaire
+                      </span>
+                    )}
+                    {option.badge === "Meilleure Valeur" && (
+                      <span className="bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        Meilleure Valeur
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 ml-auto flex-wrap">
+                    {option.savings && (
+                      <span className="text-xs text-green-700 font-medium">
+                        Économisez {option.savings}
+                      </span>
+                    )}
+                    <span className="text-sm font-bold text-gray-900">€{option.price.toFixed(2)}</span>
+                  </div>
+                </div>
+                {option.freeShipping && (
+                  <p className="text-xs text-green-700 font-medium mt-1">
+                    Livraison gratuite incluse !
+                  </p>
+                )}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Orange CTA button */}
+        <button
+          type="button"
+          disabled={!product.inStock}
+          onClick={() => handleBuyNow()}
+          data-add-to-cart="true"
+          className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <ShoppingCart className="h-5 w-5 flex-shrink-0" />
+          Commander Maintenant — €{selectedQtyOption.price.toFixed(2)}
+        </button>
+
+        {/* Reassurance line */}
+        <p className="text-center text-xs text-gray-500">
+          Paiement 100% Sécurisé &nbsp;|&nbsp; Livraison Gratuite dès 80€
+        </p>
+      </div>
+    )
+  }
+
+  // Default English version
   return (
     <div className="flex flex-col items-center gap-4">
       {/* Quantity Selector - compact and centered */}
@@ -140,13 +232,11 @@ export function AddToCartButton({ product, variant = "default", className, isFre
         </button>
       </div>
 
-      <Button onClick={handleBuyNow} size="lg" className="h-12 w-full" disabled={!product.inStock} data-add-to-cart="true">
+      <Button onClick={() => handleBuyNow()} size="lg" className="h-12 w-full" disabled={!product.inStock} data-add-to-cart="true">
         <ShoppingBag className="mr-2 h-4 w-4" />
-        {product.currency === "BRL" 
+        {product.currency === "BRL"
           ? `Comprar - R$${(displayPrice * quantity).toFixed(2)}`
-          : isFrenchVersion 
-            ? `Acheter - €${displayPrice * quantity}` 
-            : `Buy Now - £${displayPrice * quantity}`}
+          : `Buy Now - £${displayPrice * quantity}`}
       </Button>
     </div>
   )

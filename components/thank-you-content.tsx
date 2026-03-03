@@ -133,7 +133,7 @@ export function ThankYouContent() {
         </h1>
         <p className="text-muted-foreground">
           {isFrench 
-            ? 'Félicitations pour votre achat, vous recevrez votre commande dans 14 à 15 jours ! En cas de questions, envoyez un email à homepanel@panel.com'
+            ? 'Félicitations pour votre achat, vous recevrez votre commande dans 5 à 8 jours ouvrables ! Expédition sous 24-48h après commande. En cas de questions, envoyez un email à homepanel@panel.com'
             : `Thank you for your purchase. We've sent a confirmation email to ${customerEmail}`}
         </p>
       </div>

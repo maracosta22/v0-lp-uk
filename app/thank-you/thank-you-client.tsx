@@ -186,7 +186,7 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
           </h1>
           <p className="text-muted-foreground text-lg">
             {purchaseData?.metadata?.content_ids?.includes('-fr')
-              ? 'Félicitations pour votre achat, vous recevrez votre commande dans 14 à 15 jours ! En cas de questions, envoyez un email à homepanel@panel.com'
+              ? 'Félicitations pour votre achat, vous recevrez votre commande dans 5 à 8 jours ouvrables ! Expédition sous 24-48h après commande. En cas de questions, envoyez un email à homepanel@panel.com'
               : 'Your order has been confirmed. You will receive an email confirmation shortly.'}
           </p>
         </div>

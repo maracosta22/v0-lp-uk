@@ -20,6 +20,7 @@ import { ProductCard } from "@/components/product-card" // Added import for Prod
 import { RecessedLedSection } from "@/components/recessed-led-section"
 import { SamplesSection } from "@/components/samples-section"
 import { AcousticLineSection } from "@/components/acoustic-line-section"
+import { CountdownTimerFr } from "@/components/countdown-timer-fr"
 
 interface ClientProductPageProps {
   product: any
@@ -328,8 +329,14 @@ export default function ClientProductPage({
             {product.styles && product.styles.length > 0 && <StyleSelector styles={product.styles} />}
 
             {/* Add to Cart */}
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col gap-3">
+              {isFrenchVersion && <CountdownTimerFr />}
               <AddToCartButton product={product} isFrenchVersion={isFrenchVersion} />
+              {isFrenchVersion && (
+                <p className="text-center text-xs text-muted-foreground">
+                  Expédition sous 24-48h — Livraison estimée 5 à 8 jours ouvrables
+                </p>
+              )}
             </div>
 
             {/* Trust Badges */}
