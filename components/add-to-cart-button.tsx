@@ -115,7 +115,8 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       ? { ...product, price: selectedQtyOption.price / selectedQtyOption.qty }
       : product
     addItem(productToAdd, qty)
-    router.push("/cart")
+    // FR version goes to optimized pre-checkout summary page
+    router.push(isFrenchVersion ? "/checkout-fr" : "/cart")
   }
 
   const displayPrice = product.salePrice || product.price
