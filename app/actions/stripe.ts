@@ -232,6 +232,113 @@ export async function createCheckoutSession(items: CartItem[], origin: string, t
   }
 }
 
+// ─── FR-ONLY CHECKOUT SESSION ─────────────────────────────────────────────────
+export async function createCheckoutSessionFr(items: CartItem[], origin: string, trackingData?: TrackingData) {
+  try {
+    const utmData = await getUTMDataFromCookie()
+
+    if (!items?.length) throw new Error("Cart is empty")
+
+    for (const item of items) {
+      const quantity = item.quantity
+      if (!Number.isInteger(quantity) || quantity < 1) throw new Error(`Invalid quantity ${quantity}`)
+      if (quantity > 100) throw new Error(`Quantity ${quantity} exceeds maximum of 100`)
+      const price = item.product.salePrice || item.product.price
+      if (!Number.isFinite(price) || price < 0) throw new Error(`Invalid price for ${item.product.name}`)
+    }
+
+    const checkoutEventId = trackingData?.eventId || makeId("checkout")
+    const purchaseEventId = makeId("purchase")
+
+    const contentIds = items.map((item) => item.product.id)
+    const contents = items.map((item) => {
+      const serverProduct = products.find((p) => p.id === item.product.id)
+      return {
+        id: item.product.id,
+        title: serverProduct?.name || item.product.name,
+        category: serverProduct?.category || "product",
+        price: serverProduct?.salePrice || serverProduct?.price || item.product.price,
+        quantity: item.quantity,
+      }
+    })
+
+    const lineItems = items.map((item) => {
+      const serverProduct = products.find((p) => p.id === item.product.id)
+      const unitPrice = serverProduct ? serverProduct.salePrice || serverProduct.price : item.product.salePrice || item.product.price
+      const roundedAmount = Math.round(unitPrice * 100)
+      return {
+        price_data: {
+          currency: "eur",
+          product_data: { name: serverProduct?.name || item.product.name },
+          unit_amount: roundedAmount,
+        },
+        quantity: item.quantity,
+      }
+    })
+
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: "embedded",
+      mode: "payment",
+      locale: "fr",
+      line_items: lineItems,
+
+      // ✅ Métodos de pagamento europeus — PayPal e Klarna aumentam conversão FR
+      payment_method_types: ["card", "paypal", "klarna"],
+
+      // ✅ Frete grátis explícito — reduz abandono
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: { amount: 0, currency: "eur" },
+            display_name: "Livraison Standard Gratuite",
+            delivery_estimate: {
+              minimum: { unit: "business_day" as const, value: 5 },
+              maximum: { unit: "business_day" as const, value: 8 },
+            },
+          },
+        },
+      ],
+
+      // ✅ Países francófonos + principais europeus
+      shipping_address_collection: {
+        allowed_countries: ["FR", "BE", "CH", "LU", "MC", "DE", "NL", "ES", "IT", "PT", "AT", "IE"],
+      },
+
+      // ✅ Não pedir telefone — reduz fricção
+      phone_number_collection: { enabled: false },
+      billing_address_collection: "auto",
+
+      return_url: `${origin}/succes-fr?session_id={CHECKOUT_SESSION_ID}`,
+
+      metadata: {
+        content_ids: JSON.stringify(contentIds),
+        contents: JSON.stringify(contents),
+        locale: "fr",
+        product_type: "panneau_acoustique",
+        ...(trackingData?.fbc ? { fbc: trackingData.fbc } : {}),
+        ...(trackingData?.fbp ? { fbp: trackingData.fbp } : {}),
+        checkout_event_id: checkoutEventId,
+        purchase_event_id: purchaseEventId,
+        event_id: checkoutEventId,
+        ...(trackingData?.eventSourceUrl ? { event_source_url: trackingData.eventSourceUrl } : {}),
+        ...(trackingData?.clientIp ? { client_ip: trackingData.clientIp } : {}),
+        ...(trackingData?.clientUserAgent ? { client_user_agent: trackingData.clientUserAgent } : {}),
+        ...(utmData.utm_source ? { utm_source: utmData.utm_source } : {}),
+        ...(utmData.utm_medium ? { utm_medium: utmData.utm_medium } : {}),
+        ...(utmData.utm_campaign ? { utm_campaign: utmData.utm_campaign } : {}),
+        ...(utmData.utm_content ? { utm_content: utmData.utm_content } : {}),
+        ...(utmData.utm_term ? { utm_term: utmData.utm_term } : {}),
+      },
+    })
+
+    return { clientSecret: session.client_secret }
+  } catch (error) {
+    throw error
+  }
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
 export async function getCheckoutSession(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ["line_items", "line_items.data.price.product"],
