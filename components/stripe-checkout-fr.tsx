@@ -75,7 +75,7 @@ export function StripeCheckoutFr({ items, onInitiateCheckout }: StripeCheckoutFr
       <div className="w-full space-y-3">
         <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1">
           <Lock className="h-3 w-3" />
-          Paiement sécurisé SSL — Carte, PayPal, Klarna
+          Paiement 100% Sécurisé SSL • Visa, Mastercard, American Express
         </p>
         <EmbeddedCheckoutProvider stripe={stripePromise} options={{ fetchClientSecret }}>
           <EmbeddedCheckout />

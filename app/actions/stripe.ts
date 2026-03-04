@@ -282,8 +282,8 @@ export async function createCheckoutSessionFr(items: CartItem[], origin: string,
       locale: "fr",
       line_items: lineItems,
 
-      // ✅ Métodos de pagamento europeus — PayPal e Klarna aumentam conversão FR
-      payment_method_types: ["card", "paypal", "klarna"],
+      // ✅ Apenas cartão por enquanto — universal e sem dependência de ativação
+      payment_method_types: ["card"],
 
       // ✅ Frete grátis explícito — reduz abandono
       shipping_options: [
@@ -333,8 +333,9 @@ export async function createCheckoutSessionFr(items: CartItem[], origin: string,
     })
 
     return { clientSecret: session.client_secret }
-  } catch (error) {
-    throw error
+  } catch (error: any) {
+    console.error("[Stripe FR] createCheckoutSessionFr error:", error?.message || error)
+    throw new Error(error?.message || "Erreur lors de la création de la session de paiement")
   }
 }
 // ──────────────────────────────────────────────────────────────────────────────
