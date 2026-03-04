@@ -3,8 +3,6 @@
  * Implements all TikTok Pixel events with proper data formatting
  */
 
-import crypto from 'crypto'
-
 interface TikTokContent {
   content_id?: string
   content_type?: 'product' | 'product_group'
@@ -41,15 +39,16 @@ declare global {
 }
 
 /**
- * SHA-256 hash function for PII data
+ * SHA-256 hash function for PII data (client-side using SubtleCrypto)
  */
-function hashSHA256(data: string): string {
-  if (typeof window === 'undefined') {
-    // Server-side fallback
-    return crypto.createHash('sha256').update(data).digest('hex')
+async function hashSHA256(data: string): Promise<string> {
+  if (typeof window !== 'undefined' && window.crypto?.subtle) {
+    const encoder = new TextEncoder()
+    const dataBuffer = encoder.encode(data)
+    const hashBuffer = await window.crypto.subtle.digest('SHA-256', dataBuffer)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
   }
-  // Client-side - would need SubtleCrypto, but TikTok recommends server-side hashing
-  // For now, just return data (improve with actual hashing)
   return data
 }
 
@@ -77,13 +76,13 @@ export async function trackIdentify(data: TikTokIdentifyData) {
   const identifyData: Record<string, any> = {}
   
   if (data.email) {
-    identifyData.email = hashSHA256(data.email.toLowerCase().trim())
+    identifyData.email = await hashSHA256(data.email.toLowerCase().trim())
   }
   if (data.phone_number) {
-    identifyData.phone_number = hashSHA256(data.phone_number.replace(/\D/g, ''))
+    identifyData.phone_number = await hashSHA256(data.phone_number.replace(/\D/g, ''))
   }
   if (data.external_id) {
-    identifyData.external_id = hashSHA256(data.external_id)
+    identifyData.external_id = await hashSHA256(data.external_id)
   }
 
   try {

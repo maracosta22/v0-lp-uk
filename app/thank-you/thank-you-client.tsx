@@ -71,9 +71,13 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
         }
 
         // 4) Track TikTok Purchase
+        console.log('[v0] TikTok Purchase - Starting tracking')
+        console.log('[v0] TikTok Purchase - window.ttq available:', typeof window !== 'undefined' && !!window.ttq)
+        
         let tiktokData: any = null
         try {
           const stored = sessionStorage.getItem('tiktok_purchase_data')
+          console.log('[v0] TikTok Purchase - sessionStorage data:', stored ? 'found' : 'not found')
           if (stored) {
             tiktokData = JSON.parse(stored)
             sessionStorage.removeItem('tiktok_purchase_data')
@@ -82,16 +86,20 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
           console.warn('[v0] Could not read TikTok stored data:', e)
         }
 
+        const tiktokPayload = {
+          contents: tiktokData?.contents || [],
+          value: tiktokData?.value || sessionValue,
+          currency: tiktokData?.currency || sessionCurrency,
+          status: 'completed',
+          description: 'Purchase completed',
+        }
+        console.log('[v0] TikTok Purchase - Payload:', JSON.stringify(tiktokPayload))
+
         try {
-          await trackPurchase({
-            contents: tiktokData?.contents || [],
-            value: tiktokData?.value || sessionValue,
-            currency: tiktokData?.currency || sessionCurrency,
-            status: 'completed',
-            description: 'Purchase completed',
-          })
+          await trackPurchase(tiktokPayload)
+          console.log('[v0] TikTok Purchase - trackPurchase() called successfully')
         } catch (tiktokErr) {
-          // Non-blocking: silently fail
+          console.error('[v0] TikTok Purchase - Error:', tiktokErr)
         }
 
         // 5) Fire Google Ads Conversion Tracking
