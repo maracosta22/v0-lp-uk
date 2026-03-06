@@ -8,6 +8,7 @@ import { CartProvider } from "@/lib/cart-context"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { MetaPixelProvider } from "@/components/meta-pixel-provider"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -117,6 +118,7 @@ export default function RootLayout({
       </head>
 
       <body className="font-sans antialiased">
+        <ScrollToTop />
         <Suspense fallback={null}>
           <MetaPixelProvider>
             <CartProvider>
