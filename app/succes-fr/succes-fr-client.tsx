@@ -34,6 +34,13 @@ export default function SuccesFrClient({ sessionId }: { sessionId: string | null
     firedRef.current = true
     clearCart()
 
+    // Correção 4 — Limpar dados do pré-checkout após sucesso
+    try {
+      sessionStorage.removeItem("checkout_order_fr")
+    } catch (e) {
+      // ignore
+    }
+
     ;(async () => {
       try {
         // 1) Fetch session details
