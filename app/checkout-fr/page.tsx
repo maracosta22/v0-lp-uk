@@ -3,36 +3,98 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useCart } from "@/lib/cart-context"
 import { StripeCheckoutFr } from "@/components/stripe-checkout-fr"
-import { ArrowLeft, Lock, Package, RotateCcw, Shield, Star } from "lucide-react"
+import { ArrowLeft, Lock, Package, RotateCcw, Star } from "lucide-react"
 import { trackInitiateCheckout, generateEventId } from "@/lib/meta-pixel"
 import { getFbpFbc } from "@/lib/fbp-fbc"
 import { getStoredUTMs } from "@/lib/utm-client"
 
+// Shape that comes from sessionStorage
+interface StoredOrder {
+  productId: string
+  name: string
+  price: number       // unit price
+  totalPrice: number  // qty * unit
+  quantity: number
+  image: string
+  currency: string
+}
+
 export default function CheckoutFrPage() {
-  const { items, totalPrice, clearCart } = useCart()
+  const router = useRouter()
+  const { items } = useCart()
   const [initiated, setInitiated] = useState(false)
 
-  // Filter only FR/EUR items
-  const frItems = items.filter((item) => item.product.currency === "EUR")
-  const totalEur = frItems.reduce((sum, item) => {
-    const price = item.product.salePrice || item.product.price
-    return sum + price * item.quantity
-  }, 0)
+  // Source of truth: sessionStorage first, then cart context
+  const [storedOrder, setStoredOrder] = useState<StoredOrder | null>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("checkout_order_fr")
+      if (raw) {
+        setStoredOrder(JSON.parse(raw))
+        setReady(true)
+        return
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+
+    // Fallback: build from cart context (EUR items only)
+    const frItems = items.filter((i) => i.product.currency === "EUR")
+    if (frItems.length > 0) {
+      const first = frItems[0]
+      const unitPrice = first.product.salePrice || first.product.price
+      setStoredOrder({
+        productId: first.product.id,
+        name: first.product.name,
+        price: unitPrice,
+        totalPrice: unitPrice * first.quantity,
+        quantity: first.quantity,
+        image: first.product.images?.[0] || first.product.image || "",
+        currency: "EUR",
+      })
+      setReady(true)
+      return
+    }
+
+    // Nothing in sessionStorage or cart → redirect back
+    router.replace("/product/flexible-acoustic-panel-fr")
+  }, [items, router])
+
+  if (!ready || !storedOrder) return null
+
+  const totalEur = storedOrder.totalPrice
   const isFreeShipping = totalEur >= 80
+
+  // Build a cart-like item array for StripeCheckoutFr
+  const checkoutItems = [
+    {
+      product: {
+        id: storedOrder.productId,
+        name: storedOrder.name,
+        price: storedOrder.price,
+        salePrice: storedOrder.price,
+        currency: "EUR" as const,
+        image: storedOrder.image,
+        images: [storedOrder.image],
+      } as any,
+      quantity: storedOrder.quantity,
+    },
+  ]
 
   const handleInitiateCheckout = () => {
     if (initiated) return
     setInitiated(true)
 
     const eventId = generateEventId("ic")
-    const contentIds = frItems.map((item) => item.product.id)
-    const numItems = frItems.reduce((sum, item) => sum + item.quantity, 0)
 
     trackInitiateCheckout({
-      contentIds,
-      numItems,
+      contentIds: [storedOrder.productId],
+      numItems: storedOrder.quantity,
       value: totalEur,
       currency: "EUR",
       eventId,
@@ -49,8 +111,8 @@ export default function CheckoutFrPage() {
         eventId,
         pageUrl: window.location.href,
         customData: {
-          content_ids: contentIds,
-          num_items: numItems,
+          content_ids: [storedOrder.productId],
+          num_items: storedOrder.quantity,
           value: totalEur,
           currency: "EUR",
           ...utms,
@@ -61,22 +123,10 @@ export default function CheckoutFrPage() {
     }).catch(console.error)
   }
 
-  if (frItems.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-muted-foreground">Votre panier est vide.</p>
-          <Link href="/product/flexible-acoustic-panel-fr" className="mt-4 inline-block text-sm text-[#FF6B00] hover:underline">
-            Retour au produit
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-[#f9f7f4] py-8 px-4">
       <div className="mx-auto max-w-lg">
+
         {/* Header */}
         <div className="mb-6 flex items-center gap-3">
           <Link
@@ -94,39 +144,35 @@ export default function CheckoutFrPage() {
 
         {/* Order Summary Card */}
         <div className="rounded-xl bg-white border border-border shadow-sm p-5 mb-4">
-          <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">Récapitulatif de la commande</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">
+            Récapitulatif de la commande
+          </h2>
 
-          {/* Items */}
-          <div className="space-y-3 mb-4">
-            {frItems.map((item) => (
-              <div key={item.product.id} className="flex items-center gap-3">
-                <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-secondary/30 flex-shrink-0">
-                  {item.product.image && (
-                    <Image
-                      src={item.product.image || "/placeholder.svg"}
-                      alt={item.product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium leading-tight line-clamp-2">{item.product.name}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Qté: {item.quantity}</p>
-                </div>
-                <p className="text-sm font-semibold flex-shrink-0">
-                  €{((item.product.salePrice || item.product.price) * item.quantity).toFixed(2)}
-                </p>
+          {/* Item */}
+          <div className="flex items-center gap-3 mb-4">
+            {storedOrder.image && (
+              <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-secondary/30 flex-shrink-0">
+                <Image
+                  src={storedOrder.image}
+                  alt={storedOrder.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
-            ))}
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium leading-tight">{storedOrder.name}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Qté : {storedOrder.quantity}</p>
+            </div>
+            <p className="text-sm font-semibold flex-shrink-0">€{totalEur.toFixed(2)}</p>
           </div>
 
-          {/* Divider */}
+          {/* Totals */}
           <div className="border-t border-border pt-3 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Livraison</span>
               <span className={isFreeShipping ? "text-green-600 font-semibold" : ""}>
-                {isFreeShipping ? "GRATUITE" : `€7.00`}
+                {isFreeShipping ? "GRATUITE" : "€7,00"}
               </span>
             </div>
             <div className="flex justify-between font-semibold">
@@ -158,13 +204,13 @@ export default function CheckoutFrPage() {
           </div>
         </div>
 
-        {/* CTA + Stripe Embedded */}
+        {/* Stripe Embedded Checkout */}
         <div className="rounded-xl bg-white border border-border shadow-sm p-5 mb-4">
-          <StripeCheckoutFr items={frItems} onInitiateCheckout={handleInitiateCheckout} />
+          <StripeCheckoutFr items={checkoutItems} onInitiateCheckout={handleInitiateCheckout} />
 
-          {/* Payment method icons */}
+          {/* Payment icons */}
           <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-            {["Visa", "MC", "Amex", "PayPal", "Klarna"].map((method) => (
+            {["Visa", "Mastercard", "Amex"].map((method) => (
               <span
                 key={method}
                 className="inline-block border border-border rounded px-2 py-0.5 text-[10px] font-medium text-muted-foreground bg-secondary/30"
@@ -179,6 +225,7 @@ export default function CheckoutFrPage() {
             Vos données sont cryptées et 100% sécurisées
           </p>
         </div>
+
       </div>
     </div>
   )

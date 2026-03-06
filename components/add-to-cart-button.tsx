@@ -115,6 +115,25 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       ? { ...product, price: selectedQtyOption.price / selectedQtyOption.qty }
       : product
     addItem(productToAdd, qty)
+
+    // FR: persist order in sessionStorage so /checkout-fr always has data
+    if (isFrenchVersion) {
+      const orderData = {
+        productId: product.id,
+        name: product.name,
+        price: selectedQtyOption.price / selectedQtyOption.qty,
+        totalPrice: selectedQtyOption.price,
+        quantity: selectedQtyOption.qty,
+        image: product.images?.[0] || product.image || "",
+        currency: "EUR",
+      }
+      try {
+        sessionStorage.setItem("checkout_order_fr", JSON.stringify(orderData))
+      } catch (e) {
+        // sessionStorage not available — cart context will be used as fallback
+      }
+    }
+
     // FR version goes to optimized pre-checkout summary page
     router.push(isFrenchVersion ? "/checkout-fr" : "/cart")
   }
