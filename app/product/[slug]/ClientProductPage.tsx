@@ -474,7 +474,7 @@ export default function ClientProductPage({
                             {bumpProduct.name}
                           </h3>
                         </Link>
-                        <p className="text-xs font-semibold mt-1">£{bumpProduct.price}</p>
+                        <p className="text-xs font-semibold mt-1">{isFrenchVersion ? "€" : "£"}{bumpProduct.price}</p>
                         <div className="mt-auto pt-2">
                           <AddToCartButton product={bumpProduct} variant="icon" className="w-full h-7 text-xs" />
                         </div>
