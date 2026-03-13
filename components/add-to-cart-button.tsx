@@ -18,20 +18,21 @@ interface AddToCartButtonProps {
   isFrenchVersion?: boolean
 }
 
-// FR upsell quantity options
+// FR upsell quantity options with coverage context
 const frQuantities = [
-  { qty: 1, price: 15.44, label: "1 Panneau", badge: null, savings: null, freeShipping: false },
-  { qty: 2, price: 28.00, label: "2 Panneaux", badge: null, savings: "€2,88", freeShipping: false },
-  { qty: 4, price: 54.00, label: "4 Panneaux", badge: "Le Plus Populaire", savings: "€7,76", freeShipping: true },
-  { qty: 6, price: 80.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€12,64", freeShipping: true },
+  { qty: 2, price: 59.00, label: "2 Panneaux", badge: null, savings: null, freeShipping: true, coverage: "~6 m2", ideal: "Coin TV ou colonne", pricePerPanel: "29,50" },
+  { qty: 6, price: 179.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€30,40", freeShipping: true, coverage: "~18 m2", ideal: "Mur entier standard", pricePerPanel: "29,83" },
+  { qty: 8, price: 229.00, label: "8 Panneaux", badge: "Le Plus Populaire", savings: "€50,20", freeShipping: true, coverage: "~24 m2", ideal: "Grand salon", pricePerPanel: "28,63" },
+  { qty: 10, price: 279.00, label: "10 Panneaux", badge: null, savings: "€70,00", freeShipping: true, coverage: "~30 m2", ideal: "Mur + accent", pricePerPanel: "27,90" },
+  { qty: 12, price: 329.00, label: "12 Panneaux", badge: "Pack Pro - LED Offert", savings: "€89,80", freeShipping: true, coverage: "~36 m2", ideal: "Suite complete", pricePerPanel: "27,42" },
 ]
 
 export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = false }: AddToCartButtonProps) {
   const { addItem, items } = useCart()
   const router = useRouter()
 
-  // FR: default to 4 panels option (index 2)
-  const [selectedQtyOption, setSelectedQtyOption] = useState(frQuantities[2])
+  // FR: default to 6 panels option (index 1) - Meilleure Valeur
+  const [selectedQtyOption, setSelectedQtyOption] = useState(frQuantities[1])
   // Non-FR: simple quantity
   const [quantity, setQuantity] = useState(1)
 
@@ -161,7 +162,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     return (
       <div className="flex flex-col gap-3 w-full">
         {/* Quantity upsell cards */}
-        <div className="space-y-2">
+        <div className="space-y-2" data-bundle-selector>
           {frQuantities.map((option) => {
             const isSelected = selectedQtyOption.qty === option.qty
             return (
@@ -169,33 +170,42 @@ export function AddToCartButton({ product, variant = "default", className, isFre
                 key={option.qty}
                 type="button"
                 onClick={() => setSelectedQtyOption(option)}
+                data-bundle={option.qty}
                 className={`w-full rounded-lg border-2 px-4 py-3 transition-all ${
                   isSelected
                     ? "border-[#FF6B00] bg-orange-50"
                     : "border-gray-200 bg-white hover:border-gray-300"
                 }`}
               >
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between gap-3 mb-1">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-semibold text-gray-900">{option.label}</span>
                     {option.badge && (
                       <span className={`text-white text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                        option.badge === "Le Plus Populaire" ? "bg-green-600" : "bg-amber-600"
+                        option.badge === "Le Plus Populaire" ? "bg-green-600" : option.badge.includes("LED") ? "bg-purple-600" : "bg-amber-600"
                       }`}>
                         {option.badge}
                       </span>
                     )}
                   </div>
-                  <span className="text-sm font-bold text-gray-900">€{option.price.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-gray-900">{option.price.toFixed(0)} EUR</span>
+                </div>
+                {/* Coverage context */}
+                <div className="text-xs text-gray-500 mb-1.5">
+                  {option.coverage} - Ideal pour {option.ideal}
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  {option.savings ? (
-                    <span className="text-green-700 font-medium">Économisez {option.savings}</span>
-                  ) : (
-                    <span></span>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {option.savings ? (
+                      <span className="text-green-700 font-medium">Economisez {option.savings}</span>
+                    ) : (
+                      <span className="text-gray-400">-</span>
+                    )}
+                    <span className="text-gray-400">|</span>
+                    <span className="text-gray-500">{option.pricePerPanel} EUR / panneau</span>
+                  </div>
                   {option.freeShipping && (
-                    <span className="text-green-700 font-medium">Livraison gratuite incluse !</span>
+                    <span className="text-green-700 font-medium">Livraison gratuite</span>
                   )}
                 </div>
               </button>
@@ -203,22 +213,37 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           })}
         </div>
 
-        {/* Orange CTA button */}
+        {/* Orange CTA button with dynamic copy */}
         <button
           type="button"
           disabled={!product.inStock}
           onClick={() => handleBuyNow()}
           data-add-to-cart="true"
-          className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:shadow-md"
         >
           <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Commander Maintenant €{selectedQtyOption.price.toFixed(2)}
+          Transformer mes {selectedQtyOption.coverage} — {selectedQtyOption.price.toFixed(0)} EUR
         </button>
 
-        {/* Reassurance line */}
-        <p className="text-center text-xs text-gray-500">
-          Paiement 100% Sécurisé &nbsp;|&nbsp; Livraison Gratuite dès 80€
-        </p>
+        {/* Trust signal row */}
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-gray-500">
+          <span className="flex items-center gap-1">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Paiement securise
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+            Livraison gratuite
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg>
+            Retour 30j gratuit
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            Garantie 5 ans
+          </span>
+        </div>
       </div>
     )
   }

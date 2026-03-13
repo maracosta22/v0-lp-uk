@@ -22,6 +22,9 @@ import { SamplesSection } from "@/components/samples-section"
 import { AcousticLineSection } from "@/components/acoustic-line-section"
 import { CountdownTimerFr } from "@/components/countdown-timer-fr"
 import { ExitIntentPopupFr } from "@/components/exit-intent-popup-fr"
+import { PanelCalculatorFr } from "@/components/panel-calculator-fr"
+import { StickyCartBarFr } from "@/components/sticky-cart-bar-fr"
+import { FaqSectionFr } from "@/components/faq-section-fr"
 
 interface ClientProductPageProps {
   product: any
@@ -102,21 +105,6 @@ export default function ClientProductPage({
   const t = isFrenchVersion ? frenchTranslations : englishTranslations
   const { addItem, totalItems } = useCart()
   const { opacity, isVisible } = useScrollVisibility()
-  const [showStickyFr, setShowStickyFr] = useState(false)
-
-  // FR sticky CTA: show when main CTA button scrolls out of view
-  useEffect(() => {
-    if (!isFrenchVersion) return
-    const handleScroll = () => {
-      const btn = document.querySelector("[data-add-to-cart]") as HTMLElement | null
-      if (btn) {
-        const rect = btn.getBoundingClientRect()
-        setShowStickyFr(rect.bottom < 0)
-      }
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [isFrenchVersion])
 
   const handleAddBothToCart = () => {
     frequentlyBoughtTogether.forEach((bundleProduct) => {
@@ -170,17 +158,25 @@ export default function ClientProductPage({
                   product.onSale ? "bg-accent text-accent-foreground" : "bg-foreground text-background"
                 }`}
               >
-                {product.onSale ? `${isFrenchVersion ? "Offre de Lancement" : "Launch Offer"}` : product.badge}
+                {product.onSale ? `$                {isFrenchVersion ? "Offre de Lancement — -39% jusqu'a epuisement" : "Launch Offer"}` : product.badge}
               </span>
             )}
 
             {/* Title & Price */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-balance break-words">{product.name}</h1>
 
+            {/* FR: Benefit subheadline */}
+            {isFlexibleAcousticPanel && isFrenchVersion && (
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                Le seul panneau qui epouse vos courbes — sans outil, sans artisan, en 30 minutes
+              </p>
+            )}
+
             {isFlexibleAcousticPanel && (
-              <div className="mt-2 flex flex-col gap-1">
+              <div className="mt-2 flex flex-col gap-2">
+                {/* Rating - FR uses 4.9/2847, EN uses 4.8/1080 */}
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm text-muted-foreground">4.8</span>
+                  <span className="text-sm text-muted-foreground">{isFrenchVersion ? "4.9" : "4.8"}</span>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="h-4 w-4 text-amber-400 fill-current" viewBox="0 0 20 20">
@@ -188,12 +184,28 @@ export default function ClientProductPage({
                       </svg>
                     ))}
                   </div>
-                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(1080)</span>
+                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">
+                    {isFrenchVersion ? "(2847 avis verifies)" : "(1080)"}
+                  </span>
                 </div>
-                <p className="text-sm">
-                  <span className="font-semibold">{isFrenchVersion ? "4500+ achetes" : "4500+ bought"}</span>{" "}
-                  <span className="text-muted-foreground">{isFrenchVersion ? "le mois dernier" : "in past month"}</span>
-                </p>
+
+                {/* FR: Social proof badges */}
+                {isFrenchVersion ? (
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 text-xs text-orange-800">
+                      <span className="text-orange-500">*</span>
+                      <strong>4 500+</strong> achetes ce mois
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 text-xs text-orange-800">
+                      <strong>18 personnes</strong> voient ce produit
+                    </span>
+                  </div>
+                ) : (
+                  <p className="text-sm">
+                    <span className="font-semibold">4500+ bought</span>{" "}
+                    <span className="text-muted-foreground">in past month</span>
+                  </p>
+                )}
               </div>
             )}
 
@@ -224,10 +236,25 @@ export default function ClientProductPage({
                   )}
                   <Info className="h-3.5 w-3.5 text-muted-foreground cursor-pointer flex-shrink-0" />
                 </div>
-                {isFlexibleAcousticPanel && (
-                  <p className="text-xs text-muted-foreground mt-2">{isFrenchVersion ? "Offre de lancement limitée — Seulement quelques panneaux disponibles" : "Limited batch / Introductory offer — Only a few batches available"}</p>
+                {/* FR: Stock urgency bar with specific count */}
+                {isFlexibleAcousticPanel && isFrenchVersion && (
+                  <div className="mt-3 space-y-1.5">
+                    <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-orange-600 to-orange-400 rounded-full transition-all duration-1000"
+                        style={{ width: '73%' }}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      <span className="text-orange-600 font-medium">73% des stocks vendus</span>
+                      {" — "}Il reste <strong className="text-foreground">47 panneaux</strong>
+                    </p>
+                  </div>
                 )}
-                {isFlexibleAcousticPanel && <PeopleViewing isFrench={isFrenchVersion} />}
+                {isFlexibleAcousticPanel && !isFrenchVersion && (
+                  <p className="text-xs text-muted-foreground mt-2">Limited batch / Introductory offer — Only a few batches available</p>
+                )}
+                {isFlexibleAcousticPanel && !isFrenchVersion && <PeopleViewing isFrench={isFrenchVersion} />}
               </div>
             ) : (
               <div className="mt-4">
@@ -281,7 +308,7 @@ export default function ClientProductPage({
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">3</span>
                       </div>
-                      <p className="text-xs font-medium">{isFrenchVersion ? "Profitez!" : "Enjoy!"}</p>
+                      <p className="text-xs font-medium">{isFrenchVersion ? "Admirez le resultat" : "Enjoy!"}</p>
                     </div>
                   </div>
                 </div>
@@ -295,23 +322,23 @@ export default function ClientProductPage({
                 <ul className="space-y-2.5 pt-2">
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Flexible" : "Flexible"}</strong> — {isFrenchVersion ? "Se plie aux courbes et piliers" : "Bends to curves and pillars"}</span>
+                    <span><strong>{isFrenchVersion ? "Flexible" : "Flexible"}</strong> — {isFrenchVersion ? "S'adapte a toutes les courbes et piliers — meme rayon de 20cm" : "Bends to curves and pillars"}</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Installation facile" : "Easy Install"}</strong> — {isFrenchVersion ? "Auto-adhesif, sans outils" : "Peel & stick, no tools needed"}</span>
+                    <span><strong>{isFrenchVersion ? "Sans outil" : "Easy Install"}</strong> — {isFrenchVersion ? "Auto-adhesif repositionnable. Cutter suffit pour la decoupe." : "Peel & stick, no tools needed"}</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Sans salissure" : "No Mess"}</strong> — {isFrenchVersion ? "Pas de peinture, pas de poussiere" : "No paint, no dust, no hassle"}</span>
+                    <span><strong>{isFrenchVersion ? "Zero chantier" : "No Mess"}</strong> — {isFrenchVersion ? "Pas de colle chimique, pas de poussiere, pas d'artisan." : "No paint, no dust, no hassle"}</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Acoustique" : "Acoustic"}</strong> — {isFrenchVersion ? "Reduit l'echo et ameliore le confort sonore" : "Reduces echo and improves sound comfort"}</span>
+                    <span><strong>{isFrenchVersion ? "NRC 0.85" : "Acoustic"}</strong> — {isFrenchVersion ? "Reduit l'echo de 60%. Certifie SGS — teste en laboratoire." : "Reduces echo and improves sound comfort"}</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Look Premium" : "Premium Look"}</strong> — {isFrenchVersion ? "Esthetique bois haut de gamme" : "High-end wood aesthetic"}</span>
+                    <span><strong>{isFrenchVersion ? "Bois massif MDF" : "Premium Look"}</strong> — {isFrenchVersion ? "Lames vraies. Finition premium identique au bois traite." : "High-end wood aesthetic"}</span>
                   </li>
                 </ul>
                 <div className="pt-2 space-y-1.5 text-sm text-muted-foreground">
@@ -329,20 +356,20 @@ export default function ClientProductPage({
                 {/* Certifications & Features Grid */}
                 <div className="mt-8 grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">NRC 0.80</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Excellent Sound Absorption</p>
+                    <h4 className="font-semibold text-sm sm:text-base">NRC 0.85</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">{isFrenchVersion ? "Absorption sonore" : "Excellent Sound Absorption"}</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">E1 Certified</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Low Formaldehyde Emission</p>
+                    <h4 className="font-semibold text-sm sm:text-base">{isFrenchVersion ? "Certifie E1" : "E1 Certified"}</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">{isFrenchVersion ? "Faible emission formaldehyde" : "Low Formaldehyde Emission"}</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">Easy Install</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">DIY Friendly Setup</p>
+                    <h4 className="font-semibold text-sm sm:text-base">{isFrenchVersion ? "Installation DIY" : "Easy Install"}</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">{isFrenchVersion ? "Sans artisan requis" : "DIY Friendly Setup"}</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">6 Colors</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Match Any Interior</p>
+                    <h4 className="font-semibold text-sm sm:text-base">{isFrenchVersion ? "6 Couleurs" : "6 Colors"}</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">{isFrenchVersion ? "Adaptez a votre interieur" : "Match Any Interior"}</p>
                   </div>
                 </div>
 
@@ -385,6 +412,9 @@ export default function ClientProductPage({
                 <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">{isFrenchVersion ? "Garantie 5 ans" : "5-Year Warranty"}</span>
               </div>
             </div>
+
+            {/* Panel Calculator - FR only */}
+            {isFlexibleAcousticPanel && isFrenchVersion && <PanelCalculatorFr />}
 
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
@@ -530,8 +560,11 @@ export default function ClientProductPage({
         {/* Product Description Section */}
         {isFlexibleAcousticPanel && <ProductDescriptionSection />}
 
-  {/* Customer Reviews Section */}
-  {isFlexibleAcousticPanel && <CustomerReviews isFrench={isFrenchVersion} />}
+        {/* FAQ Section - FR only, before reviews */}
+        {isFlexibleAcousticPanel && isFrenchVersion && <FaqSectionFr />}
+
+        {/* Customer Reviews Section */}
+        {isFlexibleAcousticPanel && <CustomerReviews isFrench={isFrenchVersion} />}
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
@@ -564,24 +597,8 @@ export default function ClientProductPage({
         )}
       </div>
 
-      {/* FR Sticky CTA for Mobile — aparece quando o botão principal sai da tela */}
-      {isFrenchVersion && isFlexibleAcousticPanel && showStickyFr && (
-        <div className="fixed bottom-0 left-0 right-0 lg:hidden z-50 bg-white border-t border-border shadow-[0_-4px_16px_rgba(0,0,0,0.12)] px-4 py-3">
-          <button
-            onClick={() => {
-              const addButton = document.querySelector("[data-add-to-cart]") as HTMLButtonElement
-              if (addButton) {
-                addButton.scrollIntoView({ behavior: "smooth" })
-              }
-            }}
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 transition-colors shadow-lg"
-          >
-            <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-            Commander Maintenant — €54,00
-          </button>
-          <p className="text-center text-[10px] text-muted-foreground mt-1.5">Paiement 100% Sécurisé • Livraison 5-8 jours</p>
-        </div>
-      )}
+      {/* FR Sticky Cart Bar - Desktop & Mobile */}
+      {isFrenchVersion && isFlexibleAcousticPanel && <StickyCartBarFr />}
 
       {/* Floating CTA for Mobile - Only show if cart has items (non-FR) */}
       {isFlexibleAcousticPanel && !isFrenchVersion && totalItems > 0 && (

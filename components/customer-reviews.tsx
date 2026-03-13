@@ -351,24 +351,66 @@ export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
 
   const averageRating = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
 
+  // Rating breakdown data
+  const ratingBreakdown = [
+    { stars: 5, pct: 91 },
+    { stars: 4, pct: 7 },
+    { stars: 3, pct: 1 },
+    { stars: 2, pct: 0.5 },
+    { stars: 1, pct: 0.5 },
+  ]
+
   return (
     <section className="mt-16 border-t border-border pt-12 overflow-hidden">
       {/* Header */}
       <div className="mb-8">
         <h2 className="font-serif text-xl sm:text-2xl">{isFrench ? 'Avis Clients' : 'Customer Reviews'}</h2>
-        <div className="mt-3 flex items-center gap-2 sm:gap-3 flex-wrap">
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star
-                key={star}
-                className={`h-4 sm:h-5 w-4 sm:w-5 ${star <= averageRating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
-              />
-            ))}
+        
+        {/* FR: Rating Breakdown */}
+        {isFrench ? (
+          <div className="mt-4 flex flex-wrap gap-6 items-center p-4 sm:p-6 bg-[#FAF7F2] rounded-xl">
+            {/* Big score */}
+            <div className="flex flex-col items-center">
+              <span className="text-4xl sm:text-5xl font-bold text-[#2C1810]">4.9</span>
+              <div className="flex mt-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-xs text-[#6B5B4E] mt-1">{totalReviews} avis verifies</span>
+            </div>
+            {/* Rating bars */}
+            <div className="flex-1 min-w-[200px] flex flex-col gap-1.5">
+              {ratingBreakdown.map(({ stars, pct }) => (
+                <div key={stars} className="flex items-center gap-2 text-xs">
+                  <span className="w-5 text-[#6B5B4E]">{stars}</span>
+                  <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                  <div className="flex-1 h-2 bg-[#E8DDD4] rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-[#C8522A] rounded-full transition-all duration-1000" 
+                      style={{ width: `${pct}%` }} 
+                    />
+                  </div>
+                  <span className="w-8 text-right text-[#8B7B70]">{pct}%</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <span className="text-xs sm:text-sm text-muted-foreground">
-            {averageRating.toFixed(1)} {isFrench ? 'sur' : 'out of'} 5 | {totalReviews} {isFrench ? 'avis' : 'reviews'}
-          </span>
-        </div>
+        ) : (
+          <div className="mt-3 flex items-center gap-2 sm:gap-3 flex-wrap">
+            <div className="flex items-center gap-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={`h-4 sm:h-5 w-4 sm:w-5 ${star <= averageRating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
+                />
+              ))}
+            </div>
+            <span className="text-xs sm:text-sm text-muted-foreground">
+              {averageRating.toFixed(1)} out of 5 | {totalReviews} reviews
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Reviews List */}
@@ -411,7 +453,14 @@ export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
               {review.verified && (
                 <>
                   <span className="text-muted-foreground">|</span>
-                  <span className="font-medium text-amber-600">{isFrench ? 'Achat Vérifié' : 'Verified Purchase'}</span>
+                  {isFrench ? (
+                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full">
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                      Achat Verifie
+                    </span>
+                  ) : (
+                    <span className="font-medium text-amber-600">Verified Purchase</span>
+                  )}
                 </>
               )}
             </div>

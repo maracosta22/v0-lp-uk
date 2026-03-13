@@ -167,3 +167,85 @@ div {
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== FR Product Page Micro-Interactions ===== */
+
+/* Product images: subtle zoom on hover */
+.product-image-container {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.product-image-container img {
+  transition: transform 0.5s ease;
+}
+.product-image-container:hover img {
+  transform: scale(1.03);
+}
+
+/* Thumbnail images: highlight on hover */
+.thumbnail-image {
+  transition: opacity 0.2s, outline 0.2s;
+  cursor: pointer;
+}
+.thumbnail-image:hover {
+  opacity: 0.85;
+}
+.thumbnail-image.active {
+  outline: 2px solid oklch(0.55 0.12 45);
+  outline-offset: 2px;
+}
+
+/* Primary CTA buttons: subtle scale + shadow */
+.cta-button-primary {
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.cta-button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200, 82, 42, 0.3);
+}
+.cta-button-primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+/* Color swatches: scale + ring */
+.color-swatch {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+.color-swatch.selected {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px oklch(0.55 0.12 45);
+}
+
+/* Bundle option cards: highlight on hover */
+.bundle-option {
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.bundle-option:hover {
+  border-color: oklch(0.55 0.12 45);
+  box-shadow: 0 0 0 1px oklch(0.55 0.12 45);
+}
+.bundle-option.selected {
+  border-color: oklch(0.55 0.12 45);
+  background: #FFF8F4;
+}
+
+/* Scroll entrance animations */
+.animate-fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

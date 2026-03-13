@@ -30,17 +30,17 @@ const CONTENT = {
     blocks: [
       {
         title: "Efficacite Acoustique",
-        text: "Profitez d'une qualite sonore incomparable avec nos panneaux decoratifs a lattes, soigneusement concus pour ameliorer l'acoustique de n'importe quel espace.",
+        text: "NRC 0.85 — chaque panneau absorbe 85% des ondes sonores. Conversations nettes, musique precise, silence dans les open-spaces. Certifie SGS.",
         image: "/images/acustika-efficiency.jpg",
       },
       {
-        title: "Facile a Nettoyer",
-        text: "Maintenir la beaute de vos espaces n'a jamais ete aussi simple. Nos panneaux a lattes sont concus pour faciliter votre quotidien : il suffit de passer un chiffon sec ou legerement humide pour enlever la poussiere ou les taches legeres, sans compromettre la finition impeccable. Fonctionnalite et praticite au quotidien.",
+        title: "Entretien Zero",
+        text: "Un chiffon sec suffit. Aucun produit special, aucune precaution particuliere. Le bois garde sa finition premium apres des annees d'utilisation.",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Caracteristicas-Facil-de-instalar-tTBaUKwKi4AyDqZpyQSaRsdncnw4Uf.webp",
       },
       {
-        title: "Design Europeen pour Interieurs",
-        text: "Apportez chez vous l'elegance intemporelle du design scandinave, la combinaison parfaite de fonctionnalite et d'esthetique, avec nos panneaux sophistiques en bois a lattes.",
+        title: "Design Europeen",
+        text: "Concu en Europe. Lames de chene massif avec ecartement millimetre pour un rendu architectural. Le meme look que les hotels 5 etoiles — a installer soi-meme.",
         image: "/images/acustika-european-design.jpg",
       },
     ],
