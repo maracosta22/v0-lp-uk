@@ -30,11 +30,22 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-5 lg:gap-8">
           <div className="lg:col-span-2">
             <Link href="/" className="font-serif text-2xl font-medium tracking-[0.2em] text-foreground">
-              WOOD SHOP
+              Green Trees of Hope Foundation
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Premium wood slat panels and curated home decor. We believe in quality craftsmanship, sustainable
-              materials, and timeless design that elevates every space.
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              EIN: 41-5193815
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Director: Joseph Cristian Robinson
+            </p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              2900 Montclaire Dr NE<br />
+              Albuquerque, NM 87110
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <a href="tel:+15052551701" className="hover:text-foreground transition-colors">
+                (505) 255-1701
+              </a>
             </p>
             <div className="mt-6 flex gap-4">
               <a
@@ -118,7 +129,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-10 sm:flex-row">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} WOOD SHOP. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Green Trees of Hope Foundation. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">
               Privacy Policy
