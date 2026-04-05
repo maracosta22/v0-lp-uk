@@ -58,7 +58,7 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
 
         // 3) Fire Meta Pixel Purchase client-side (deduplicates with CAPI via event_id)
         const sessionValue = sessionData ? (sessionData.amount_total || 0) / 100 : 0
-        const sessionCurrency = (sessionData?.currency || "GBP").toUpperCase()
+        const sessionCurrency = (sessionData?.currency || "EUR").toUpperCase()
 
         if (typeof window !== "undefined" && window.fbq) {
           const pixelEventId = metaEventId || `purchase_${sessionId}`
@@ -211,9 +211,9 @@ export default function ThankYouClient({ sessionId }: { sessionId: string | null
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">Total Amount</p>
                 <p className="text-2xl font-bold">
-                  {(purchaseData.amount_total / 100).toLocaleString("en-GB", {
+                  {(purchaseData.amount_total / 100).toLocaleString("fr-FR", {
                     style: "currency",
-                    currency: purchaseData.currency?.toUpperCase() || "GBP",
+                    currency: purchaseData.currency?.toUpperCase() || "EUR",
                   })}
                 </p>
               </div>

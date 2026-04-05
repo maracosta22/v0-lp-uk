@@ -15,10 +15,10 @@ const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 
 export const metadata: Metadata = {
-  title: "WOOD SHOP | Premium Wood Slat Panels & Interior Design",
+  title: "WOOD SHOP | Panneaux Muraux en Bois Premium & Design Intérieur",
   description:
-    "Premium wood slat wall panels, acoustic solutions, and curated home decor. European craftsmanship for modern interiors.",
-  keywords: ["wood slat panels", "acoustic panels", "interior design", "home decor", "premium wall panels"],
+    "Panneaux muraux en bois premium, solutions acoustiques et décoration intérieure sélectionnée. Artisanat européen pour les intérieurs modernes.",
+  keywords: ["panneaux muraux bois", "panneaux acoustiques", "design intérieur", "décoration maison", "panneaux muraux premium"],
     generator: 'v0.app'
 }
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <meta name="facebook-domain-verification" content="doluxynzdjfzg90rzthp0243s680oy" />
 

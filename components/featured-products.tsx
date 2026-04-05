@@ -12,15 +12,15 @@ export function FeaturedProducts() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <span className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">Curated Selection</span>
-            <h2 className="font-serif text-3xl font-normal sm:text-4xl lg:text-5xl">Featured Collection</h2>
+            <span className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">Sélection</span>
+            <h2 className="font-serif text-3xl font-normal sm:text-4xl lg:text-5xl">Collection Vedette</h2>
             <p className="mt-5 max-w-xl text-muted-foreground">
-              Our most loved pieces, selected for their exceptional craftsmanship and design.
+              Nos pièces les plus appréciées, sélectionnées pour leur artisanat et design exceptionnels.
             </p>
           </div>
           <Button asChild variant="ghost" className="group text-sm font-medium uppercase tracking-wider">
             <Link href="/products">
-              View All
+              Voir Tout
               <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </Button>

@@ -2,7 +2,7 @@
  * Format price with proper decimal handling
  * Prevents floating point precision issues
  */
-export function formatPrice(price: number, currency: string = "GBP"): string {
+export function formatPrice(price: number, currency: string = "EUR"): string {
   // Ensure we're working with a valid number
   const validPrice = Number.isFinite(price) ? price : 0
   
@@ -10,8 +10,8 @@ export function formatPrice(price: number, currency: string = "GBP"): string {
   const roundedPrice = Math.round(validPrice * 100) / 100
   
   // Format based on currency
-  let currencySymbol = "£"
-  if (currency === "EUR") currencySymbol = "€"
+  let currencySymbol = "€"
+  if (currency === "GBP") currencySymbol = "£"
   else if (currency === "BRL") currencySymbol = "R$"
   
   return `${currencySymbol}${roundedPrice.toFixed(2)}`

@@ -27,9 +27,7 @@ export function PeopleViewing({ isFrench = false }: PeopleViewingProps) {
       <Eye className="h-4 w-4 text-accent" />
       <span>
         <span className="font-medium text-foreground">{viewers}</span>{" "}
-        {isFrench
-          ? "personnes visualisent ce produit en ce moment"
-          : "people are viewing this product right now"}
+        personnes visualisent ce produit en ce moment
       </span>
     </div>
   )

@@ -37,7 +37,7 @@ export function trackViewContent(params: {
       content_name: params.contentName,
       content_type: params.contentType || "product",
       value: params.value,
-      currency: params.currency || "GBP",
+      currency: params.currency || "EUR",
     }, { eventID: eventId })
   }
 
@@ -68,7 +68,7 @@ export function trackAddToCart(params: {
       content_name: params.contentName,
       content_type: "product",
       value: params.value,
-      currency: params.currency || "GBP",
+      currency: params.currency || "EUR",
     }, { eventID: eventId })
   }
 
@@ -90,7 +90,7 @@ export function trackInitiateCheckout(params: {
       content_ids: params.contentIds,
       num_items: params.numItems,
       value: params.value,
-      currency: params.currency || "GBP",
+      currency: params.currency || "EUR",
     }, { eventID: eventId })
   }
 
@@ -114,7 +114,7 @@ export function trackPurchase(params: {
       contents: params.contents,
       content_type: "product",
       value: params.value,
-      currency: params.currency || "GBP",
+      currency: params.currency || "EUR",
       order_id: params.orderId,
     }, { eventID: eventId })
   }

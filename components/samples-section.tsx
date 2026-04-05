@@ -39,7 +39,7 @@ const SAMPLES = [
 ]
 
 const PRICE = { en: 5, fr: 5 }
-const CURRENCY = { en: "£", fr: "€" }
+const CURRENCY = { en: "€", fr: "€" }
 
 const LABELS = {
   en: {
@@ -106,7 +106,7 @@ export function SamplesSection({ isFrenchVersion = false }: SamplesSectionProps)
         description: sample.name[lang],
         longDescription: "",
         price: price,
-        currency: isFrenchVersion ? "EUR" : "GBP",
+        currency: "EUR",
         category: "samples",
         images: [sample.image],
         features: [],

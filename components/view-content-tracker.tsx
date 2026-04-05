@@ -22,7 +22,7 @@ export function ViewContentTracker({ product }: ViewContentTrackerProps) {
       contentName: product.name,
       contentType: "product",
       value: price,
-      currency: "GBP",
+      currency: "EUR",
       eventId,
     })
 
@@ -40,7 +40,7 @@ export function ViewContentTracker({ product }: ViewContentTrackerProps) {
         }
       ],
       value: price,
-      currency: 'GBP',
+      currency: 'EUR',
       description: product.description,
     })
 
@@ -60,7 +60,7 @@ export function ViewContentTracker({ product }: ViewContentTrackerProps) {
           content_name: product.name,
           content_type: "product",
           value: price,
-          currency: "GBP",
+          currency: "EUR",
           ...utms,
         },
         fbp,

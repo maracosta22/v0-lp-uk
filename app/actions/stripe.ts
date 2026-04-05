@@ -349,7 +349,7 @@ export async function getCheckoutSession(sessionId: string) {
     status: session.status,
     customerEmail: session.customer_details?.email,
     amountTotal: session.amount_total ? session.amount_total / 100 : 0,
-    currency: session.currency?.toUpperCase() || "GBP",
+    currency: session.currency?.toUpperCase() || "EUR",
     lineItems:
       session.line_items?.data.map((item) => ({
         name:

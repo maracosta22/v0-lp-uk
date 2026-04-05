@@ -170,7 +170,7 @@ export default function ClientProductPage({
                   product.onSale ? "bg-accent text-accent-foreground" : "bg-foreground text-background"
                 }`}
               >
-                {product.onSale ? `${isFrenchVersion ? "Offre de Lancement" : "Launch Offer"}` : product.badge}
+                {product.onSale ? "Offre de Lancement" : product.badge}
               </span>
             )}
 
@@ -191,8 +191,8 @@ export default function ClientProductPage({
                   <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(1080)</span>
                 </div>
                 <p className="text-sm">
-                  <span className="font-semibold">{isFrenchVersion ? "4500+ achetes" : "4500+ bought"}</span>{" "}
-                  <span className="text-muted-foreground">{isFrenchVersion ? "le mois dernier" : "in past month"}</span>
+                  <span className="font-semibold">4500+ achetés</span>{" "}
+                  <span className="text-muted-foreground">le mois dernier</span>
                 </p>
               </div>
             )}
@@ -200,38 +200,33 @@ export default function ClientProductPage({
             {product.onSale && product.originalPrice ? (
               <div className="mt-4">
                 <span className="inline-block px-2.5 py-1 text-xs font-medium bg-red-600 text-white rounded-sm mb-3">
-                  {isFrenchVersion ? "Offre limitee" : "Limited time deal"}
+                  Offre limitée
                 </span>
                 <div className="flex items-baseline gap-2 flex-wrap">
                   <span className="text-xl sm:text-2xl font-medium text-red-600">-{discountPercent}%</span>
-                  <span className="text-2xl sm:text-3xl font-medium text-foreground">{isFrenchVersion ? "€" : "£"}{Math.floor(product.price)}</span>
+                  <span className="text-2xl sm:text-3xl font-medium text-foreground">€{Math.floor(product.price)}</span>
                   <span className="text-sm align-top relative -top-2">
                     {((product.price % 1) * 100).toFixed(0).padStart(2, "0")}
                   </span>
                   {isFlexibleAcousticPanel && (
-                    <span className="text-sm sm:text-base text-muted-foreground ml-1">/ {isFrenchVersion ? "piece" : "piece"}</span>
+                    <span className="text-sm sm:text-base text-muted-foreground ml-1">/ pièce</span>
                   )}
                 </div>
                 <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                  <span className="text-sm text-muted-foreground">{isFrenchVersion ? "Prix habituel:" : "Typical price:"}</span>
+                  <span className="text-sm text-muted-foreground">Prix habituel:</span>
                   <span className="text-sm text-muted-foreground line-through">
-                    {isFrenchVersion ? "€" : "£"}{product.originalPrice.toFixed(2)}
+                    €{product.originalPrice.toFixed(2)}
                   </span>
-                  {!isFrenchVersion && (
-                    <span className="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
-                      -60%
-                    </span>
-                  )}
                   <Info className="h-3.5 w-3.5 text-muted-foreground cursor-pointer flex-shrink-0" />
                 </div>
                 {isFlexibleAcousticPanel && (
-                  <p className="text-xs text-muted-foreground mt-2">{isFrenchVersion ? "Offre de lancement limitée — Seulement quelques panneaux disponibles" : "Limited batch / Introductory offer — Only a few batches available"}</p>
+                  <p className="text-xs text-muted-foreground mt-2">Offre de lancement limitée — Seulement quelques panneaux disponibles</p>
                 )}
                 {isFlexibleAcousticPanel && <PeopleViewing isFrench={isFrenchVersion} />}
               </div>
             ) : (
               <div className="mt-4">
-                <p className="font-serif text-2xl">{isFrenchVersion ? "€" : "£"}{product.price}</p>
+                <p className="font-serif text-2xl">€{product.price}</p>
               </div>
             )}
 
@@ -242,19 +237,17 @@ export default function ClientProductPage({
                 {/* Clear Hero Promise */}
                 <div className="bg-secondary/50 border border-border/50 rounded-lg p-4">
                   <p className="text-lg sm:text-xl font-serif font-medium text-foreground leading-snug text-center">
-                    {isFrenchVersion 
-                      ? "Transformez Votre Mur en Minutes — Sans Outils, Sans Salissure" 
-                      : "Transform Your Wall in Minutes — No Tools, No Mess"}
+                    Transformez Votre Mur en Minutes — Sans Outils, Sans Salissure
                   </p>
                   <div className="flex justify-center gap-3 mt-3 flex-wrap">
                     <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-accent">
-                      <Check className="h-3.5 w-3.5" /> {isFrenchVersion ? "Flexible" : "Flexible"}
+                      <Check className="h-3.5 w-3.5" /> Flexible
                     </span>
                     <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-accent">
-                      <Check className="h-3.5 w-3.5" /> {isFrenchVersion ? "Acoustique" : "Acoustic"}
+                      <Check className="h-3.5 w-3.5" /> Acoustique
                     </span>
                     <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-accent">
-                      <Check className="h-3.5 w-3.5" /> {isFrenchVersion ? "Auto-Adhesif" : "Peel & Stick"}
+                      <Check className="h-3.5 w-3.5" /> Auto-Adhésif
                     </span>
                   </div>
                 </div>
@@ -262,67 +255,65 @@ export default function ClientProductPage({
                 {/* How It Works - 3 Steps */}
                 <div className="bg-accent/5 border border-accent/20 rounded-lg p-4">
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-center mb-4">
-                    {isFrenchVersion ? "Comment Ca Marche" : "How It Works"}
+                    Comment Ça Marche
                   </h3>
                   <div className="grid grid-cols-3 gap-3">
                     <div className="flex flex-col items-center text-center">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">1</span>
                       </div>
-                      <p className="text-xs font-medium">{isFrenchVersion ? "Decollez l'adhesif" : "Peel the adhesive"}</p>
+                      <p className="text-xs font-medium">Décollez l&apos;adhésif</p>
                     </div>
                     <div className="flex flex-col items-center text-center">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">2</span>
                       </div>
-                      <p className="text-xs font-medium">{isFrenchVersion ? "Placez & appuyez" : "Place & press"}</p>
+                      <p className="text-xs font-medium">Placez & appuyez</p>
                     </div>
                     <div className="flex flex-col items-center text-center">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">3</span>
                       </div>
-                      <p className="text-xs font-medium">{isFrenchVersion ? "Profitez!" : "Enjoy!"}</p>
+                      <p className="text-xs font-medium">Profitez!</p>
                     </div>
                   </div>
                 </div>
 
                 <p className="leading-relaxed text-muted-foreground text-sm sm:text-base">
-                  {isFrenchVersion 
-                    ? "Le panneau acoustique flexible qui sublime votre espace, reduit l'echo et offre un look architectural moderne — sans renovation."
-                    : "The flexible acoustic panel that upgrades your space, reduces echo and delivers a modern architectural look — without renovation."}
+                  Le panneau acoustique flexible qui sublime votre espace, réduit l&apos;écho et offre un look architectural moderne — sans rénovation.
                 </p>
                 
                 <ul className="space-y-2.5 pt-2">
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Flexible" : "Flexible"}</strong> — {isFrenchVersion ? "Se plie aux courbes et piliers" : "Bends to curves and pillars"}</span>
+                    <span><strong>Flexible</strong> — Se plie aux courbes et piliers</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Installation facile" : "Easy Install"}</strong> — {isFrenchVersion ? "Auto-adhesif, sans outils" : "Peel & stick, no tools needed"}</span>
+                    <span><strong>Installation facile</strong> — Auto-adhésif, sans outils</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Sans salissure" : "No Mess"}</strong> — {isFrenchVersion ? "Pas de peinture, pas de poussiere" : "No paint, no dust, no hassle"}</span>
+                    <span><strong>Sans salissure</strong> — Pas de peinture, pas de poussière</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Acoustique" : "Acoustic"}</strong> — {isFrenchVersion ? "Reduit l'echo et ameliore le confort sonore" : "Reduces echo and improves sound comfort"}</span>
+                    <span><strong>Acoustique</strong> — Réduit l&apos;écho et améliore le confort sonore</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>{isFrenchVersion ? "Look Premium" : "Premium Look"}</strong> — {isFrenchVersion ? "Esthetique bois haut de gamme" : "High-end wood aesthetic"}</span>
+                    <span><strong>Look Premium</strong> — Esthétique bois haut de gamme</span>
                   </li>
                 </ul>
                 <div className="pt-2 space-y-1.5 text-sm text-muted-foreground">
                   <p>
-                    <span className="font-medium text-foreground">{isFrenchVersion ? "Taille:" : "Size:"}</span> 270 × 110 cm — {isFrenchVersion ? "couvre jusqu'a 3m²" : "covers up to 3m²"}
+                    <span className="font-medium text-foreground">Taille:</span> 270 × 110 cm — couvre jusqu&apos;à 3m²
                   </p>
                   <p className="text-xs italic">
-                    {isFrenchVersion ? "Parfait pour les murs TV, les murs de caracteristique et les zones d'accent." : "Ideal for TV walls, feature walls and accent areas."}
+                    Parfait pour les murs TV, les murs de caractéristique et les zones d&apos;accent.
                   </p>
                   <p className="break-words">
-                    <span className="font-medium text-foreground">{isFrenchVersion ? "Couleurs disponibles:" : "Available colors:"}</span> {isFrenchVersion ? "Chene Naturel, Chene Fume, Noyer, Chene Gris" : "Natural Oak, Smoked Oak, Walnut, Grey Oak"}
+                    <span className="font-medium text-foreground">Couleurs disponibles:</span> Chêne Naturel, Chêne Fumé, Noyer, Chêne Gris
                   </p>
                 </div>
 
@@ -330,23 +321,23 @@ export default function ClientProductPage({
                 <div className="mt-8 grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
                     <h4 className="font-semibold text-sm sm:text-base">NRC 0.80</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Excellent Sound Absorption</p>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Excellente absorption sonore</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">E1 Certified</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Low Formaldehyde Emission</p>
+                    <h4 className="font-semibold text-sm sm:text-base">Certifié E1</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Faible émission de formaldéhyde</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">Easy Install</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">DIY Friendly Setup</p>
+                    <h4 className="font-semibold text-sm sm:text-base">Facile à installer</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Installation DIY</p>
                   </div>
                   <div className="rounded-lg bg-secondary/50 p-3 sm:p-4 text-center">
-                    <h4 className="font-semibold text-sm sm:text-base">6 Colors</h4>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Match Any Interior</p>
+                    <h4 className="font-semibold text-sm sm:text-base">6 Couleurs</h4>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground">S&apos;adapte à tout intérieur</p>
                   </div>
                 </div>
 
-                <p className="pt-6 text-sm font-semibold text-accent">{isFrenchVersion ? "Sublimez votre espace aujourd'hui." : "Upgrade your space today."}</p>
+                <p className="pt-6 text-sm font-semibold text-accent">Sublimez votre espace aujourd&apos;hui.</p>
               </div>
             ) : (
               <p className="mt-6 leading-relaxed text-muted-foreground break-words">{product.longDescription}</p>
@@ -358,13 +349,11 @@ export default function ClientProductPage({
 
             {/* Add to Cart */}
             <div className="mt-8 flex flex-col gap-3">
-              {isFrenchVersion && <CountdownTimerFr />}
-              <AddToCartButton product={product} isFrenchVersion={isFrenchVersion} />
-              {isFrenchVersion && (
-                <p className="text-center text-xs text-muted-foreground">
-                  Expédition sous 24-48h • Livraison estimée 5 à 8 jours ouvrables
-                </p>
-              )}
+              <CountdownTimerFr />
+              <AddToCartButton product={product} isFrenchVersion={true} />
+              <p className="text-center text-xs text-muted-foreground">
+                Expédition sous 24-48h • Livraison estimée 5 à 8 jours ouvrables
+              </p>
             </div>
 
             {/* Trust Badges */}
@@ -372,24 +361,24 @@ export default function ClientProductPage({
               <div className="flex flex-col items-center text-center">
                 <Truck className="h-5 w-5 text-muted-foreground" />
                 <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">
-                  {isFrenchVersion ? "Livraison gratuite" : "Free Shipping"}
-                  <br className="sm:hidden" /> {isFrenchVersion ? "des 80€" : "Over £80"}
+                  Livraison gratuite
+                  <br className="sm:hidden" /> dès 80€
                 </span>
               </div>
               <div className="flex flex-col items-center text-center">
                 <RotateCcw className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">{isFrenchVersion ? "Retours sous 30 jours" : "30-Day Returns"}</span>
+                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Retours sous 30 jours</span>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Shield className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">{isFrenchVersion ? "Garantie 5 ans" : "5-Year Warranty"}</span>
+                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Garantie 5 ans</span>
               </div>
             </div>
 
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
-                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">{isFrenchVersion ? "Frequemment achetes ensemble" : "Frequently Bought Together"}</h2>
+                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">Fréquemment achetés ensemble</h2>
                 <div className="flex flex-col gap-4">
                   {/* Products */}
                   <div className="flex flex-wrap items-center gap-3">
@@ -411,7 +400,7 @@ export default function ClientProductPage({
                             <h3 className="text-[10px] sm:text-xs font-medium leading-tight line-clamp-2">
                               {bundleProduct.name}
                             </h3>
-                            <p className="text-[10px] sm:text-xs font-semibold mt-0.5">{isFrenchVersion ? "€" : "£"}{bundleProduct.price}</p>
+                            <p className="text-[10px] sm:text-xs font-semibold mt-0.5">€{bundleProduct.price}</p>
                           </div>
                         </div>
                         {index < frequentlyBoughtTogether.length - 1 && (
@@ -424,15 +413,15 @@ export default function ClientProductPage({
                   {/* Price & Button */}
                   <div className="flex items-center justify-between gap-3 pt-3 border-t border-border">
                     <div>
-                      <p className="text-xs text-muted-foreground">{isFrenchVersion ? "Prix total:" : "Total price:"}</p>
-                      <p className="text-lg font-semibold">{isFrenchVersion ? "€" : "£"}{frequentlyBoughtTotal.toFixed(2)}</p>
+                      <p className="text-xs text-muted-foreground">Prix total:</p>
+                      <p className="text-lg font-semibold">€{frequentlyBoughtTotal.toFixed(2)}</p>
                     </div>
                     <button
                       type="button"
                       className="px-4 py-2 text-sm font-medium bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors whitespace-nowrap"
                       onClick={handleAddBothToCart}
                     >
-                      {isFrenchVersion ? "Ajouter au panier" : "Add Both to Cart"}
+                      Ajouter au panier
                     </button>
                   </div>
                 </div>
@@ -440,12 +429,12 @@ export default function ClientProductPage({
             )}
 
             {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
-            {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={isFrenchVersion} />}
+            {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={true} />}
 
-            {/* You Might Also Like - Hide for French version */}
-            {orderBumpProducts.length > 0 && !isFrenchVersion && (
+            {/* You Might Also Like */}
+            {orderBumpProducts.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
-                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">You Might Also Like</h2>
+                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">Vous pourriez aussi aimer</h2>
                 <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide -mx-3 px-3">
                   {orderBumpProducts.map((bumpProduct) => (
                     <div
@@ -474,7 +463,7 @@ export default function ClientProductPage({
                             {bumpProduct.name}
                           </h3>
                         </Link>
-                        <p className="text-xs font-semibold mt-1">{isFrenchVersion ? "€" : "£"}{bumpProduct.price}</p>
+                        <p className="text-xs font-semibold mt-1">€{bumpProduct.price}</p>
                         <div className="mt-auto pt-2">
                           <AddToCartButton product={bumpProduct} variant="icon" className="w-full h-7 text-xs" />
                         </div>
@@ -523,7 +512,7 @@ export default function ClientProductPage({
             {product.id === "prod_led_strip" && <LedStripCarousel />}
 
             {/* Samples Section - Only for Flexible Acoustic Panel */}
-            {isFlexibleAcousticPanel && <SamplesSection isFrenchVersion={isFrenchVersion} />}
+            {isFlexibleAcousticPanel && <SamplesSection isFrenchVersion={true} />}
           </div>
         </div>
 
@@ -531,15 +520,15 @@ export default function ClientProductPage({
         {isFlexibleAcousticPanel && <ProductDescriptionSection />}
 
   {/* Customer Reviews Section */}
-  {isFlexibleAcousticPanel && <CustomerReviews isFrench={isFrenchVersion} />}
+  {isFlexibleAcousticPanel && <CustomerReviews isFrench={true} />}
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
 
-        {/* Related Products - Hide for French version */}
-        {relatedProducts.length > 0 && !isFrenchVersion && (
+        {/* Related Products */}
+        {relatedProducts.length > 0 && (
           <section className="mt-16 sm:mt-24">
-            <h2 className="mb-6 sm:mb-8 font-serif text-xl sm:text-2xl">You May Also Like</h2>
+            <h2 className="mb-6 sm:mb-8 font-serif text-xl sm:text-2xl">Vous pourriez aussi aimer</h2>
             <div className="grid gap-4 sm:gap-8 grid-cols-2 lg:grid-cols-4">
               {relatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct.id} product={relatedProduct} />
@@ -551,9 +540,9 @@ export default function ClientProductPage({
         {/* Decor & Lighting cross-sell section */}
         {decorAndLightingProducts.length > 0 && (
           <section className="mt-12 sm:mt-16">
-            <h2 className="mb-4 sm:mb-8 font-serif text-xl sm:text-2xl">Complete Your Space</h2>
+            <h2 className="mb-4 sm:mb-8 font-serif text-xl sm:text-2xl">Complétez Votre Espace</h2>
             <p className="mb-6 sm:mb-8 text-sm sm:text-base text-muted-foreground">
-              Explore our curated selection of decor and lighting to complement your panels.
+              Explorez notre sélection de décoration et d&apos;éclairage pour compléter vos panneaux.
             </p>
             <div className="grid gap-4 sm:gap-8 grid-cols-2 lg:grid-cols-4">
               {decorAndLightingProducts.map((crossProduct) => (
@@ -565,7 +554,7 @@ export default function ClientProductPage({
       </div>
 
       {/* FR Sticky CTA for Mobile — aparece quando o botão principal sai da tela */}
-      {isFrenchVersion && isFlexibleAcousticPanel && showStickyFr && (
+      {isFlexibleAcousticPanel && showStickyFr && (
         <div className="fixed bottom-0 left-0 right-0 lg:hidden z-50 bg-white border-t border-border shadow-[0_-4px_16px_rgba(0,0,0,0.12)] px-4 py-3">
           <button
             onClick={() => {
@@ -583,29 +572,7 @@ export default function ClientProductPage({
         </div>
       )}
 
-      {/* Floating CTA for Mobile - Only show if cart has items (non-FR) */}
-      {isFlexibleAcousticPanel && !isFrenchVersion && totalItems > 0 && (
-        <div
-          className="fixed bottom-6 left-4 right-4 lg:hidden z-40 transition-all duration-300"
-          style={{
-            opacity,
-            pointerEvents: isVisible ? 'auto' : 'none',
-          }}
-        >
-          <button
-            onClick={() => {
-              const addButton = document.querySelector('[data-add-to-cart]') as HTMLButtonElement
-              if (addButton) {
-                addButton.scrollIntoView({ behavior: 'smooth' })
-                addButton.click()
-              }
-            }}
-            className="w-full bg-accent text-accent-foreground py-3 px-4 rounded-lg font-medium text-sm hover:bg-accent/90 transition-colors shadow-lg"
-          >
-            Start with one panel
-          </button>
-        </div>
-      )}
+
     </div>
   )
 }
