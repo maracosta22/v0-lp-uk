@@ -16,7 +16,7 @@ interface ProductCardProps {
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCart()
 
-  const isFlexibleAcousticPanel = product.id === "prod_U2rtV5Q5yVJ2XV"
+  const isFlexibleAcousticPanel = product.id === "prod_U2rumuoWXebtgj"
   const isExternalImage = product.images[0]?.startsWith("http")
 
   return (
@@ -39,13 +39,13 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 product.onSale ? "bg-accent text-accent-foreground" : "bg-foreground text-background"
               }`}
             >
-              {product.onSale ? "Launch Offer" : product.badge}
+              {product.onSale ? "Offre Lancement" : product.badge}
             </span>
           )}
           {isFlexibleAcousticPanel && (
             <span className="absolute right-3 top-3 flex items-center gap-1.5 bg-accent px-2.5 py-1.5 text-[10px] font-medium uppercase tracking-wider text-accent-foreground">
               <Flame className="h-3 w-3" />
-              Only 30 left!
+              Plus que 30 !
             </span>
           )}
         </div>
@@ -59,7 +59,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           <div className="flex items-center gap-2 pt-1">
             <p className={`font-serif text-lg tracking-tight ${product.onSale ? "text-accent" : ""}`}>
               {formatPrice(product.price, product.currency)}
-              {isFlexibleAcousticPanel && <span className="ml-1 font-sans text-xs text-muted-foreground">/ piece</span>}
+              {isFlexibleAcousticPanel && <span className="ml-1 font-sans text-xs text-muted-foreground">/ pièce</span>}
             </p>
             {product.onSale && product.originalPrice && (
               <p className="font-serif text-sm text-muted-foreground line-through">{formatPrice(product.originalPrice, product.currency)}</p>
@@ -71,7 +71,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           size="icon"
           className="shrink-0 border-border/50 bg-transparent transition-all duration-200 hover:border-foreground/30 hover:bg-foreground/5"
           onClick={() => addItem(product)}
-          aria-label={`Add ${product.name} to cart`}
+          aria-label={`Ajouter ${product.name} au panier`}
         >
           <ShoppingBag className="h-4 w-4" />
         </Button>

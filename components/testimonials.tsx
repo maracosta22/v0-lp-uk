@@ -3,21 +3,21 @@ import { Star } from "lucide-react"
 const testimonials = [
   {
     name: "Sophie M.",
-    location: "Berlin, Germany",
+    location: "Paris, France",
     rating: 5,
-    text: "The oak panels transformed our living room completely. The quality is exceptional and the installation was surprisingly straightforward.",
+    text: "Les panneaux en chêne ont complètement transformé notre salon. La qualité est exceptionnelle et l'installation était étonnamment simple.",
   },
   {
-    name: "Marcus L.",
-    location: "Amsterdam, Netherlands",
+    name: "Marc L.",
+    location: "Lyon, France",
     rating: 5,
-    text: "Beautiful craftsmanship. I ordered the acoustic panels for my home studio and the sound difference is remarkable. Plus they look stunning.",
+    text: "Artisanat magnifique. J'ai commandé les panneaux acoustiques pour mon studio et la différence sonore est remarquable. En plus, ils sont superbes.",
   },
   {
     name: "Emma K.",
-    location: "Stockholm, Sweden",
+    location: "Bordeaux, France",
     rating: 5,
-    text: "WOOD SHOP has become my go-to for home decor. Every piece I've purchased feels thoughtfully designed and built to last.",
+    text: "WOOD SHOP est devenu ma référence pour la décoration intérieure. Chaque pièce que j'ai achetée semble soigneusement conçue et faite pour durer.",
   },
 ]
 
@@ -26,10 +26,10 @@ export function Testimonials() {
     <section className="bg-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">Testimonials</span>
-          <h2 className="font-serif text-3xl font-normal sm:text-4xl lg:text-5xl">What Our Customers Say</h2>
+          <span className="mb-4 inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">Témoignages</span>
+          <h2 className="font-serif text-3xl font-normal sm:text-4xl lg:text-5xl">Ce Que Disent Nos Clients</h2>
           <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
-            Join thousands of happy customers who have transformed their homes with WOOD SHOP.
+            Rejoignez des milliers de clients satisfaits qui ont transformé leur intérieur avec WOOD SHOP.
           </p>
         </div>
 

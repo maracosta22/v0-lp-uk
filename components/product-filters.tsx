@@ -31,7 +31,7 @@ export function ProductFilters() {
           !currentCategory && "bg-foreground text-background hover:bg-foreground/90 hover:text-background",
         )}
       >
-        All
+        Tout
       </Button>
       {categories.map((category) => (
         <Button

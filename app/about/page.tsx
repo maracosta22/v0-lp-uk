@@ -5,36 +5,36 @@ import { Button } from "@/components/ui/button"
 
 const values = [
   {
-    title: "Craftsmanship",
+    title: "Artisanat",
     description:
-      "Every piece in our collection is crafted with meticulous attention to detail, using time-honored techniques passed down through generations.",
+      "Chaque pièce de notre collection est fabriquée avec une attention méticuleuse aux détails, utilisant des techniques ancestrales transmises de génération en génération.",
   },
   {
-    title: "Sustainability",
+    title: "Durabilité",
     description:
-      "We source materials responsibly, partner with FSC-certified suppliers, and design products that stand the test of time—reducing waste through longevity.",
+      "Nous approvisionnons nos matériaux de manière responsable, travaillons avec des fournisseurs certifiés FSC et concevons des produits qui résistent à l'épreuve du temps — réduisant les déchets par la longévité.",
   },
   {
-    title: "Timeless Design",
+    title: "Design Intemporel",
     description:
-      "We believe in design that transcends trends. Our pieces are created to become cherished elements of your home for years to come.",
+      "Nous croyons en un design qui transcende les tendances. Nos pièces sont créées pour devenir des éléments chéris de votre intérieur pour les années à venir.",
   },
 ]
 
 const team = [
   {
     name: "Lena Bergström",
-    role: "Founder & Creative Director",
+    role: "Fondatrice & Directrice Créative",
     image: "/professional-scandinavian-blonde-woman-founder-por.jpg",
   },
   {
     name: "Anders Nilsson",
-    role: "Head of Production",
+    role: "Responsable Production",
     image: "/professional-scandinavian-man-production-manager-p.jpg",
   },
   {
     name: "Sofia Lindqvist",
-    role: "Lead Designer",
+    role: "Designer Principal",
     image: "/professional-scandinavian-brunette-woman-designer-.jpg",
   },
 ]
@@ -47,11 +47,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl text-balance">
-              Design That Lives With You
+              Un Design Qui Vit Avec Vous
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              WOOD SHOP was founded in Copenhagen in 2019 with a simple mission: to bring the warmth and authenticity of
-              premium wood craftsmanship into modern homes across Europe.
+              WOOD SHOP a été fondé à Copenhague en 2019 avec une mission simple : apporter la chaleur et l&apos;authenticité de l&apos;artisanat du bois premium dans les maisons modernes à travers l&apos;Europe.
             </p>
           </div>
         </div>
@@ -64,7 +63,7 @@ export default function AboutPage() {
             <div className="aspect-[4/5] overflow-hidden">
               <Image
                 src="/woodworking-workshop-craftsman-working-on-wood-sla.jpg"
-                alt="WOOD SHOP workshop with craftsman working on wood panels"
+                alt="Atelier WOOD SHOP avec artisan travaillant sur des panneaux en bois"
                 width={600}
                 height={750}
                 className="w-full h-full object-cover"
@@ -72,22 +71,17 @@ export default function AboutPage() {
               />
             </div>
             <div>
-              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Our Story</span>
-              <h2 className="mt-4 font-serif text-3xl sm:text-4xl">Born from a Love of Natural Materials</h2>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Notre Histoire</span>
+              <h2 className="mt-4 font-serif text-3xl sm:text-4xl">Née d&apos;un Amour des Matériaux Naturels</h2>
               <div className="mt-6 space-y-4 text-muted-foreground">
                 <p>
-                  Our founder, Lena Bergström, grew up surrounded by the forests of Sweden. Her grandfather was a
-                  carpenter who taught her that wood has a soul—each grain tells a story, each knot holds character.
+                  Notre fondatrice, Lena Bergström, a grandi entourée des forêts de Suède. Son grand-père était menuisier et lui a appris que le bois a une âme — chaque grain raconte une histoire, chaque nœud porte un caractère.
                 </p>
                 <p>
-                  After years working in industrial furniture production, Lena felt disconnected from the materials she
-                  loved. In 2019, she returned to her roots, partnering with small workshops across Scandinavia to
-                  create a collection that honors traditional craftsmanship while meeting the needs of contemporary
-                  living.
+                  Après des années de travail dans la production de meubles industriels, Lena s&apos;est sentie déconnectée des matériaux qu&apos;elle aimait. En 2019, elle est revenue à ses racines, s&apos;associant à de petits ateliers à travers la Scandinavie pour créer une collection qui honore l&apos;artisanat traditionnel tout en répondant aux besoins de la vie contemporaine.
                 </p>
                 <p>
-                  Today, WOOD SHOP works with over 20 artisan workshops, from the oak forests of Denmark to the ceramics
-                  studios of Portugal. Every product we offer has been touched by human hands.
+                  Aujourd&apos;hui, WOOD SHOP travaille avec plus de 20 ateliers artisanaux, des forêts de chêne du Danemark aux studios de céramique du Portugal. Chaque produit que nous proposons a été touché par des mains humaines.
                 </p>
               </div>
             </div>
@@ -99,9 +93,9 @@ export default function AboutPage() {
       <section id="sustainability" className="bg-secondary py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl">What We Stand For</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl">Ce Que Nous Défendons</h2>
             <p className="mt-4 text-muted-foreground">
-              Our values guide every decision, from the materials we source to the partners we work with.
+              Nos valeurs guident chaque décision, des matériaux que nous approvisionnons aux partenaires avec lesquels nous travaillons.
             </p>
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -119,10 +113,9 @@ export default function AboutPage() {
       <section id="careers" className="py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl">The People Behind WOOD SHOP</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl">Les Personnes Derrière WOOD SHOP</h2>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              A passionate team of designers, craftspeople, and dreamers dedicated to bringing beautiful design into
-              your home.
+              Une équipe passionnée de designers, artisans et rêveurs dédiés à apporter un beau design dans votre maison.
             </p>
           </div>
           <div className="grid gap-8 sm:grid-cols-3">
@@ -150,14 +143,13 @@ export default function AboutPage() {
       <section className="border-t border-border py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-serif text-3xl sm:text-4xl">Ready to Transform Your Space?</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl">Prêt à Transformer Votre Espace ?</h2>
             <p className="mt-4 text-muted-foreground">
-              Explore our collection of premium wood slat panels and curated home decor for the perfect addition to your
-              home.
+              Explorez notre collection de panneaux muraux en bois premium et de décoration intérieure sélectionnée pour l&apos;ajout parfait à votre maison.
             </p>
             <Button asChild size="lg" className="mt-8">
               <Link href="/products">
-                Shop the Collection
+                Voir la Collection
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

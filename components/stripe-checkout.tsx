@@ -46,7 +46,7 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
     const tiktokItems = formatCartForTikTok(items)
 
     // Detect currency from items
-    const currency = items[0]?.product?.currency || 'GBP'
+    const currency = items[0]?.product?.currency || 'EUR'
 
     // Store purchase data for later (when user completes purchase)
     storePurchaseData({
@@ -93,7 +93,7 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
       await trackAddPaymentInfo({
         contents: tiktokItems,
         value: totalValue,
-        currency: 'GBP',
+        currency: 'EUR',
       })
     } catch (error) {
       console.error('[v0] Error tracking AddPaymentInfo:', error)
@@ -108,7 +108,7 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
     return (
       <div className="w-full space-y-3">
         <p className="text-xs text-muted-foreground text-center">
-          Supported payment methods: Card, Apple Pay, Google Pay
+          Méthodes de paiement acceptées : Carte, Apple Pay, Google Pay
         </p>
         <EmbeddedCheckoutProvider stripe={stripePromise} options={{ fetchClientSecret }}>
           <EmbeddedCheckout />
@@ -127,10 +127,10 @@ export function StripeCheckout({ items, onInitiateCheckout }: StripeCheckoutProp
       {loading ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Loading...
+          Chargement...
         </>
       ) : (
-        "Proceed to Checkout"
+        "Procéder au Paiement"
       )}
     </Button>
   )

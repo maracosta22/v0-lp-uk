@@ -18,9 +18,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="font-serif text-4xl sm:text-5xl">Our Collection</h1>
+          <h1 className="font-serif text-4xl sm:text-5xl">Notre Collection</h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            Discover our curated selection of Scandinavian-inspired home decor, crafted with care and built to last.
+            Découvrez notre sélection de décoration d&apos;inspiration scandinave, fabriquée avec soin et conçue pour durer.
           </p>
         </div>
 
@@ -40,14 +40,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           </div>
         ) : (
           <div className="py-24 text-center">
-            <p className="text-muted-foreground">No products found in this category.</p>
+            <p className="text-muted-foreground">Aucun produit trouvé dans cette catégorie.</p>
           </div>
         )}
 
         {/* Results count */}
         <div className="mt-12 border-t border-border pt-8">
           <p className="text-sm text-muted-foreground">
-            Showing {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
+            Affichage de {filteredProducts.length} {filteredProducts.length === 1 ? "produit" : "produits"}
           </p>
         </div>
       </div>
