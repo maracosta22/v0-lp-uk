@@ -8,10 +8,10 @@ interface PaymentRequestButtonProps {
   items: Array<{ name: string; quantity: number }>
   onSuccess?: (paymentIntent: any) => void
   onError?: (error: string) => void
-  currency?: "GBP" | "EUR"
+  currency?: "EUR"
 }
 
-export function PaymentRequestButton({ amount, items, onSuccess, onError, currency = "GBP" }: PaymentRequestButtonProps) {
+export function PaymentRequestButton({ amount, items, onSuccess, onError, currency = "EUR" }: PaymentRequestButtonProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(true)
 
@@ -27,7 +27,7 @@ export function PaymentRequestButton({ amount, items, onSuccess, onError, curren
         const elements = stripe.elements()
 
         const paymentRequest = stripe.paymentRequest({
-          country: currency === "EUR" ? "FR" : "GB",
+          country: "FR",
           currency: currency.toLowerCase(),
           total: {
             label: "Total",
@@ -59,7 +59,7 @@ export function PaymentRequestButton({ amount, items, onSuccess, onError, curren
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                   amount,
-                  currency: "gbp",
+                  currency: "eur",
                 }),
               })
 

@@ -8,7 +8,7 @@ export async function trackMetaEvent({
   phone,
   external_id,
   value,
-  currency = "GBP",
+  currency = "EUR",
 }: {
   event_name?: string
   email?: string

@@ -55,7 +55,7 @@ export function ThankYouContent() {
 
         // Calculate purchase value
         const purchaseValue = Number(data.amount_total) / 100
-        const purchaseCurrency = (data.currency || "GBP").toUpperCase()
+        const purchaseCurrency = (data.currency || "EUR").toUpperCase()
         const sanitizedEmail = (data.customer_details?.email || "").trim().toLowerCase()
         const isValidEmail = sanitizedEmail && 
                             sanitizedEmail !== "null" && 
@@ -122,31 +122,27 @@ export function ThankYouContent() {
 
   const orderTotal = sessionData.amount_total ? (sessionData.amount_total / 100).toFixed(2) : "0.00"
   const customerEmail = sessionData.customer_details?.email || "Not provided"
-  const isFrench = sessionData.metadata?.content_ids?.includes('-fr') || false
-
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
       <div className="text-center mb-8">
         <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
         <h1 className="text-3xl font-bold mb-2">
-          {isFrench ? 'Félicitations !' : 'Order Confirmed!'}
+          Félicitations !
         </h1>
         <p className="text-muted-foreground">
-          {isFrench 
-            ? 'Félicitations pour votre achat, vous recevrez votre commande dans 5 à 8 jours ouvrables ! Expédition sous 24-48h après commande. En cas de questions, envoyez un email à homepanel@panel.com'
-            : `Thank you for your purchase. We've sent a confirmation email to ${customerEmail}`}
+          Félicitations pour votre achat, vous recevrez votre commande dans 5 à 8 jours ouvrables ! Expédition sous 24-48h après commande. En cas de questions, envoyez un email à homepanel@panel.com
         </p>
       </div>
 
       <div className="bg-card border border-border rounded-lg p-6 mb-6">
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div>
-            <p className="text-sm text-muted-foreground mb-1">Order ID</p>
+            <p className="text-sm text-muted-foreground mb-1">N° de commande</p>
             <p className="font-mono text-sm">{sessionId.slice(-8)}</p>
           </div>
           <div className="text-right">
             <p className="text-sm text-muted-foreground mb-1">Total</p>
-            <p className="text-xl font-bold">£{orderTotal}</p>
+            <p className="text-xl font-bold">€{orderTotal}</p>
           </div>
         </div>
 
@@ -158,7 +154,7 @@ export function ThankYouContent() {
 
       {/* Delivery Information */}
       <div className="bg-secondary/30 border border-border/50 rounded-lg p-6 mb-8">
-        <h2 className="font-serif text-lg font-medium mb-4">Delivery Information</h2>
+        <h2 className="font-serif text-lg font-medium mb-4">Informations de livraison</h2>
         
         <div className="space-y-4">
           <div className="flex items-start gap-4">
@@ -166,9 +162,9 @@ export function ThankYouContent() {
               <Truck className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <p className="font-medium text-sm">Estimated Delivery Time</p>
+              <p className="font-medium text-sm">Délai de livraison estimé</p>
               <p className="text-muted-foreground text-sm mt-1">
-                Your order will arrive in approximately <strong>14 business days</strong>. Delivery times may vary depending on your location.
+                Votre commande arrivera dans environ <strong>5 à 8 jours ouvrables</strong>. Les délais peuvent varier selon votre localisation.
               </p>
             </div>
           </div>
@@ -178,9 +174,9 @@ export function ThankYouContent() {
               <Mail className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <p className="font-medium text-sm">Track Your Order</p>
+              <p className="font-medium text-sm">Suivez votre commande</p>
               <p className="text-muted-foreground text-sm mt-1">
-                Keep an eye on your email inbox! We will send you tracking information as soon as your order is shipped so you can follow its journey to you.
+                Surveillez votre boîte mail ! Nous vous enverrons les informations de suivi dès que votre commande sera expédiée.
               </p>
             </div>
           </div>
@@ -190,12 +186,12 @@ export function ThankYouContent() {
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href="/" className="flex-1">
           <Button variant="outline" className="w-full bg-transparent">
-            Continue Shopping
+            Continuer mes achats
           </Button>
         </Link>
         <Link href="/products" className="flex-1">
           <Button className="w-full">
-            Explore More <ArrowRight className="ml-2 w-4 h-4" />
+            Explorer plus <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </Link>
       </div>

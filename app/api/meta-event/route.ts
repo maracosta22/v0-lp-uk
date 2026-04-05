@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
           },
           custom_data: {
             value: value != null ? Number(value) : undefined,
-            currency: currency || "GBP",
+            currency: currency || "EUR",
           },
         },
       ],

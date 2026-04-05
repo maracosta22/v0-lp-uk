@@ -26,7 +26,7 @@ const frQuantities = [
   { qty: 6, price: 80.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€12,64", freeShipping: true },
 ]
 
-export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = false }: AddToCartButtonProps) {
+export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = true }: AddToCartButtonProps) {
   const { addItem, items } = useCart()
   const router = useRouter()
 
@@ -55,7 +55,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     const totalValue = overridePrice ?? (isFrenchVersion ? selectedQtyOption.price : (product.salePrice || product.price) * quantity)
 
     const eventId = generateEventId("atc")
-    const currency = isFrenchVersion ? "EUR" : "GBP"
+    const currency = "EUR"
 
     // Track Meta
     trackAddToCart({
@@ -151,7 +151,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
         disabled={!product.inStock}
       >
         <ShoppingBag className="h-3 w-3" />
-        <span>Add</span>
+        <span>Ajouter</span>
       </Button>
     )
   }
@@ -232,7 +232,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           type="button"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
           className="flex h-full w-10 items-center justify-center transition-colors hover:bg-secondary rounded-l-md"
-          aria-label="Decrease quantity"
+          aria-label="Diminuer la quantité"
         >
           <Minus className="h-3 w-3" />
         </button>
@@ -241,7 +241,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           type="button"
           onClick={() => setQuantity((q) => q + 1)}
           className="flex h-full w-10 items-center justify-center transition-colors hover:bg-secondary rounded-r-md"
-          aria-label="Increase quantity"
+          aria-label="Augmenter la quantité"
         >
           <Plus className="h-3 w-3" />
         </button>
@@ -249,9 +249,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
 
       <Button onClick={() => handleBuyNow()} size="lg" className="h-12 w-full" disabled={!product.inStock} data-add-to-cart="true">
         <ShoppingBag className="mr-2 h-4 w-4" />
-        {product.currency === "BRL"
-          ? `Comprar - R$${(displayPrice * quantity).toFixed(2)}`
-          : `Buy Now - £${displayPrice * quantity}`}
+        {`Acheter - €${(displayPrice * quantity).toFixed(2)}`}
       </Button>
     </div>
   )
