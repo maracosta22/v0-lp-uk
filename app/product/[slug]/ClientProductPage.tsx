@@ -25,6 +25,7 @@ import { ExitIntentPopupFr } from "@/components/exit-intent-popup-fr"
 import { SurfaceCalculator } from "@/components/surface-calculator"
 import { ProductFAQ } from "@/components/product-faq"
 import { ProductImageGallery } from "@/components/product-image-gallery"
+import { PurchaseNotification } from "@/components/purchase-notification"
 
 interface ClientProductPageProps {
   product: any
@@ -147,7 +148,12 @@ export default function ClientProductPage({
             }
           }}
         />
+)}
+      />
       )}
+
+      {/* Purchase Notification - floating at bottom left */}
+      {isFlexibleAcousticPanel && <PurchaseNotification />}
 
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
@@ -388,47 +394,49 @@ export default function ClientProductPage({
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
-                <h2 className="text-sm font-bold uppercase tracking-wider mb-4">FREQUEMMENT ACHETES ENSEMBLE</h2>
-                <div className="flex flex-col gap-4">
+                <h2 className="text-base font-bold uppercase tracking-wide mb-6">FREQUEMMENT ACHETES ENSEMBLE</h2>
+                <div className="flex flex-col gap-6">
                   {/* Products */}
-                  <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-wrap items-start gap-4">
                     {frequentlyBoughtTogether.map((bundleProduct, index) => (
-                      <div key={bundleProduct.id} className="flex items-center gap-3">
-                        <div className="w-20 sm:w-24 bg-secondary/30 rounded-lg overflow-hidden">
+                      <div key={bundleProduct.id} className="flex items-center gap-4">
+                        <div className="w-36 sm:w-40">
                           <Link href={`/product/${bundleProduct.slug}`} className="block">
-                            <div className="aspect-square overflow-hidden">
+                            <div className="aspect-square overflow-hidden rounded-lg bg-gray-50">
                               <Image
                                 src={bundleProduct.images[0] || "/placeholder.svg"}
                                 alt={bundleProduct.name}
-                                width={96}
-                                height={96}
+                                width={160}
+                                height={160}
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                               />
                             </div>
                           </Link>
-                          <div className="p-1.5">
-                            <h3 className="text-[10px] sm:text-xs font-medium leading-tight line-clamp-2">
-                              {bundleProduct.name}
+                          <div className="mt-2">
+                            <h3 className="text-sm font-medium leading-tight line-clamp-2 text-blue-600">
+                              {bundleProduct.name.length > 20 
+                                ? bundleProduct.name.substring(0, 20) + "..." 
+                                : bundleProduct.name}
                             </h3>
-                            <p className="text-[10px] sm:text-xs font-semibold mt-0.5">€{bundleProduct.price}</p>
+                            <p className="text-sm font-bold mt-1">€{bundleProduct.price}</p>
                           </div>
                         </div>
                         {index < frequentlyBoughtTogether.length - 1 && (
-                          <span className="text-lg font-light text-muted-foreground">+</span>
+                          <span className="text-xl font-light text-gray-400">+</span>
                         )}
                       </div>
                     ))}
                   </div>
                   
-                  {/* Price & Button */}
-                  <div className="flex items-center justify-between gap-3 pt-3 border-t border-border">
+                  {/* Price & Button - matching reference image */}
+                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-border">
                     <div>
-                      <p className="text-xs text-muted-foreground">Prix total:</p>
-                      <p className="text-lg font-semibold">€{frequentlyBoughtTotal.toFixed(2)}</p>
+                      <p className="text-sm text-gray-500">Prix total:</p>
+                      <p className="text-2xl font-bold">€{frequentlyBoughtTotal.toFixed(2)}</p>
                     </div>
                     <button
                       type="button"
-                      className="px-4 py-2 text-sm font-medium bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors whitespace-nowrap"
+                      className="px-6 py-3 text-base font-medium bg-[#b08968] text-white rounded-lg hover:bg-[#9a7759] transition-colors whitespace-nowrap"
                       onClick={handleAddBothToCart}
                     >
                       Ajouter au panier
