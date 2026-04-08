@@ -148,8 +148,6 @@ export default function ClientProductPage({
             }
           }}
         />
-)}
-      />
       )}
 
       {/* Purchase Notification - floating at bottom left */}
