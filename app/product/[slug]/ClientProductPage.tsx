@@ -393,53 +393,54 @@ export default function ClientProductPage({
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
                 <h2 className="text-base font-bold uppercase tracking-wide mb-6">FREQUEMMENT ACHETES ENSEMBLE</h2>
-                <div className="flex flex-col gap-6">
-                  {/* Products */}
-                  <div className="flex flex-wrap items-start gap-4">
-                    {frequentlyBoughtTogether.map((bundleProduct, index) => (
-                      <div key={bundleProduct.id} className="flex items-center gap-4">
-                        <div className="w-36 sm:w-40">
-                          <Link href={`/product/${bundleProduct.slug}`} className="block">
-                            <div className="aspect-square overflow-hidden rounded-lg bg-gray-50">
-                              <Image
-                                src={bundleProduct.images[0] || "/placeholder.svg"}
-                                alt={bundleProduct.name}
-                                width={160}
-                                height={160}
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                          </Link>
-                          <div className="mt-2">
+                
+                {/* Products row */}
+                <div className="flex items-start gap-2 mb-6">
+                  {frequentlyBoughtTogether.map((bundleProduct, index) => (
+                    <div key={bundleProduct.id} className="flex items-center">
+                      <div className="w-32 sm:w-36">
+                        <Link href={`/product/${bundleProduct.slug}`} className="block">
+                          <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                            <Image
+                              src={bundleProduct.images[0] || "/placeholder.svg"}
+                              alt={bundleProduct.name}
+                              width={144}
+                              height={144}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        </Link>
+<div className="mt-2">
                             <h3 className="text-sm font-medium leading-tight line-clamp-2 text-blue-600">
-                              {bundleProduct.name.length > 20 
-                                ? bundleProduct.name.substring(0, 20) + "..." 
-                                : bundleProduct.name}
+                              {bundleProduct.name.includes('STARWAX') 
+                                ? 'STARWAX Anti-...' 
+                                : bundleProduct.name.includes('LED') 
+                                  ? 'Kit Ruban LED Encastre' 
+                                  : bundleProduct.name.substring(0, 15) + '...'}
                             </h3>
                             <p className="text-sm font-bold mt-1">€{bundleProduct.price}</p>
                           </div>
-                        </div>
-                        {index < frequentlyBoughtTogether.length - 1 && (
-                          <span className="text-xl font-light text-gray-400">+</span>
-                        )}
                       </div>
-                    ))}
-                  </div>
-                  
-                  {/* Price & Button - matching reference image */}
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-border">
-                    <div>
-                      <p className="text-sm text-gray-500">Prix total:</p>
-                      <p className="text-2xl font-bold">€{frequentlyBoughtTotal.toFixed(2)}</p>
+                      {index < frequentlyBoughtTogether.length - 1 && (
+                        <span className="text-lg font-light text-gray-400 mx-2">+</span>
+                      )}
                     </div>
-                    <button
-                      type="button"
-                      className="px-6 py-3 text-base font-medium bg-[#b08968] text-white rounded-lg hover:bg-[#9a7759] transition-colors whitespace-nowrap"
-                      onClick={handleAddBothToCart}
-                    >
-                      Ajouter au panier
-                    </button>
+                  ))}
+                </div>
+                
+                {/* Price & Button - exactly matching reference image */}
+                <div className="flex items-center justify-between gap-4 pt-4 border-t border-border">
+                  <div>
+                    <p className="text-sm text-gray-500">Prix total:</p>
+                    <p className="text-2xl font-bold">€{frequentlyBoughtTotal.toFixed(2)}</p>
                   </div>
+                  <button
+                    type="button"
+                    className="px-6 py-3 text-base font-medium bg-[#b08968] text-white rounded-lg hover:bg-[#9a7759] transition-colors whitespace-nowrap"
+                    onClick={handleAddBothToCart}
+                  >
+                    Ajouter au panier
+                  </button>
                 </div>
               </div>
             )}
