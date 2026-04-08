@@ -150,34 +150,18 @@ export async function createCheckoutSession(items: CartItem[], origin: string, t
 
       return_url: `${origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
 
+      // ✅ Apenas países da Europa
       shipping_address_collection: {
         allowed_countries: [
-          "AC", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AT", "AU", "AW", "AX", "AZ",
-          "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ",
-          "CA", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CV", "CW", "CY", "CZ",
-          "DE", "DJ", "DK", "DM", "DO", "DZ",
-          "EC", "EE", "EG", "EH", "ER", "ES", "ET",
-          "FI", "FJ", "FK", "FO", "FR",
-          "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY",
-          "HK", "HN", "HR", "HT", "HU",
-          "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IS", "IT",
-          "JE", "JM", "JO", "JP",
-          "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ",
-          "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY",
-          "MA", "MC", "MD", "ME", "MF", "MG", "MK", "ML", "MM", "MN", "MO", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ",
-          "NA", "NC", "NE", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ",
-          "OM",
-          "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PY",
-          "QA",
-          "RE", "RO", "RS", "RU", "RW",
-          "SA", "SB", "SC", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SZ",
-          "TA", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ",
-          "UA", "UG", "US", "UY", "UZ",
-          "VA", "VC", "VE", "VG", "VN", "VU",
-          "WF", "WS",
-          "XK",
-          "YE", "YT",
-          "ZA", "ZM", "ZW"
+          "AD", "AL", "AT", "AX", "BA", "BE", "BG", "BY", "CH", "CY", "CZ",
+          "DE", "DK", "EE", "ES", "FI", "FO", "FR",
+          "GB", "GG", "GI", "GR", "HR", "HU",
+          "IE", "IM", "IS", "IT", "JE",
+          "LI", "LT", "LU", "LV",
+          "MC", "MD", "ME", "MK", "MT",
+          "NL", "NO", "PL", "PT",
+          "RO", "RS", "RU", "SE", "SI", "SJ", "SK", "SM",
+          "UA", "VA", "XK"
         ],
       },
 
@@ -297,35 +281,18 @@ export async function createCheckoutSessionFr(items: CartItem[], origin: string,
         },
       ],
 
-      // ✅ Todos os países disponíveis
+      // ✅ Apenas países da Europa
       shipping_address_collection: {
         allowed_countries: [
-          "AC", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AT", "AU", "AW", "AX", "AZ",
-          "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ",
-          "CA", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CV", "CW", "CY", "CZ",
-          "DE", "DJ", "DK", "DM", "DO", "DZ",
-          "EC", "EE", "EG", "EH", "ER", "ES", "ET",
-          "FI", "FJ", "FK", "FO", "FR",
-          "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY",
-          "HK", "HN", "HR", "HT", "HU",
-          "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IS", "IT",
-          "JE", "JM", "JO", "JP",
-          "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ",
-          "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY",
-          "MA", "MC", "MD", "ME", "MF", "MG", "MK", "ML", "MM", "MN", "MO", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ",
-          "NA", "NC", "NE", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ",
-          "OM",
-          "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PY",
-          "QA",
-          "RE", "RO", "RS", "RU", "RW",
-          "SA", "SB", "SC", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SZ",
-          "TA", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ",
-          "UA", "UG", "US", "UY", "UZ",
-          "VA", "VC", "VE", "VG", "VN", "VU",
-          "WF", "WS",
-          "XK",
-          "YE", "YT",
-          "ZA", "ZM", "ZW"
+          "AD", "AL", "AT", "AX", "BA", "BE", "BG", "BY", "CH", "CY", "CZ",
+          "DE", "DK", "EE", "ES", "FI", "FO", "FR",
+          "GB", "GG", "GI", "GR", "HR", "HU",
+          "IE", "IM", "IS", "IT", "JE",
+          "LI", "LT", "LU", "LV",
+          "MC", "MD", "ME", "MK", "MT",
+          "NL", "NO", "PL", "PT",
+          "RO", "RS", "RU", "SE", "SI", "SJ", "SK", "SM",
+          "UA", "VA", "XK"
         ],
       },
 
@@ -362,7 +329,7 @@ export async function createCheckoutSessionFr(items: CartItem[], origin: string,
     throw new Error(error?.message || "Erreur lors de la création de la session de paiement")
   }
 }
-// ──────────────────────────────────────────────────────────────────────────────
+// ───────────────────────────────────��──────────────────────────────────────────
 
 export async function getCheckoutSession(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
