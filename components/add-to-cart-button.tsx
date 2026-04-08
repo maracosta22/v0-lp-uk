@@ -147,45 +147,48 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     )
   }
 
-  // French version: simple quantity selector + black rounded CTA button (matching the reference image)
+  // French version: simple quantity selector + minimalist black CTA button
   if (isFrenchVersion) {
-    const totalPrice = UNIT_PRICE * quantity
-    
     return (
-      <div className="flex flex-col gap-4 w-full">
-        {/* Simple Quantity Selector - centered, matching the image style */}
+      <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
+        {/* Compact Quantity Selector */}
         <div className="flex justify-center">
-          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+          <div className="inline-flex items-center border border-gray-200 rounded-lg">
             <button
               type="button"
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="flex h-12 w-14 items-center justify-center transition-colors hover:bg-gray-100"
-              aria-label="Diminuer la quantité"
+              className="flex h-10 w-12 items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              aria-label="Diminuer"
             >
-              <Minus className="h-4 w-4 text-gray-600" />
+              <Minus className="h-3.5 w-3.5" />
             </button>
-            <span className="w-14 text-center text-lg font-medium text-gray-900">{quantity}</span>
+            <span className="w-10 text-center text-base font-medium text-gray-900">{quantity}</span>
             <button
               type="button"
               onClick={() => setQuantity((q) => q + 1)}
-              className="flex h-12 w-14 items-center justify-center transition-colors hover:bg-gray-100"
-              aria-label="Augmenter la quantité"
+              className="flex h-10 w-12 items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              aria-label="Augmenter"
             >
-              <Plus className="h-4 w-4 text-gray-600" />
+              <Plus className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
 
-        {/* Black rounded CTA button - matching the reference image */}
+        {/* Minimalist CTA button - compact */}
         <button
           type="button"
           disabled={!product.inStock}
           onClick={() => handleBuyNow()}
           data-add-to-cart="true"
-          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1a1a1a] hover:bg-[#333] text-white font-medium text-lg py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1f1f1f] hover:bg-[#333] text-white py-3.5 px-6 transition-colors disabled:opacity-50"
         >
-          <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Buy Now - {totalPrice.toFixed(2).replace('.', ',')} EUR
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span className="flex flex-col items-start leading-none">
+            <span className="text-sm font-normal">Commander</span>
+            <span className="text-sm font-normal">Maintenant</span>
+          </span>
         </button>
       </div>
     )

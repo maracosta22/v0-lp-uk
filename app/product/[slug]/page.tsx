@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import { getProductBySlug, products, getProductsByCategory } from "@/lib/products"
 import ClientProductPage from "./ClientProductPage"
 import { TableauMadridPage } from "@/components/tableau-madrid-page"
@@ -7,6 +8,58 @@ export async function generateStaticParams() {
   return products.map((product) => ({
     slug: product.slug,
   }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
+  
+  if (!product) {
+    return { title: 'Produit non trouvé' }
+  }
+  
+  const reviewCount = 2847
+  
+  return {
+    title: `${product.name} | WOOD SHOP — Panneaux Muraux Premium`,
+    description: `${product.description || product.longDescription?.slice(0, 150)} — Installation DIY en 30min. Livraison gratuite dès 80€. Retours 30 jours. 4.9★ sur ${reviewCount} avis vérifiés.`,
+    keywords: [
+      product.name,
+      'panneau acoustique',
+      'panneau mural bois',
+      'décoration intérieure',
+      'panneau flexible',
+      'installation DIY',
+    ],
+    openGraph: {
+      title: `${product.name} — Transformez votre mur en 30 min`,
+      description: `Le seul panneau qui s'adapte aux courbes. NRC 0.80 certifié SGS. ${reviewCount} avis. À partir de €${product.price}.`,
+      url: `https://www.woodofgreen.com/product/${slug}`,
+      siteName: 'WOOD SHOP',
+      images: [{
+        url: product.images[0],
+        width: 1200,
+        height: 1200,
+        alt: `${product.name} — Panneau Acoustique Flexible`,
+      }],
+      locale: 'fr_FR',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} | WOOD SHOP`,
+      description: `Installation DIY en 30 min. ${reviewCount} avis.`,
+      images: [product.images[0]],
+    },
+    alternates: {
+      canonical: `https://www.woodofgreen.com/product/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    },
+  }
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {

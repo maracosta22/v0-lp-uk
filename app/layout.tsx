@@ -15,11 +15,31 @@ const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 
 export const metadata: Metadata = {
-  title: "WOOD SHOP | Panneaux Muraux en Bois Premium & Design Intérieur",
-  description:
-    "Panneaux muraux en bois premium, solutions acoustiques et décoration intérieure sélectionnée. Artisanat européen pour les intérieurs modernes.",
-  keywords: ["panneaux muraux bois", "panneaux acoustiques", "design intérieur", "décoration maison", "panneaux muraux premium"],
-    generator: 'v0.app'
+  metadataBase: new URL('https://www.woodofgreen.com'),
+  title: {
+    default: 'WOOD SHOP | Panneaux Muraux en Bois Premium & Design Intérieur',
+    template: '%s | WOOD SHOP',
+  },
+  description: 'Panneaux muraux acoustiques en bois premium. Installation DIY en 30 min, NRC 0.80 certifié SGS. Livraison gratuite dès 80€. 4.9★ sur 2847 avis.',
+  keywords: ['panneaux muraux bois', 'panneaux acoustiques', 'design intérieur', 'décoration maison', 'panneaux muraux premium', 'panneau flexible', 'installation DIY'],
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    url: 'https://www.woodofgreen.com',
+    siteName: 'WOOD SHOP',
+    images: [{
+      url: '/og-default.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'WOOD SHOP — Panneaux Muraux Premium',
+    }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -28,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="overflow-x-hidden">
       <head>
         <meta name="facebook-domain-verification" content="doluxynzdjfzg90rzthp0243s680oy" />
 
@@ -117,13 +137,13 @@ export default function RootLayout({
         )}
       </head>
 
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-x-hidden w-full max-w-full">
         <ScrollToTop />
         <Suspense fallback={null}>
           <MetaPixelProvider>
             <CartProvider>
               <Header />
-              <main className="min-h-screen pt-16 lg:pt-20">{children}</main>
+              <main className="min-h-screen pt-16 lg:pt-20 overflow-x-hidden w-full">{children}</main>
               <Footer />
             </CartProvider>
           </MetaPixelProvider>

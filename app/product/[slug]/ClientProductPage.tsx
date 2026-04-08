@@ -26,6 +26,8 @@ import { SurfaceCalculator } from "@/components/surface-calculator"
 import { ProductFAQ } from "@/components/product-faq"
 import { ProductImageGallery } from "@/components/product-image-gallery"
 import { PurchaseNotification } from "@/components/purchase-notification"
+import { StickyCartBar } from "@/components/sticky-cart-bar"
+import { PaymentIcons } from "@/components/payment-icons"
 
 interface ClientProductPageProps {
   product: any
@@ -134,9 +136,76 @@ export default function ClientProductPage({
     })
   }
 
+  // JSON-LD structured data for SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.longDescription || product.description,
+    image: product.images,
+    sku: product.id,
+    brand: {
+      '@type': 'Brand',
+      name: 'WOOD SHOP',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `https://www.woodofgreen.com/product/${product.slug}`,
+      priceCurrency: 'EUR',
+      price: product.price.toFixed(2),
+      priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'WOOD SHOP',
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '2847',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  }
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Accueil',
+        item: 'https://www.woodofgreen.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Panneaux Muraux',
+        item: 'https://www.woodofgreen.com/products?category=wall-panels',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: `https://www.woodofgreen.com/product/${product.slug}`,
+      },
+    ],
+  }
+
   return (
-    <div className="py-8 lg:py-12 overflow-x-hidden max-w-full w-full box-border relative">
-      <ViewContentTracker product={product} />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <div className="py-6 lg:py-12 overflow-x-hidden overflow-y-visible max-w-full w-full box-border relative">
+        <ViewContentTracker product={product} />
 
       {/* Exit intent popup — FR only */}
       {isFrenchVersion && (
@@ -153,31 +222,52 @@ export default function ClientProductPage({
       {/* Purchase Notification - floating at bottom left */}
       {isFlexibleAcousticPanel && <PurchaseNotification />}
 
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 overflow-hidden w-full">
+      {/* Sticky Cart Bar - appears when main CTA scrolls out of view */}
+      {isFrenchVersion && isFlexibleAcousticPanel && (
+        <StickyCartBar
+          productName={product.name}
+          price={product.price}
+          originalPrice={product.originalPrice || product.price * 2}
+          image={product.images[0]}
+          quantity={5}
+          selectedColor="Chêne Naturel"
+          stock={47}
+          onBuyNow={() => {
+            const btn = document.querySelector("[data-add-to-cart]") as HTMLButtonElement
+            if (btn) btn.click()
+          }}
+        />
+      )}
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
-        <Link
-          href={isFrenchVersion ? `/product/${product.slug}` : "/products"}
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {t.backToProducts}
-        </Link>
+        <nav aria-label="Fil d'Ariane" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
+            <li><Link href="/" className="hover:text-foreground transition-colors">Accueil</Link></li>
+            <li aria-hidden="true"><span className="mx-1">/</span></li>
+            <li><Link href="/products?category=wall-panels" className="hover:text-foreground transition-colors">Panneaux Muraux</Link></li>
+            <li aria-hidden="true"><span className="mx-1">/</span></li>
+            <li className="font-medium text-foreground" aria-current="page">{product.name}</li>
+          </ol>
+        </nav>
 
         {/* Product Section */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
-          {/* Gallery */}
-          <ProductGallery images={product.images} productName={product.name} video={product.video} />
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 lg:items-start overflow-hidden">
+          {/* Gallery - sticky on desktop */}
+          <div className="lg:sticky lg:top-24 lg:self-start w-full overflow-hidden">
+            <ProductGallery images={product.images} productName={product.name} video={product.video} />
+          </div>
 
           {/* Details */}
-          <div className="flex flex-col min-w-0 w-full overflow-hidden max-w-full">
-            {/* Badge */}
+          <div className="flex flex-col min-w-0 w-full overflow-hidden">
+            {/* Badge - urgency styling */}
             {product.badge && (
               <span
-                className={`mb-4 inline-block w-fit px-3 py-1 text-xs font-medium uppercase tracking-wider ${
-                  product.onSale ? "bg-accent text-accent-foreground" : "bg-foreground text-background"
+                className={`mb-4 inline-flex items-center gap-1.5 w-fit px-3 py-1.5 text-xs font-bold uppercase tracking-wider ${
+                  product.onSale ? "bg-red-600 text-white rounded-sm animate-pulse" : "bg-foreground text-background"
                 }`}
               >
-                {product.onSale ? "Offre de Lancement" : product.badge}
+                {product.onSale ? "Offre de Lancement — Se termine bientôt" : product.badge}
               </span>
             )}
 
@@ -185,7 +275,7 @@ export default function ClientProductPage({
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-balance break-words">{product.name}</h1>
             {isFlexibleAcousticPanel && (
               <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Le seul panneau qui épouse vos courbes, sans outil, sans artisan, en 30 minutes
+                Transformez n&apos;importe quel mur en 30 min — courbes, colonnes, piliers. Zéro outil, zéro artisan, zéro chantier.
               </p>
             )}
 
@@ -281,47 +371,47 @@ export default function ClientProductPage({
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">1</span>
                       </div>
-                      <p className="text-xs font-medium">Décollez l&apos;adhésif</p>
+                      <p className="text-xs font-medium">Décollez le film protecteur</p>
                     </div>
                     <div className="flex flex-col items-center text-center">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">2</span>
                       </div>
-                      <p className="text-xs font-medium">Placez & appuyez</p>
+                      <p className="text-xs font-medium">Posez & appuyez 30s</p>
                     </div>
                     <div className="flex flex-col items-center text-center">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-2">
                         <span className="text-accent font-bold">3</span>
                       </div>
-                      <p className="text-xs font-medium">Profitez!</p>
+                      <p className="text-xs font-medium">Admirez le résultat</p>
                     </div>
                   </div>
                 </div>
 
                 <p className="leading-relaxed text-muted-foreground text-sm sm:text-base">
-                  Le panneau acoustique flexible qui sublime votre espace, réduit l&apos;écho et offre un look architectural moderne — sans rénovation.
+                  Votre mur TV a l&apos;air vide ? Vos appels en visio résonnent dans toute la pièce ? Ce panneau règle les deux problèmes en 30 minutes : il réduit l&apos;écho de 80%, couvre les murs les plus complexes et donne à chaque pièce le look d&apos;un intérieur de magazine.
                 </p>
                 
                 <ul className="space-y-2.5 pt-2">
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>Flexible</strong> — Se plie aux courbes et piliers</span>
+                    <span><strong>Flexible</strong> — S&apos;adapte aux courbes, colonnes et piliers sans découpe spéciale</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>Installation facile</strong> — Auto-adhésif, sans outils</span>
+                    <span><strong>Installé en 30 min</strong> — Adhésif pré-appliqué, repositionnable 48h, aucun outil requis</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>Sans salissure</strong> — Pas de peinture, pas de poussière</span>
+                    <span><strong>Zéro chantier</strong> — Pas de peinture, pas de colle, pas de poussière, pas de bruit</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>Acoustique</strong> — Réduit l&apos;écho et améliore le confort sonore</span>
+                    <span><strong>NRC 0.80 certifié SGS</strong> — Élimine les échos et réverbérations, prouvé en laboratoire</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-foreground">
                     <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span><strong>Look Premium</strong> — Esthétique bois haut de gamme</span>
+                    <span><strong>Vrai bois MDF</strong> — Ponçable, teignable. Aspect architecte, prix accessible</span>
                   </li>
                 </ul>
                 <div className="pt-2 space-y-1.5 text-sm text-muted-foreground">
@@ -356,7 +446,12 @@ export default function ClientProductPage({
                   </div>
                 </div>
 
-                <p className="pt-6 text-base font-medium text-[#b08968]">Sublimez votre espace aujourd&apos;hui.</p>
+                <div className="pt-6 flex items-start gap-3">
+                  <p className="text-sm font-medium text-[#b08968] leading-snug">
+                    Rejoignez les <strong>4 500+ clients</strong> qui ont transformé leur intérieur ce mois-ci.
+                  </p>
+                  <span className="flex-shrink-0 text-xs text-muted-foreground whitespace-nowrap mt-0.5">Il reste 47 pièces</span>
+                </div>
               </div>
             ) : (
               <p className="mt-6 leading-relaxed text-muted-foreground break-words">{product.longDescription}</p>
@@ -371,23 +466,26 @@ export default function ClientProductPage({
               <AddToCartButton product={product} isFrenchVersion={true} />
             </div>
 
-            {/* Trust Badges - matching the reference image exactly */}
-            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-b border-border py-6">
+            {/* Trust Badges - improved copy */}
+            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-border py-6">
               <div className="flex flex-col items-center text-center">
                 <Truck className="h-6 w-6 text-muted-foreground" />
                 <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">
-                  Livraison gratuite des 80€
+                  Livraison offerte dès 80€
                 </span>
               </div>
               <div className="flex flex-col items-center text-center">
                 <RotateCcw className="h-6 w-6 text-muted-foreground" />
-                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Retours sous 30 jours</span>
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Retours gratuits 30 jours</span>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Shield className="h-6 w-6 text-muted-foreground" />
                 <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Garantie 5 ans</span>
               </div>
             </div>
+            
+            {/* Payment Icons */}
+            <PaymentIcons />
 
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
@@ -600,5 +698,6 @@ export default function ClientProductPage({
 
 
     </div>
+    </>
   )
 }
