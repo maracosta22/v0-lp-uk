@@ -176,18 +176,21 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           </div>
         </div>
 
-        {/* Black rounded CTA button - without total price to avoid price shock */}
+        {/* Minimalist black rounded CTA button */}
         <button
           type="button"
           disabled={!product.inStock}
           onClick={() => handleBuyNow()}
           data-add-to-cart="true"
-          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1a1a1a] hover:bg-[#333] text-white font-medium text-lg py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-4 rounded-full bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white py-5 px-8 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
-          Commander Maintenant
+          <span className="flex flex-col items-start leading-tight">
+            <span className="text-base font-normal tracking-wide">Commander</span>
+            <span className="text-base font-normal tracking-wide">Maintenant</span>
+          </span>
         </button>
       </div>
     )
