@@ -50,8 +50,8 @@ export const products: Product[] = [
       "Panneau acoustique pliable révolutionnaire qui s'adapte à toute surface. Parfait pour les murs courbés, les piliers et les installations créatives.",
     longDescription:
       "Découvrez notre Panneau Acoustique Flexible révolutionnaire - la solution de revêtement mural la plus polyvalente du marché. Contrairement aux panneaux rigides traditionnels, ce design innovant dispose d'un support en feutre flexible spécialement conçu qui permet au panneau de se plier et de s'adapter aux surfaces courbées, aux piliers et aux caractéristiques architecturales non conventionnelles. Disponible en plusieurs tons de bois dont Chêne Naturel, Chêne Fumé, Noyer et Chêne Gris, chaque panneau offre une absorption sonore exceptionnelle tout en transformant n'importe quel espace en une déclaration de design. Avec des dimensions incroyables de 270x110cm, chaque panneau couvre près de 3m² de surface murale, ce qui en fait la solution acoustique premium la plus rentable disponible.",
-    price: 15.44,
-    originalPrice: 57,
+    price: 14.49,
+    originalPrice: 28.98,
     currency: "EUR",
     category: "wall-panels",
     images: [
@@ -177,7 +177,7 @@ export const products: Product[] = [
     description: "Ruban LED blanc chaud 3000K pour éclairage de panneaux encastrés. Auto-adhésif avec variateur tactile. 8 pièces incluses.",
     longDescription:
       "Améliorez vos panneaux muraux avec notre Kit Ruban LED Encastré professionnel, conçu spécifiquement pour l'installation derrière les panneaux. Ce kit complet de 8 pièces comprend des rubans LED de plusieurs tailles (18\", 26\", 34\", 42\" - 2 de chaque), un driver LED premium, un variateur tactile, et tous les câbles de connexion. La température de couleur chaude de 3000K crée une ambiance chaleureuse, tandis que le variateur tactile permet un réglage de 10% à 100% de luminosité avec fonction mémoire. Caractérisé par un ruban adhésif plus épais pour un montage supérieur et un boîtier en aluminium noir qui disparaît derrière les panneaux. Le système de connexion rapide rend l'installation simple. Parfait pour chambres, salons, bureaux et murs de canapé.",
-    price: 175,
+    price: 150.49,
     currency: "EUR",
     category: "lighting",
     images: [
@@ -209,7 +209,7 @@ export const products: Product[] = [
     description: "Idéal pour éliminer les moisissures sur les murs, plafonds, contours de fenêtres des pièces à vivre. Sans rinçage, sans odeur incommodante, ne décolore pas les supports. Sans Javel.",
     longDescription:
       "STARWAX Anti-moisissures pour murs et pièces à vivre 500ML - Idéal pour éliminer les moisissures sur les murs, plafonds, contours de fenêtres des pièces à vivre. Prêt à l'emploi : sans rinçage, sans odeur incommodante, ne tache pas. Fongicide selon EN1650 et EN13697 en 15 min à 20°C. Bactéricide selon les normes EN1276 et EN13697 en 5 min à 20°C. Virucide sur virus enveloppés selon la norme EN 14476 en 1 min à 20°C. Utilisable sur chambres, salon, murs et plafonds peints, papier vinyl, contours de fenêtres, surfaces lavables dures. Flacon pulvérisateur de 500ml. Sans Javel.",
-    price: 17,
+    price: 14.88,
     currency: "EUR",
     category: "decor",
     images: [

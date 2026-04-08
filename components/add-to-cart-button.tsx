@@ -18,22 +18,15 @@ interface AddToCartButtonProps {
   isFrenchVersion?: boolean
 }
 
-// FR upsell quantity options
-const frQuantities = [
-  { qty: 1, price: 15.44, label: "1 Panneau", badge: null, savings: null, freeShipping: false },
-  { qty: 2, price: 28.00, label: "2 Panneaux", badge: null, savings: "€2,88", freeShipping: false },
-  { qty: 4, price: 54.00, label: "4 Panneaux", badge: "Le Plus Populaire", savings: "€7,76", freeShipping: true },
-  { qty: 6, price: 80.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€12,64", freeShipping: true },
-]
+// Price per unit
+const UNIT_PRICE = 14.49
 
 export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = true }: AddToCartButtonProps) {
   const { addItem, items } = useCart()
   const router = useRouter()
 
-  // FR: default to 4 panels option (index 2)
-  const [selectedQtyOption, setSelectedQtyOption] = useState(frQuantities[2])
-  // Non-FR: simple quantity
-  const [quantity, setQuantity] = useState(1)
+  // Simple quantity state - default to 5 as shown in the image
+  const [quantity, setQuantity] = useState(5)
 
   const handleBuyNow = (overrideQty?: number, overridePrice?: number) => {
     // Check if cart has products with different currency
@@ -50,9 +43,9 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       }
     }
 
-    const qty = overrideQty ?? (isFrenchVersion ? selectedQtyOption.qty : quantity)
-    const unitPrice = overridePrice ?? (isFrenchVersion ? selectedQtyOption.price / selectedQtyOption.qty : (product.salePrice || product.price))
-    const totalValue = overridePrice ?? (isFrenchVersion ? selectedQtyOption.price : (product.salePrice || product.price) * quantity)
+    const qty = overrideQty ?? quantity
+    const unitPrice = overridePrice ?? UNIT_PRICE
+    const totalValue = overridePrice ?? (UNIT_PRICE * quantity)
 
     const eventId = generateEventId("atc")
     const currency = "EUR"
@@ -110,10 +103,8 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       }),
     }).catch(console.error)
 
-    // For FR upsell, add the selected qty as a single cart entry with adjusted price
-    const productToAdd = isFrenchVersion
-      ? { ...product, price: selectedQtyOption.price / selectedQtyOption.qty }
-      : product
+    // Add to cart with unit price
+    const productToAdd = { ...product, price: UNIT_PRICE }
     addItem(productToAdd, qty)
 
     // FR: persist order in sessionStorage so /checkout-fr always has data
@@ -121,9 +112,9 @@ export function AddToCartButton({ product, variant = "default", className, isFre
       const orderData = {
         productId: product.id,
         name: product.name,
-        price: selectedQtyOption.price / selectedQtyOption.qty,
-        totalPrice: selectedQtyOption.price,
-        quantity: selectedQtyOption.qty,
+        price: UNIT_PRICE,
+        totalPrice: UNIT_PRICE * qty,
+        quantity: qty,
         image: product.images?.[0] || product.image || "",
         currency: "EUR",
       }
@@ -156,69 +147,46 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     )
   }
 
-  // French version: upsell quantity selector + orange CTA button
+  // French version: simple quantity selector + black rounded CTA button (matching the reference image)
   if (isFrenchVersion) {
+    const totalPrice = UNIT_PRICE * quantity
+    
     return (
-      <div className="flex flex-col gap-3 w-full">
-        {/* Quantity upsell cards */}
-        <div className="space-y-2">
-          {frQuantities.map((option) => {
-            const isSelected = selectedQtyOption.qty === option.qty
-            return (
-              <button
-                key={option.qty}
-                type="button"
-                onClick={() => setSelectedQtyOption(option)}
-                className={`w-full rounded-lg border-2 px-4 py-3 transition-all ${
-                  isSelected
-                    ? "border-[#FF6B00] bg-orange-50"
-                    : "border-gray-200 bg-white hover:border-gray-300"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-gray-900">{option.label}</span>
-                    {option.badge && (
-                      <span className={`text-white text-[10px] font-bold px-2.5 py-1 rounded-full ${
-                        option.badge === "Le Plus Populaire" ? "bg-green-600" : "bg-amber-600"
-                      }`}>
-                        {option.badge}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-sm font-bold text-gray-900">€{option.price.toFixed(2)}</span>
-                </div>
-                <div className="flex items-center justify-between text-xs">
-                  {option.savings ? (
-                    <span className="text-green-700 font-medium">Économisez {option.savings}</span>
-                  ) : (
-                    <span></span>
-                  )}
-                  {option.freeShipping && (
-                    <span className="text-green-700 font-medium">Livraison gratuite incluse !</span>
-                  )}
-                </div>
-              </button>
-            )
-          })}
+      <div className="flex flex-col gap-4 w-full">
+        {/* Simple Quantity Selector - centered, matching the image style */}
+        <div className="flex justify-center">
+          <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              className="flex h-12 w-14 items-center justify-center transition-colors hover:bg-gray-100"
+              aria-label="Diminuer la quantité"
+            >
+              <Minus className="h-4 w-4 text-gray-600" />
+            </button>
+            <span className="w-14 text-center text-lg font-medium text-gray-900">{quantity}</span>
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => q + 1)}
+              className="flex h-12 w-14 items-center justify-center transition-colors hover:bg-gray-100"
+              aria-label="Augmenter la quantité"
+            >
+              <Plus className="h-4 w-4 text-gray-600" />
+            </button>
+          </div>
         </div>
 
-        {/* Orange CTA button */}
+        {/* Black rounded CTA button - matching the reference image */}
         <button
           type="button"
           disabled={!product.inStock}
           onClick={() => handleBuyNow()}
           data-add-to-cart="true"
-          className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1a1a1a] hover:bg-[#333] text-white font-medium text-lg py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Commander Maintenant €{selectedQtyOption.price.toFixed(2)}
+          Buy Now - {totalPrice.toFixed(2).replace('.', ',')} EUR
         </button>
-
-        {/* Reassurance line */}
-        <p className="text-center text-xs text-gray-500">
-          Paiement 100% Sécurisé &nbsp;|&nbsp; Livraison Gratuite dès 80€
-        </p>
       </div>
     )
   }

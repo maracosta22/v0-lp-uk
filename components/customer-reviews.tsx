@@ -351,25 +351,55 @@ export function CustomerReviews({ isFrench = false }: CustomerReviewsProps) {
 
   const averageRating = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
 
+  // Rating distribution percentages matching the reference site
+  const ratingDistribution = [
+    { stars: 5, percent: 91 },
+    { stars: 4, percent: 7 },
+    { stars: 3, percent: 1 },
+    { stars: 2, percent: 0.5 },
+    { stars: 1, percent: 0.5 },
+  ]
+
   return (
     <section className="mt-16 border-t border-border pt-12 overflow-hidden">
-      {/* Header */}
+      {/* Header with Rating Summary */}
       <div className="mb-8">
-        <h2 className="font-serif text-xl sm:text-2xl">{isFrench ? 'Avis Clients' : 'Customer Reviews'}</h2>
-        <div className="mt-3 flex items-center gap-2 sm:gap-3 flex-wrap">
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star
-                key={star}
-                className={`h-4 sm:h-5 w-4 sm:w-5 ${star <= averageRating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
-              />
+        <div className="flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-10">
+          {/* Left side - Overall rating */}
+          <div className="flex-shrink-0">
+            <div className="text-5xl font-bold text-foreground">4.9</div>
+            <div className="flex items-center gap-1 mt-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className="h-4 w-4 fill-amber-400 text-amber-400"
+                />
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground mt-1">
+              {totalReviews.toLocaleString()} {isFrench ? 'avis verifies' : 'verified reviews'}
+            </p>
+          </div>
+
+          {/* Right side - Rating breakdown */}
+          <div className="flex-1 space-y-1.5">
+            {ratingDistribution.map((item) => (
+              <div key={item.stars} className="flex items-center gap-2">
+                <span className="text-sm w-4 text-muted-foreground">{item.stars}</span>
+                <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-amber-400 rounded-full"
+                    style={{ width: `${item.percent}%` }}
+                  />
+                </div>
+                <span className="text-xs text-muted-foreground w-10 text-right">{item.percent}%</span>
+              </div>
             ))}
           </div>
-          <span className="text-xs sm:text-sm text-muted-foreground">
-            {averageRating.toFixed(1)} {isFrench ? 'sur' : 'out of'} 5 | {totalReviews} {isFrench ? 'avis' : 'reviews'}
-          </span>
         </div>
       </div>
+
+      <h2 className="font-serif text-xl sm:text-2xl mb-6">{isFrench ? 'Avis Clients' : 'Customer Reviews'}</h2>
 
       {/* Reviews List */}
       <div className="space-y-8">

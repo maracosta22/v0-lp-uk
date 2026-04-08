@@ -22,6 +22,10 @@ import { SamplesSection } from "@/components/samples-section"
 import { AcousticLineSection } from "@/components/acoustic-line-section"
 import { CountdownTimerFr } from "@/components/countdown-timer-fr"
 import { ExitIntentPopupFr } from "@/components/exit-intent-popup-fr"
+import { SurfaceCalculator } from "@/components/surface-calculator"
+import { ProductFAQ } from "@/components/product-faq"
+import { ProductImageGallery } from "@/components/product-image-gallery"
+import { PurchaseNotification } from "@/components/purchase-notification"
 
 interface ClientProductPageProps {
   product: any
@@ -146,6 +150,9 @@ export default function ClientProductPage({
         />
       )}
 
+      {/* Purchase Notification - floating at bottom left */}
+      {isFlexibleAcousticPanel && <PurchaseNotification />}
+
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
         <Link
@@ -176,11 +183,16 @@ export default function ClientProductPage({
 
             {/* Title & Price */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-balance break-words">{product.name}</h1>
+            {isFlexibleAcousticPanel && (
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                Le seul panneau qui épouse vos courbes, sans outil, sans artisan, en 30 minutes
+              </p>
+            )}
 
             {isFlexibleAcousticPanel && (
               <div className="mt-2 flex flex-col gap-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm text-muted-foreground">4.8</span>
+                  <span className="text-sm text-muted-foreground">4.9</span>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="h-4 w-4 text-amber-400 fill-current" viewBox="0 0 20 20">
@@ -188,7 +200,7 @@ export default function ClientProductPage({
                       </svg>
                     ))}
                   </div>
-                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(1080)</span>
+                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(2847 avis verifies)</span>
                 </div>
                 <p className="text-sm">
                   <span className="font-semibold">4500+ achetés</span>{" "}
@@ -220,7 +232,14 @@ export default function ClientProductPage({
                   <Info className="h-3.5 w-3.5 text-muted-foreground cursor-pointer flex-shrink-0" />
                 </div>
                 {isFlexibleAcousticPanel && (
-                  <p className="text-xs text-muted-foreground mt-2">Offre de lancement limitée — Seulement quelques panneaux disponibles</p>
+                  <div className="mt-3">
+                    <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+                      <div className="h-full bg-red-500 rounded-full" style={{ width: "73%" }} />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1.5">
+                      73% des stocks vendus | Il reste <strong className="text-foreground">47 panneaux</strong>
+                    </p>
+                  </div>
                 )}
                 {isFlexibleAcousticPanel && <PeopleViewing isFrench={isFrenchVersion} />}
               </div>
@@ -337,7 +356,7 @@ export default function ClientProductPage({
                   </div>
                 </div>
 
-                <p className="pt-6 text-sm font-semibold text-accent">Sublimez votre espace aujourd&apos;hui.</p>
+                <p className="pt-6 text-base font-medium text-[#b08968]">Sublimez votre espace aujourd&apos;hui.</p>
               </div>
             ) : (
               <p className="mt-6 leading-relaxed text-muted-foreground break-words">{product.longDescription}</p>
@@ -348,85 +367,86 @@ export default function ClientProductPage({
             {product.styles && product.styles.length > 0 && <StyleSelector styles={product.styles} />}
 
             {/* Add to Cart */}
-            <div className="mt-8 flex flex-col gap-3">
-              <CountdownTimerFr />
+            <div className="mt-8 flex flex-col gap-4">
               <AddToCartButton product={product} isFrenchVersion={true} />
-              <p className="text-center text-xs text-muted-foreground">
-                Expédition sous 24-48h • Livraison estimée 5 à 8 jours ouvrables
-              </p>
             </div>
 
-            {/* Trust Badges */}
-            <div className="mt-8 grid grid-cols-3 gap-2 border-t border-border pt-8">
+            {/* Trust Badges - matching the reference image exactly */}
+            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-b border-border py-6">
               <div className="flex flex-col items-center text-center">
-                <Truck className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">
-                  Livraison gratuite
-                  <br className="sm:hidden" /> dès 80€
+                <Truck className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">
+                  Livraison gratuite des 80€
                 </span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <RotateCcw className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Retours sous 30 jours</span>
+                <RotateCcw className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Retours sous 30 jours</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <Shield className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Garantie 5 ans</span>
+                <Shield className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Garantie 5 ans</span>
               </div>
             </div>
 
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
-                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">Fréquemment achetés ensemble</h2>
-                <div className="flex flex-col gap-4">
-                  {/* Products */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    {frequentlyBoughtTogether.map((bundleProduct, index) => (
-                      <div key={bundleProduct.id} className="flex items-center gap-3">
-                        <div className="w-20 sm:w-24 bg-secondary/30 rounded-lg overflow-hidden">
-                          <Link href={`/product/${bundleProduct.slug}`} className="block">
-                            <div className="aspect-square overflow-hidden">
-                              <Image
-                                src={bundleProduct.images[0] || "/placeholder.svg"}
-                                alt={bundleProduct.name}
-                                width={96}
-                                height={96}
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                          </Link>
-                          <div className="p-1.5">
-                            <h3 className="text-[10px] sm:text-xs font-medium leading-tight line-clamp-2">
-                              {bundleProduct.name}
-                            </h3>
-                            <p className="text-[10px] sm:text-xs font-semibold mt-0.5">€{bundleProduct.price}</p>
+                <h2 className="text-base font-bold uppercase tracking-wide mb-6">FREQUEMMENT ACHETES ENSEMBLE</h2>
+                
+                {/* Products row */}
+                <div className="flex items-start gap-2 mb-6">
+                  {frequentlyBoughtTogether.map((bundleProduct, index) => (
+                    <div key={bundleProduct.id} className="flex items-center">
+                      <div className="w-32 sm:w-36">
+                        <Link href={`/product/${bundleProduct.slug}`} className="block">
+                          <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                            <Image
+                              src={bundleProduct.images[0] || "/placeholder.svg"}
+                              alt={bundleProduct.name}
+                              width={144}
+                              height={144}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
                           </div>
-                        </div>
-                        {index < frequentlyBoughtTogether.length - 1 && (
-                          <span className="text-lg font-light text-muted-foreground">+</span>
-                        )}
+                        </Link>
+<div className="mt-2">
+                            <h3 className="text-sm font-medium leading-tight line-clamp-2 text-blue-600">
+                              {bundleProduct.name.includes('STARWAX') 
+                                ? 'STARWAX Anti-...' 
+                                : bundleProduct.name.includes('LED') 
+                                  ? 'Kit Ruban LED Encastre' 
+                                  : bundleProduct.name.substring(0, 15) + '...'}
+                            </h3>
+                            <p className="text-sm font-bold mt-1">€{bundleProduct.price}</p>
+                          </div>
                       </div>
-                    ))}
-                  </div>
-                  
-                  {/* Price & Button */}
-                  <div className="flex items-center justify-between gap-3 pt-3 border-t border-border">
-                    <div>
-                      <p className="text-xs text-muted-foreground">Prix total:</p>
-                      <p className="text-lg font-semibold">€{frequentlyBoughtTotal.toFixed(2)}</p>
+                      {index < frequentlyBoughtTogether.length - 1 && (
+                        <span className="text-lg font-light text-gray-400 mx-2">+</span>
+                      )}
                     </div>
-                    <button
-                      type="button"
-                      className="px-4 py-2 text-sm font-medium bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors whitespace-nowrap"
-                      onClick={handleAddBothToCart}
-                    >
-                      Ajouter au panier
-                    </button>
+                  ))}
+                </div>
+                
+                {/* Price & Button - exactly matching reference image */}
+                <div className="flex items-center justify-between gap-4 pt-4 border-t border-border">
+                  <div>
+                    <p className="text-sm text-gray-500">Prix total:</p>
+                    <p className="text-2xl font-bold">€{frequentlyBoughtTotal.toFixed(2)}</p>
                   </div>
+                  <button
+                    type="button"
+                    className="px-6 py-3 text-base font-medium bg-[#b08968] text-white rounded-lg hover:bg-[#9a7759] transition-colors whitespace-nowrap"
+                    onClick={handleAddBothToCart}
+                  >
+                    Ajouter au panier
+                  </button>
                 </div>
               </div>
             )}
+
+            {/* Surface Calculator - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <SurfaceCalculator isFrenchVersion={true} />}
 
             {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
             {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={true} />}
@@ -519,8 +539,14 @@ export default function ClientProductPage({
         {/* Product Description Section */}
         {isFlexibleAcousticPanel && <ProductDescriptionSection />}
 
-  {/* Customer Reviews Section */}
-  {isFlexibleAcousticPanel && <CustomerReviews isFrench={true} />}
+        {/* Product Image Gallery - Only for Flexible Acoustic Panel */}
+        {isFlexibleAcousticPanel && <ProductImageGallery images={product.images} productName={product.name} isFrenchVersion={true} />}
+
+        {/* FAQ Section - Only for Flexible Acoustic Panel */}
+        {isFlexibleAcousticPanel && <ProductFAQ isFrenchVersion={true} />}
+
+        {/* Customer Reviews Section */}
+        {isFlexibleAcousticPanel && <CustomerReviews isFrench={true} />}
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
@@ -566,7 +592,7 @@ export default function ClientProductPage({
             className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 transition-colors shadow-lg"
           >
             <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-            Commander Maintenant — €54,00
+            Buy Now - {product.price.toFixed(2).replace('.', ',')} EUR
           </button>
           <p className="text-center text-[10px] text-muted-foreground mt-1.5">Paiement 100% Sécurisé • Livraison 5-8 jours</p>
         </div>
