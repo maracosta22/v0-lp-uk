@@ -22,6 +22,9 @@ import { SamplesSection } from "@/components/samples-section"
 import { AcousticLineSection } from "@/components/acoustic-line-section"
 import { CountdownTimerFr } from "@/components/countdown-timer-fr"
 import { ExitIntentPopupFr } from "@/components/exit-intent-popup-fr"
+import { SurfaceCalculator } from "@/components/surface-calculator"
+import { ProductFAQ } from "@/components/product-faq"
+import { ProductImageGallery } from "@/components/product-image-gallery"
 
 interface ClientProductPageProps {
   product: any
@@ -176,11 +179,16 @@ export default function ClientProductPage({
 
             {/* Title & Price */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-balance break-words">{product.name}</h1>
+            {isFlexibleAcousticPanel && (
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                Le seul panneau qui épouse vos courbes, sans outil, sans artisan, en 30 minutes
+              </p>
+            )}
 
             {isFlexibleAcousticPanel && (
               <div className="mt-2 flex flex-col gap-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm text-muted-foreground">4.8</span>
+                  <span className="text-sm text-muted-foreground">4.9</span>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="h-4 w-4 text-amber-400 fill-current" viewBox="0 0 20 20">
@@ -188,7 +196,7 @@ export default function ClientProductPage({
                       </svg>
                     ))}
                   </div>
-                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(1080)</span>
+                  <span className="text-sm text-sky-600 hover:text-sky-700 hover:underline cursor-pointer">(2847 avis verifies)</span>
                 </div>
                 <p className="text-sm">
                   <span className="font-semibold">4500+ achetés</span>{" "}
@@ -220,7 +228,14 @@ export default function ClientProductPage({
                   <Info className="h-3.5 w-3.5 text-muted-foreground cursor-pointer flex-shrink-0" />
                 </div>
                 {isFlexibleAcousticPanel && (
-                  <p className="text-xs text-muted-foreground mt-2">Offre de lancement limitée — Seulement quelques panneaux disponibles</p>
+                  <div className="mt-3">
+                    <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+                      <div className="h-full bg-red-500 rounded-full" style={{ width: "73%" }} />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1.5">
+                      73% des stocks vendus | Il reste <strong className="text-foreground">47 panneaux</strong>
+                    </p>
+                  </div>
                 )}
                 {isFlexibleAcousticPanel && <PeopleViewing isFrench={isFrenchVersion} />}
               </div>
@@ -428,6 +443,9 @@ export default function ClientProductPage({
               </div>
             )}
 
+            {/* Surface Calculator - Only for Flexible Acoustic Panel */}
+            {isFlexibleAcousticPanel && <SurfaceCalculator isFrenchVersion={true} />}
+
             {/* Acoustic Line Section - Only for Flexible Acoustic Panel */}
             {isFlexibleAcousticPanel && <AcousticLineSection isFrenchVersion={true} />}
 
@@ -519,8 +537,14 @@ export default function ClientProductPage({
         {/* Product Description Section */}
         {isFlexibleAcousticPanel && <ProductDescriptionSection />}
 
-  {/* Customer Reviews Section */}
-  {isFlexibleAcousticPanel && <CustomerReviews isFrench={true} />}
+        {/* Product Image Gallery - Only for Flexible Acoustic Panel */}
+        {isFlexibleAcousticPanel && <ProductImageGallery images={product.images} productName={product.name} isFrenchVersion={true} />}
+
+        {/* FAQ Section - Only for Flexible Acoustic Panel */}
+        {isFlexibleAcousticPanel && <ProductFAQ isFrenchVersion={true} />}
+
+        {/* Customer Reviews Section */}
+        {isFlexibleAcousticPanel && <CustomerReviews isFrench={true} />}
 
         {/* Recessed LED Strip Section */}
         {isRecessedLedStrip && <RecessedLedSection />}
@@ -566,7 +590,7 @@ export default function ClientProductPage({
             className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 transition-colors shadow-lg"
           >
             <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-            Commander Maintenant — €54,00
+            Buy Now - {product.price.toFixed(2).replace('.', ',')} EUR
           </button>
           <p className="text-center text-[10px] text-muted-foreground mt-1.5">Paiement 100% Sécurisé • Livraison 5-8 jours</p>
         </div>

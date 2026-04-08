@@ -18,12 +18,12 @@ interface AddToCartButtonProps {
   isFrenchVersion?: boolean
 }
 
-// FR upsell quantity options
+// FR upsell quantity options - based on 14.49 EUR unit price
 const frQuantities = [
-  { qty: 1, price: 15.44, label: "1 Panneau", badge: null, savings: null, freeShipping: false },
-  { qty: 2, price: 28.00, label: "2 Panneaux", badge: null, savings: "€2,88", freeShipping: false },
-  { qty: 4, price: 54.00, label: "4 Panneaux", badge: "Le Plus Populaire", savings: "€7,76", freeShipping: true },
-  { qty: 6, price: 80.00, label: "6 Panneaux", badge: "Meilleure Valeur", savings: "€12,64", freeShipping: true },
+  { qty: 1, price: 14.49, label: "1 Panneau", badge: null, savings: null, freeShipping: false },
+  { qty: 2, price: 26.00, label: "2 Panneaux", badge: null, savings: "€2,98", freeShipping: false },
+  { qty: 4, price: 50.00, label: "4 Panneaux", badge: "Le Plus Populaire", savings: "€7,96", freeShipping: true },
+  { qty: 5, price: 72.45, label: "5 Panneaux", badge: "Meilleure Valeur", savings: "€0,00", freeShipping: true },
 ]
 
 export function AddToCartButton({ product, variant = "default", className, isFrenchVersion = true }: AddToCartButtonProps) {
@@ -212,7 +212,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           className="w-full flex items-center justify-center gap-2 rounded-lg bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-base py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Commander Maintenant €{selectedQtyOption.price.toFixed(2)}
+          Buy Now - {selectedQtyOption.price.toFixed(2).replace('.', ',')} EUR
         </button>
 
         {/* Reassurance line */}

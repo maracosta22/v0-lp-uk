@@ -50,8 +50,8 @@ export const products: Product[] = [
       "Panneau acoustique pliable révolutionnaire qui s'adapte à toute surface. Parfait pour les murs courbés, les piliers et les installations créatives.",
     longDescription:
       "Découvrez notre Panneau Acoustique Flexible révolutionnaire - la solution de revêtement mural la plus polyvalente du marché. Contrairement aux panneaux rigides traditionnels, ce design innovant dispose d'un support en feutre flexible spécialement conçu qui permet au panneau de se plier et de s'adapter aux surfaces courbées, aux piliers et aux caractéristiques architecturales non conventionnelles. Disponible en plusieurs tons de bois dont Chêne Naturel, Chêne Fumé, Noyer et Chêne Gris, chaque panneau offre une absorption sonore exceptionnelle tout en transformant n'importe quel espace en une déclaration de design. Avec des dimensions incroyables de 270x110cm, chaque panneau couvre près de 3m² de surface murale, ce qui en fait la solution acoustique premium la plus rentable disponible.",
-    price: 15.44,
-    originalPrice: 57,
+    price: 14.49,
+    originalPrice: 28.98,
     currency: "EUR",
     category: "wall-panels",
     images: [
