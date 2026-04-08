@@ -64,7 +64,7 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
   }, [])
 
   return (
-    <div className="flex flex-col gap-3 overflow-hidden max-w-full">
+    <div className="flex flex-col gap-3 overflow-hidden max-w-full w-full px-1">
       {/* Main display area */}
       <div
         className="w-full max-w-sm sm:max-w-md mx-auto overflow-hidden bg-secondary aspect-square flex items-center justify-center"
@@ -117,9 +117,9 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
 
       {/* Thumbnail strip - swipeable */}
       {totalItems > 1 && (
-        <div className="max-w-sm sm:max-w-md mx-auto w-full overflow-hidden">
+        <div className="w-full overflow-hidden">
           <div
-            className="flex gap-1 overflow-x-auto pb-2"
+            className="flex gap-1.5 overflow-x-auto pb-2 px-1"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",

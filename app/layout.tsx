@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="overflow-x-hidden">
       <head>
         <meta name="facebook-domain-verification" content="doluxynzdjfzg90rzthp0243s680oy" />
 
@@ -137,13 +137,13 @@ export default function RootLayout({
         )}
       </head>
 
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-x-hidden w-full max-w-full">
         <ScrollToTop />
         <Suspense fallback={null}>
           <MetaPixelProvider>
             <CartProvider>
               <Header />
-              <main className="min-h-screen pt-16 lg:pt-20">{children}</main>
+              <main className="min-h-screen pt-16 lg:pt-20 overflow-x-hidden w-full">{children}</main>
               <Footer />
             </CartProvider>
           </MetaPixelProvider>

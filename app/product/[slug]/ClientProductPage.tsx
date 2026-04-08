@@ -204,7 +204,7 @@ export default function ClientProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <div className="py-8 lg:py-12 overflow-x-hidden max-w-full w-full box-border relative">
+      <div className="py-6 lg:py-12 overflow-x-hidden overflow-y-visible max-w-full w-full box-border relative">
         <ViewContentTracker product={product} />
 
       {/* Exit intent popup — FR only */}
@@ -239,7 +239,7 @@ export default function ClientProductPage({
         />
       )}
 
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 overflow-hidden w-full">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
         <nav aria-label="Fil d'Ariane" className="mb-6">
           <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
@@ -252,14 +252,14 @@ export default function ClientProductPage({
         </nav>
 
         {/* Product Section */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 lg:items-start overflow-hidden">
           {/* Gallery - sticky on desktop */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="lg:sticky lg:top-24 lg:self-start w-full overflow-hidden">
             <ProductGallery images={product.images} productName={product.name} video={product.video} />
           </div>
 
           {/* Details */}
-          <div className="flex flex-col min-w-0 w-full overflow-hidden max-w-full">
+          <div className="flex flex-col min-w-0 w-full overflow-hidden">
             {/* Badge - urgency styling */}
             {product.badge && (
               <span
