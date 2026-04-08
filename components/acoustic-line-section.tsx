@@ -24,23 +24,23 @@ const CONTENT = {
     ],
   },
   fr: {
-    supra: "Sophistication dans chaque detail",
+    supra: "Sophistication dans chaque détail",
     title: "Ligne Acoustique",
-    subtitle: "Decouvrez les caracteristiques de nos panneaux acoustiques a lattes",
+    subtitle: "Découvrez les caractéristiques de nos panneaux acoustiques à lattes",
     blocks: [
       {
-        title: "Efficacite Acoustique",
-        text: "Profitez d'une qualite sonore incomparable avec nos panneaux decoratifs a lattes, soigneusement concus pour ameliorer l'acoustique de n'importe quel espace.",
+        title: "Efficacité Acoustique",
+        text: "Profitez d'une qualité sonore incomparable avec nos panneaux décoratifs à lattes, soigneusement conçus pour améliorer l'acoustique de n'importe quel espace.",
         image: "/images/acustika-efficiency.jpg",
       },
       {
-        title: "Facile a Nettoyer",
-        text: "Maintenir la beaute de vos espaces n'a jamais ete aussi simple. Nos panneaux a lattes sont concus pour faciliter votre quotidien : il suffit de passer un chiffon sec ou legerement humide pour enlever la poussiere ou les taches legeres, sans compromettre la finition impeccable. Fonctionnalite et praticite au quotidien.",
+        title: "Facile à Nettoyer",
+        text: "Maintenir la beauté de vos espaces n'a jamais été aussi simple. Nos panneaux à lattes sont conçus pour faciliter votre quotidien : il suffit de passer un chiffon sec ou légèrement humide pour enlever la poussière ou les taches légères, sans compromettre la finition impeccable. Fonctionnalité et praticité au quotidien.",
         image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Caracteristicas-Facil-de-instalar-tTBaUKwKi4AyDqZpyQSaRsdncnw4Uf.webp",
       },
       {
-        title: "Design Europeen pour Interieurs",
-        text: "Apportez chez vous l'elegance intemporelle du design scandinave, la combinaison parfaite de fonctionnalite et d'esthetique, avec nos panneaux sophistiques en bois a lattes.",
+        title: "Design Européen pour Intérieurs",
+        text: "Apportez chez vous l'élégance intemporelle du design scandinave, la combinaison parfaite de fonctionnalité et d'esthétique, avec nos panneaux sophistiqués en bois à lattes.",
         image: "/images/acustika-european-design.jpg",
       },
     ],

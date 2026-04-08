@@ -67,7 +67,7 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
     <div className="flex flex-col gap-3 overflow-hidden max-w-full">
       {/* Main display area */}
       <div
-        className="w-full max-w-[350px] sm:max-w-[400px] mx-auto overflow-hidden bg-secondary aspect-square flex items-center justify-center"
+        className="w-full max-w-sm sm:max-w-md mx-auto overflow-hidden bg-secondary aspect-square flex items-center justify-center"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -103,12 +103,13 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
           <Image
             src={images[selectedIndex] || "/placeholder.svg"}
             alt={`${productName} - Image ${selectedIndex + 1}`}
-            width={400}
-            height={400}
+            width={800}
+            height={800}
             className="h-full w-full object-contain"
-            style={{ width: "auto", height: "auto" }}
-            priority
-            sizes="(max-width: 350px) 100vw, 400px"
+            priority={selectedIndex === 0}
+            fetchPriority="high"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+            quality={85}
             unoptimized={isExternalImage(images[selectedIndex] || "")}
           />
         )}
@@ -116,7 +117,7 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
 
       {/* Thumbnail strip - swipeable */}
       {totalItems > 1 && (
-        <div className="max-w-[350px] sm:max-w-[400px] mx-auto w-full overflow-hidden">
+        <div className="max-w-sm sm:max-w-md mx-auto w-full overflow-hidden">
           <div
             className="flex gap-1 overflow-x-auto pb-2"
             style={{

@@ -176,7 +176,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           </div>
         </div>
 
-        {/* Black rounded CTA button - matching the reference image */}
+        {/* Black rounded CTA button - without total price to avoid price shock */}
         <button
           type="button"
           disabled={!product.inStock}
@@ -184,8 +184,10 @@ export function AddToCartButton({ product, variant = "default", className, isFre
           data-add-to-cart="true"
           className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1a1a1a] hover:bg-[#333] text-white font-medium text-lg py-4 px-8 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-          Buy Now - {totalPrice.toFixed(2).replace('.', ',')} EUR
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Commander Maintenant
         </button>
       </div>
     )
