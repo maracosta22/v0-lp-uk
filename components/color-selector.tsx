@@ -23,8 +23,8 @@ export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
   return (
     <div className="mt-6">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold uppercase tracking-wider">Color</h3>
-        <span className="text-sm text-muted-foreground">{selectedColor.name}</span>
+        <h3 className="text-sm font-bold uppercase tracking-wider">COLOR</h3>
+        <span className="text-sm text-foreground">{selectedColor.name}</span>
       </div>
 
       {hasImages ? (

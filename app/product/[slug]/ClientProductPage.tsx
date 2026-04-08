@@ -352,7 +352,7 @@ export default function ClientProductPage({
                   </div>
                 </div>
 
-                <p className="pt-6 text-sm font-semibold text-accent">Sublimez votre espace aujourd&apos;hui.</p>
+                <p className="pt-6 text-base font-medium text-[#b08968]">Sublimez votre espace aujourd&apos;hui.</p>
               </div>
             ) : (
               <p className="mt-6 leading-relaxed text-muted-foreground break-words">{product.longDescription}</p>
@@ -363,37 +363,32 @@ export default function ClientProductPage({
             {product.styles && product.styles.length > 0 && <StyleSelector styles={product.styles} />}
 
             {/* Add to Cart */}
-            <div className="mt-8 flex flex-col gap-3">
-              <CountdownTimerFr />
+            <div className="mt-8 flex flex-col gap-4">
               <AddToCartButton product={product} isFrenchVersion={true} />
-              <p className="text-center text-xs text-muted-foreground">
-                Expédition sous 24-48h • Livraison estimée 5 à 8 jours ouvrables
-              </p>
             </div>
 
-            {/* Trust Badges */}
-            <div className="mt-8 grid grid-cols-3 gap-2 border-t border-border pt-8">
+            {/* Trust Badges - matching the reference image exactly */}
+            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-b border-border py-6">
               <div className="flex flex-col items-center text-center">
-                <Truck className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">
-                  Livraison gratuite
-                  <br className="sm:hidden" /> dès 80€
+                <Truck className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">
+                  Livraison gratuite des 80€
                 </span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <RotateCcw className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Retours sous 30 jours</span>
+                <RotateCcw className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Retours sous 30 jours</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <Shield className="h-5 w-5 text-muted-foreground" />
-                <span className="mt-2 text-[10px] sm:text-xs text-muted-foreground leading-tight">Garantie 5 ans</span>
+                <Shield className="h-6 w-6 text-muted-foreground" />
+                <span className="mt-2 text-xs sm:text-sm text-muted-foreground leading-tight">Garantie 5 ans</span>
               </div>
             </div>
 
             {/* Frequently Bought Together */}
             {frequentlyBoughtTogether.length > 0 && (
               <div className="mt-8 border-t border-border pt-8">
-                <h2 className="text-sm font-semibold uppercase tracking-wider mb-4">Fréquemment achetés ensemble</h2>
+                <h2 className="text-sm font-bold uppercase tracking-wider mb-4">FREQUEMMENT ACHETES ENSEMBLE</h2>
                 <div className="flex flex-col gap-4">
                   {/* Products */}
                   <div className="flex flex-wrap items-center gap-3">
