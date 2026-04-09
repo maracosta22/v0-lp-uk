@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation"
 import { Lock } from "lucide-react"
 
 export function FloatingCartButton() {
-  const { items, total } = useCart()
+  const { items, totalPrice } = useCart()
   const router = useRouter()
+
+  console.log("[v0] FloatingCartButton - items:", items.length, "totalPrice:", totalPrice)
 
   // Only show if cart has items
   if (items.length === 0) return null
@@ -20,7 +22,7 @@ export function FloatingCartButton() {
       <div className="mx-auto max-w-md">
         {/* Total */}
         <p className="text-white text-base font-bold mb-3">
-          Total : {total.toFixed(2).replace('.', ',')} EUR
+          Total : {totalPrice.toFixed(2).replace('.', ',')} EUR
         </p>
         
         {/* Green checkout button - matching reference image exactly */}
