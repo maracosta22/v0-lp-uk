@@ -178,7 +178,7 @@ export default function SuccesFrClient({ sessionId }: { sessionId: string | null
           </p>
           <div className="flex flex-col gap-2">
             <Link
-              href="/product/flexible-acoustic-panel-fr"
+              href="/product/panneau-acoustique-flexible"
               className="w-full flex items-center justify-center gap-2 rounded-lg border border-border py-2.5 text-sm font-medium hover:bg-secondary transition-colors"
             >
               <RotateCcw className="h-4 w-4" />

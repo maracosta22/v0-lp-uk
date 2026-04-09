@@ -129,6 +129,97 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     router.push(isFrenchVersion ? "/checkout-fr" : "/cart")
   }
 
+  // Add to cart WITHOUT redirecting (for FR version)
+  const handleAddToCart = () => {
+    const cartHasProducts = items.length > 0
+    if (cartHasProducts) {
+      const existingProduct = items[0]?.product
+      const existingCurrency = existingProduct?.currency
+      const newProductCurrency = product.currency
+
+      if (existingCurrency !== newProductCurrency) {
+        alert(`Cannot mix products from different markets. Please clear your cart and try again.`)
+        return
+      }
+    }
+
+    const totalValue = UNIT_PRICE * quantity
+    const eventId = generateEventId("atc")
+
+    // Track Meta
+    trackAddToCart({
+      contentId: product.id,
+      contentName: product.name,
+      quantity: quantity,
+      value: totalValue,
+      currency: "EUR",
+      eventId,
+    })
+
+    // Track TikTok
+    trackTikTokAddToCart({
+      contents: [
+        {
+          content_id: product.id,
+          content_type: 'product',
+          content_name: product.name,
+          content_category: product.category,
+          price: UNIT_PRICE,
+          num_items: quantity,
+          brand: 'Acoustic Design',
+        }
+      ],
+      value: totalValue,
+      currency: "EUR",
+      description: product.name,
+    })
+
+    // Send CAPI event
+    const { fbp, fbc } = getFbpFbc()
+    const utms = getStoredUTMs()
+
+    fetch("/api/meta/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventName: "AddToCart",
+        eventId,
+        pageUrl: window.location.href,
+        customData: {
+          content_ids: [product.id],
+          contents: [{ id: product.id, quantity: quantity, item_price: UNIT_PRICE }],
+          content_name: product.name,
+          content_type: "product",
+          value: totalValue,
+          currency: "EUR",
+          ...utms,
+        },
+        fbp,
+        fbc,
+      }),
+    }).catch(console.error)
+
+    // Add to cart with unit price - NO REDIRECT
+    const productToAdd = { ...product, price: UNIT_PRICE }
+    addItem(productToAdd, quantity)
+
+    // Store order in sessionStorage
+    const orderData = {
+      productId: product.id,
+      name: product.name,
+      price: UNIT_PRICE,
+      totalPrice: UNIT_PRICE * quantity,
+      quantity: quantity,
+      image: product.images?.[0] || product.image || "",
+      currency: "EUR",
+    }
+    try {
+      sessionStorage.setItem("checkout_order_fr", JSON.stringify(orderData))
+    } catch (e) {
+      // sessionStorage not available
+    }
+  }
+
   const displayPrice = product.salePrice || product.price
 
   // Icon variant for order bump - compact add to cart button
@@ -147,47 +238,46 @@ export function AddToCartButton({ product, variant = "default", className, isFre
     )
   }
 
-  // French version: simple quantity selector + minimalist black CTA button
+  // French version: simple quantity selector + black CTA button with price (like reference image)
   if (isFrenchVersion) {
+    const totalPrice = UNIT_PRICE * quantity
+    
     return (
-      <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
-        {/* Compact Quantity Selector */}
+      <div className="flex flex-col gap-4 w-full">
+        {/* Quantity Selector - centered, matching reference image */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border border-gray-200 rounded-lg">
+          <div className="inline-flex items-center border border-gray-300 rounded-lg">
             <button
               type="button"
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="flex h-10 w-12 items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex h-11 w-14 items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors"
               aria-label="Diminuer"
             >
-              <Minus className="h-3.5 w-3.5" />
+              <Minus className="h-4 w-4" />
             </button>
-            <span className="w-10 text-center text-base font-medium text-gray-900">{quantity}</span>
+            <span className="w-12 text-center text-lg font-medium text-gray-900">{quantity}</span>
             <button
               type="button"
               onClick={() => setQuantity((q) => q + 1)}
-              className="flex h-10 w-12 items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex h-11 w-14 items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors"
               aria-label="Augmenter"
             >
-              <Plus className="h-3.5 w-3.5" />
+              <Plus className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        {/* Minimalist CTA button - compact */}
+        {/* Black rounded CTA button with price - like reference image "Buy Now - 72,45 EUR" */}
         <button
           type="button"
           disabled={!product.inStock}
-          onClick={() => handleBuyNow()}
+          onClick={() => handleAddToCart()}
           data-add-to-cart="true"
-          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#1f1f1f] hover:bg-[#333] text-white py-3.5 px-6 transition-colors disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-3 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white py-4 px-8 transition-colors disabled:opacity-50"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          <span className="flex flex-col items-start leading-none">
-            <span className="text-sm font-normal">Commander</span>
-            <span className="text-sm font-normal">Maintenant</span>
+          <ShoppingCart className="w-5 h-5" />
+          <span className="text-base font-medium">
+            Buy Now - {totalPrice.toFixed(2).replace('.', ',')} EUR
           </span>
         </button>
       </div>

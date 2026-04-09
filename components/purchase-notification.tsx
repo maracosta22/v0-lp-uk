@@ -37,8 +37,8 @@ export function PurchaseNotification() {
   if (!isVisible) return null
 
   return (
-    <div className="fixed bottom-20 sm:bottom-6 left-2 sm:left-6 right-2 sm:right-auto z-50 animate-in slide-in-from-left-full duration-500">
-      <div className="flex items-center gap-3 bg-white rounded-xl shadow-lg border border-gray-100 px-3 sm:px-4 py-2.5 sm:py-3 max-w-xs sm:min-w-[260px]">
+    <div className="fixed bottom-24 sm:bottom-6 left-3 sm:left-6 z-40 animate-in slide-in-from-left-full duration-500">
+      <div className="flex items-center gap-2.5 bg-white rounded-xl shadow-lg border border-gray-100 px-3 py-2.5 w-auto">
         {/* User icon */}
         <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-50 flex items-center justify-center">
           <Users className="h-5 w-5 text-green-600" />

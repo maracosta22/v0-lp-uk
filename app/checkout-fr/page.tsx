@@ -62,7 +62,7 @@ export default function CheckoutFrPage() {
     }
 
     // Nothing in sessionStorage or cart → redirect back
-    router.replace("/product/flexible-acoustic-panel-fr")
+    router.replace("/product/panneau-acoustique-flexible")
   }, [items, router])
 
   if (!ready || !storedOrder) return null
@@ -130,7 +130,7 @@ export default function CheckoutFrPage() {
         {/* Header */}
         <div className="mb-6 flex items-center gap-3">
           <Link
-            href="/product/flexible-acoustic-panel-fr"
+            href="/product/panneau-acoustique-flexible"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />

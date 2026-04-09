@@ -26,8 +26,8 @@ import { SurfaceCalculator } from "@/components/surface-calculator"
 import { ProductFAQ } from "@/components/product-faq"
 import { ProductImageGallery } from "@/components/product-image-gallery"
 import { PurchaseNotification } from "@/components/purchase-notification"
-import { StickyCartBar } from "@/components/sticky-cart-bar"
 import { PaymentIcons } from "@/components/payment-icons"
+import { FloatingCartButton } from "@/components/floating-cart-button"
 
 interface ClientProductPageProps {
   product: any
@@ -219,25 +219,11 @@ export default function ClientProductPage({
         />
       )}
 
-      {/* Purchase Notification - floating at bottom left */}
+      {/* Purchase Notification - floating at bottom left corner */}
       {isFlexibleAcousticPanel && <PurchaseNotification />}
 
-      {/* Sticky Cart Bar - appears when main CTA scrolls out of view */}
-      {isFrenchVersion && isFlexibleAcousticPanel && (
-        <StickyCartBar
-          productName={product.name}
-          price={product.price}
-          originalPrice={product.originalPrice || product.price * 2}
-          image={product.images[0]}
-          quantity={5}
-          selectedColor="Chêne Naturel"
-          stock={47}
-          onBuyNow={() => {
-            const btn = document.querySelector("[data-add-to-cart]") as HTMLButtonElement
-            if (btn) btn.click()
-          }}
-        />
-      )}
+      {/* Floating Cart Button - appears when cart has items */}
+      {isFrenchVersion && <FloatingCartButton />}
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
