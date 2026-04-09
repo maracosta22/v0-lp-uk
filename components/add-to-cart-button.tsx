@@ -201,9 +201,7 @@ export function AddToCartButton({ product, variant = "default", className, isFre
 
     // Add to cart with unit price - NO REDIRECT
     const productToAdd = { ...product, price: UNIT_PRICE }
-    console.log("[v0] handleAddToCart - adding product:", productToAdd.name, "quantity:", quantity, "price:", UNIT_PRICE)
     addItem(productToAdd, quantity)
-    console.log("[v0] handleAddToCart - item added to cart")
 
     // Store order in sessionStorage
     const orderData = {
