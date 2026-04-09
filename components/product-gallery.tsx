@@ -109,7 +109,6 @@ export function ProductGallery({ images, productName, video }: ProductGalleryPro
             priority={selectedIndex === 0}
             fetchPriority="high"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-            quality={85}
             unoptimized={isExternalImage(images[selectedIndex] || "")}
           />
         )}
