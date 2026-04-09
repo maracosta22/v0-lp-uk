@@ -8,8 +8,6 @@ export function FloatingCartButton() {
   const { items, totalPrice } = useCart()
   const router = useRouter()
 
-  console.log("[v0] FloatingCartButton - items:", items.length, "totalPrice:", totalPrice)
-
   // Only show if cart has items
   if (items.length === 0) return null
 
