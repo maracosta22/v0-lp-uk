@@ -223,7 +223,7 @@ export default function ClientProductPage({
       {isFlexibleAcousticPanel && <PurchaseNotification />}
 
       {/* Floating Cart Button - appears when cart has items */}
-      {isFrenchVersion && <FloatingCartButton />}
+      {isFlexibleAcousticPanel && <FloatingCartButton />}
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 overflow-hidden w-full">
         {/* Breadcrumb */}
