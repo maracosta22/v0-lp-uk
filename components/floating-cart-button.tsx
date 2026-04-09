@@ -16,20 +16,20 @@ export function FloatingCartButton() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#3d3529] px-4 py-3 shadow-2xl animate-in slide-in-from-bottom-full duration-300">
-      <div className="mx-auto max-w-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#2d2518] px-4 py-4 shadow-2xl animate-in slide-in-from-bottom-full duration-300">
+      <div className="mx-auto max-w-md">
         {/* Total */}
-        <p className="text-white text-base font-semibold mb-2">
+        <p className="text-white text-base font-bold mb-3">
           Total : {total.toFixed(2).replace('.', ',')} EUR
         </p>
         
-        {/* Green checkout button */}
+        {/* Green checkout button - matching reference image exactly */}
         <button
           onClick={handleCheckout}
-          className="w-full flex items-center justify-center gap-2 bg-[#4ade80] hover:bg-[#22c55e] text-white font-medium py-3 px-6 rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-2.5 bg-[#5cd97f] hover:bg-[#4eca6e] text-white font-medium py-3.5 px-6 rounded-xl transition-colors"
         >
-          <Lock className="w-4 h-4" />
-          <span>Finaliser ma commande</span>
+          <Lock className="w-4 h-4" strokeWidth={2.5} />
+          <span className="text-base">Finaliser ma commande</span>
         </button>
       </div>
     </div>
